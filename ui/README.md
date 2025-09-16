@@ -1,10 +1,10 @@
-# UI - Frontend Application
+# UI - Nathan Hu's Portfolio Frontend
 
-React TypeScript frontend with Material-UI for the personal website.
+React TypeScript frontend with Material-UI for Nathan Hu's personal portfolio website.
 
 ## Description
 
-This module contains the frontend user interface built with React, TypeScript, and Material-UI. It provides a modern, responsive web interface that communicates with the backend API.
+This module contains the frontend user interface for Nathan Hu's personal portfolio, built with React, TypeScript, and Material-UI. It showcases Nathan's experience as a CS & AI student at McGill University, featuring his internship experience at PointClickCare, Intact, and 360insights.
 
 ## Technology Stack
 
@@ -32,7 +32,7 @@ ui/
 
 ## Prerequisites
 
-- **Node.js 16+** and **npm** (or **yarn**)
+- **Node.js 18.14.0+** and **npm 9.0.0+** (specified in pom.xml and package.json)
 - **TypeScript** knowledge recommended
 
 ## Getting Started
@@ -144,11 +144,13 @@ CI=true npm test
 #### Test Coverage
 
 Current test coverage includes:
-- ✅ **App Component**: 100% line and branch coverage
-- ✅ **Header Component**: Complete props and interaction testing
+- ✅ **App Component**: Routing and navigation testing with MemoryRouter
+- ✅ **Header Component**: Responsive navigation with desktop/mobile views
 - ✅ **WelcomeCard Component**: Full functionality and accessibility testing
+- ✅ **Page Components**: Individual tests for all 7 pages (Home, About, Projects, Experience, Education, AI, Contact)
 - ✅ **API Utilities**: Comprehensive mocking and error handling
 - ✅ **Integration Tests**: Full app rendering and Material-UI integration
+- ✅ **Navigation Testing**: Route changes and menu interactions
 
 #### Viewing Test Results
 
@@ -207,10 +209,40 @@ console.log(screen.debug()); // Print component HTML
 
 ## Development
 
+### Project Structure
+
+```
+src/
+├── components/              # Reusable UI components
+│   ├── Header.tsx          # Navigation header with responsive menu
+│   ├── Header.test.tsx     # Header component tests
+│   ├── WelcomeCard.tsx     # Home page welcome card
+│   └── WelcomeCard.test.tsx # Welcome card tests
+├── pages/                   # Page components for routing
+│   ├── HomePage.tsx        # Landing page with welcome content
+│   ├── AboutPage.tsx       # About me page with skills and story
+│   ├── ProjectsPage.tsx    # Projects showcase with links
+│   ├── WorkExperiencePage.tsx # Professional experience timeline
+│   ├── EducationPage.tsx   # Education and certifications
+│   ├── AIPage.tsx          # AI contribution showcase and tracking
+│   ├── ContactPage.tsx     # Contact form and information
+│   └── *.test.tsx          # Page component tests
+├── utils/                   # Utility functions
+│   ├── api.ts              # API client functions
+│   └── api.test.ts         # API utility tests
+├── __tests__/              # Integration tests
+│   └── integration.test.tsx # App-wide integration tests
+├── App.tsx                 # Main app with routing configuration
+├── App.test.tsx            # App component tests
+├── index.tsx               # Application entry point
+└── setupTests.ts           # Test environment setup
+```
+
 ### Project Configuration
 
 - **TypeScript**: Configured in `tsconfig.json`
-- **Material-UI Theme**: Customized in `App.tsx`
+- **Material-UI Theme**: Customized in `App.tsx` with typography and button overrides
+- **React Router**: Configured for client-side navigation between pages
 - **Build Settings**: Managed by React Scripts
 
 ### Adding New Components
@@ -258,24 +290,56 @@ Use the `sx` prop for styling:
 </Box>
 ```
 
-### Connecting to API
+### Navigation and Routing
 
-When your backend is ready, update API calls:
+The application uses React Router for client-side navigation:
 
 ```typescript
-// Example API integration
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
-
-const fetchData = async () => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/data`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('API Error:', error);
-  }
-};
+// Navigation structure in App.tsx
+<Routes>
+  <Route path="/" element={<HomePage />} />
+  <Route path="/about" element={<AboutPage />} />
+  <Route path="/projects" element={<ProjectsPage />} />
+  <Route path="/experience" element={<WorkExperiencePage />} />
+  <Route path="/education" element={<EducationPage />} />
+  <Route path="/contact" element={<ContactPage />} />
+</Routes>
 ```
+
+**Available Pages:**
+- **Home** (`/`) - Landing page featuring Nathan Hu, CS & AI Student at McGill
+- **About** (`/about`) - Nathan's background, technical skills (Java, Python, React, TypeScript, Jenkins), and philosophy
+- **Projects** (`/projects`) - Portfolio showcasing GitHub projects including Personal Website, Java Search Engine, and Guardians of the Hive
+- **Experience** (`/experience`) - Professional timeline including internships at PointClickCare, Intact, and 360insights
+- **Education** (`/education`) - McGill University Software Engineering degree and certifications
+- **AI Development** (`/ai`) - Comprehensive showcase of AI contributions, featuring statistics, methodology, and problem-solving examples
+- **Contact** (`/contact`) - Professional contact information and LinkedIn/GitHub profiles
+
+**Navigation Features:**
+- Responsive design with desktop menu and mobile drawer
+- Active page highlighting
+- Keyboard navigation support
+- Accessible ARIA labels and semantic HTML
+
+### Connecting to API
+
+The application includes API utilities for backend integration:
+
+```typescript
+// Using the API client from utils/api.ts
+import { greetingApi, healthApi } from './utils/api';
+
+// Get greeting from backend
+const greeting = await greetingApi.getGreeting('John');
+
+// Check API health
+const health = await healthApi.getHealth();
+```
+
+**API Configuration:**
+- Base URL configured via `REACT_APP_API_URL` environment variable
+- Error handling and loading states included
+- TypeScript interfaces for type safety
 
 ## Building for Production
 
@@ -391,14 +455,6 @@ CMD ["nginx", "-g", "daemon off;"]
 - Implement code splitting with React.lazy()
 - Optimize bundle size with webpack-bundle-analyzer
 - Use Material-UI's tree shaking for smaller builds
-
-## Contributing
-
-1. Follow React and TypeScript best practices
-2. Use Material-UI components consistently
-3. Write unit tests for new components
-4. Ensure accessibility standards are met
-5. Test on multiple browsers and devices
 
 ## Browser Support
 

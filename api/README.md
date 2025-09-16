@@ -294,9 +294,3 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
    mvn clean install
    ```
 
-## Contributing
-
-1. Follow Java coding conventions
-2. Write unit tests for new features
-3. Update API documentation
-4. Ensure all tests pass before submitting changes

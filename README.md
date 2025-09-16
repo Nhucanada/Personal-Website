@@ -1,6 +1,6 @@
-# Personal Website
+# Nathan Hu - Personal Website
 
-A full-stack web application built with Maven, featuring a React TypeScript frontend with Material-UI and a Spring Boot backend API.
+A full-stack personal portfolio website built with Maven, featuring a React TypeScript frontend with Material-UI and a Spring Boot backend API. This website showcases Nathan Hu's experience as a Computer Science & AI student at McGill University with internship experience at PointClickCare, Intact, and 360insights.
 
 ## Project Structure
 
@@ -28,16 +28,20 @@ personal-website/
 - **React 18** - JavaScript library for building user interfaces
 - **TypeScript** - Type-safe JavaScript
 - **Material-UI (MUI)** - React component library implementing Google's Material Design
+- **React Router** - Client-side routing for single-page application
 - **Emotion** - CSS-in-JS library for styling
+- **Jest & React Testing Library** - Comprehensive unit testing
 
 ### Backend (API)
 - **Spring Boot 2.7** - Java framework for building REST APIs
 - **Maven** - Build automation and dependency management
+- **JUnit & Mockito** - Unit testing framework
 
 ## Prerequisites
 
 - **Java 11+** - Required for Spring Boot backend
-- **Node.js 16+** - Required for React frontend
+- **Node.js 18.14.0+** - Required for React frontend (specified in ui/pom.xml)
+- **npm 9.0.0+** - Package manager for frontend dependencies
 - **Maven 3.6+** - Build tool (or use Maven wrapper)
 
 ## Quick Start
@@ -91,13 +95,24 @@ The project is configured for easy deployment:
 - **API**: Builds as a standalone JAR with embedded Tomcat server
 - **UI**: Builds static assets that can be served by any web server
 
-## Contributing
+## Features
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests to ensure everything works
-5. Submit a pull request
+- **About Me** - Information about Nathan's background, skills, and interests
+- **Projects** - Showcase of personal and academic projects with GitHub links
+- **Work Experience** - Professional internship experience and leadership roles
+- **Education** - Academic background at McGill University and certifications
+- **AI Development** - Comprehensive showcase of AI contributions to this project
+- **Contact** - Professional contact information and social media links
+- **Responsive Design** - Mobile-friendly interface with Material-UI components
+- **Interactive Navigation** - Smooth routing between pages
+- **AI Contribution Tracking** - Detailed methodology for tracking AI vs human contributions
+
+## Contact
+
+- **Email**: nhucanada0628@gmail.com
+- **McGill Email**: nathan.hu@mail.mcgill.ca
+- **LinkedIn**: [linkedin.com/in/nhucanada](https://www.linkedin.com/in/nhucanada/)
+- **GitHub**: [github.com/Nhucanada](https://github.com/Nhucanada)
 
 ## License
 

@@ -1,93 +1,146 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Header from './Header';
 
 const theme = createTheme();
 
-const renderWithTheme = (component: React.ReactElement) => {
+const renderWithProviders = (component: React.ReactElement) => {
   return render(
-    <ThemeProvider theme={theme}>
-      {component}
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        {component}
+      </ThemeProvider>
+    </BrowserRouter>
   );
 };
 
+// Mock useMediaQuery for consistent testing
+jest.mock('@mui/material', () => ({
+  ...jest.requireActual('@mui/material'),
+  useMediaQuery: jest.fn(() => false), // Default to desktop view
+}));
+
 describe('Header Component', () => {
+  beforeEach(() => {
+    const { useMediaQuery } = require('@mui/material');
+    useMediaQuery.mockReturnValue(false); // Default to desktop
+  });
+
   test('renders with default title', () => {
-    renderWithTheme(<Header />);
+    renderWithProviders(<Header />);
     expect(screen.getByTestId('header-title')).toHaveTextContent('Personal Website');
   });
 
   test('renders with custom title', () => {
     const customTitle = 'My Custom Website';
-    renderWithTheme(<Header title={customTitle} />);
+    renderWithProviders(<Header title={customTitle} />);
     expect(screen.getByTestId('header-title')).toHaveTextContent(customTitle);
   });
 
-  test('renders home icon', () => {
-    renderWithTheme(<Header />);
-    expect(screen.getByTestId('home-icon')).toBeInTheDocument();
+  test('renders home icon button', () => {
+    renderWithProviders(<Header />);
+    expect(screen.getByTestId('home-icon-button')).toBeInTheDocument();
   });
 
-  test('does not show menu button by default', () => {
-    renderWithTheme(<Header />);
-    expect(screen.queryByTestId('menu-button')).not.toBeInTheDocument();
+  test('displays desktop navigation on large screens', () => {
+    renderWithProviders(<Header />);
+
+    // Check for navigation buttons
+    expect(screen.getByTestId('nav-home')).toBeInTheDocument();
+    expect(screen.getByTestId('nav-about')).toBeInTheDocument();
+    expect(screen.getByTestId('nav-projects')).toBeInTheDocument();
+    expect(screen.getByTestId('nav-experience')).toBeInTheDocument();
+    expect(screen.getByTestId('nav-education')).toBeInTheDocument();
+    expect(screen.getByTestId('nav-ai')).toBeInTheDocument();
+    expect(screen.getByTestId('nav-contact')).toBeInTheDocument();
   });
 
-  test('shows menu button when showMenuButton is true', () => {
-    renderWithTheme(<Header showMenuButton={true} />);
+  test('shows mobile menu button on small screens', () => {
+    const { useMediaQuery } = require('@mui/material');
+    useMediaQuery.mockReturnValue(true); // Mobile view
+
+    renderWithProviders(<Header />);
     expect(screen.getByTestId('menu-button')).toBeInTheDocument();
   });
 
-  test('calls onMenuClick when menu button is clicked', () => {
-    const mockOnMenuClick = jest.fn();
-    renderWithTheme(<Header showMenuButton={true} onMenuClick={mockOnMenuClick} />);
+  test('opens mobile drawer when menu button is clicked', () => {
+    const { useMediaQuery } = require('@mui/material');
+    useMediaQuery.mockReturnValue(true); // Mobile view
+
+    renderWithProviders(<Header />);
 
     const menuButton = screen.getByTestId('menu-button');
     fireEvent.click(menuButton);
 
-    expect(mockOnMenuClick).toHaveBeenCalledTimes(1);
+    expect(screen.getByTestId('mobile-menu')).toBeInTheDocument();
   });
 
-  test('menu button has correct accessibility attributes', () => {
-    renderWithTheme(<Header showMenuButton={true} />);
-    const menuButton = screen.getByTestId('menu-button');
+  test('navigation items have correct icons and labels', () => {
+    renderWithProviders(<Header />);
 
-    expect(menuButton).toHaveAttribute('aria-label', 'menu');
+    expect(screen.getByTestId('nav-home')).toHaveTextContent('Home');
+    expect(screen.getByTestId('nav-about')).toHaveTextContent('About');
+    expect(screen.getByTestId('nav-projects')).toHaveTextContent('Projects');
+    expect(screen.getByTestId('nav-experience')).toHaveTextContent('Experience');
+    expect(screen.getByTestId('nav-education')).toHaveTextContent('Education');
+    expect(screen.getByTestId('nav-ai')).toHaveTextContent('AI Development');
+    expect(screen.getByTestId('nav-contact')).toHaveTextContent('Contact');
   });
 
   test('header has correct test id', () => {
-    renderWithTheme(<Header />);
+    renderWithProviders(<Header />);
     expect(screen.getByTestId('header')).toBeInTheDocument();
   });
 
   test('applies correct Material-UI classes', () => {
-    renderWithTheme(<Header />);
+    renderWithProviders(<Header />);
     const header = screen.getByTestId('header');
-
     expect(header).toHaveClass('MuiAppBar-root');
   });
 
   test('toolbar is present', () => {
-    renderWithTheme(<Header />);
+    renderWithProviders(<Header />);
     const toolbar = document.querySelector('.MuiToolbar-root');
     expect(toolbar).toBeInTheDocument();
   });
 
   test('title typography has correct variant', () => {
-    renderWithTheme(<Header />);
+    renderWithProviders(<Header />);
     const title = screen.getByTestId('header-title');
-
-    // Material-UI h6 variant should be applied
     expect(title).toHaveClass('MuiTypography-h6');
   });
 
   test('header is positioned static', () => {
-    renderWithTheme(<Header />);
+    renderWithProviders(<Header />);
     const header = screen.getByTestId('header');
-
     expect(header).toHaveClass('MuiAppBar-positionStatic');
+  });
+
+  test('title is clickable and navigates to home', () => {
+    renderWithProviders(<Header />);
+    const title = screen.getByTestId('header-title');
+    expect(title).toHaveStyle('cursor: pointer');
+  });
+
+  test('mobile navigation contains all menu items', () => {
+    const { useMediaQuery } = require('@mui/material');
+    useMediaQuery.mockReturnValue(true); // Mobile view
+
+    renderWithProviders(<Header />);
+
+    const menuButton = screen.getByTestId('menu-button');
+    fireEvent.click(menuButton);
+
+    // Check mobile navigation items
+    expect(screen.getByTestId('mobile-nav-home')).toBeInTheDocument();
+    expect(screen.getByTestId('mobile-nav-about')).toBeInTheDocument();
+    expect(screen.getByTestId('mobile-nav-projects')).toBeInTheDocument();
+    expect(screen.getByTestId('mobile-nav-experience')).toBeInTheDocument();
+    expect(screen.getByTestId('mobile-nav-education')).toBeInTheDocument();
+    expect(screen.getByTestId('mobile-nav-ai')).toBeInTheDocument();
+    expect(screen.getByTestId('mobile-nav-contact')).toBeInTheDocument();
   });
 });

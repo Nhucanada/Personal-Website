@@ -1,124 +1,170 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { MemoryRouter } from 'react-router-dom';
 import App from './App';
 
+// Mock useMediaQuery for consistent testing
+jest.mock('@mui/material', () => ({
+  ...jest.requireActual('@mui/material'),
+  useMediaQuery: jest.fn(() => false), // Default to desktop view
+}));
+
+const renderWithRouter = (initialEntries = ['/']) => {
+  return render(
+    <MemoryRouter initialEntries={initialEntries}>
+      <App />
+    </MemoryRouter>
+  );
+};
+
 describe('App Component', () => {
-  test('renders personal website title', () => {
-    render(<App />);
-    const titleElement = screen.getByText(/Personal Website/i);
-    expect(titleElement).toBeInTheDocument();
+  beforeEach(() => {
+    const { useMediaQuery } = require('@mui/material');
+    useMediaQuery.mockReturnValue(false); // Default to desktop
   });
 
-  test('renders welcome message', () => {
-    render(<App />);
-    const welcomeElement = screen.getByText(/Welcome to my Personal Website/i);
-    expect(welcomeElement).toBeInTheDocument();
+  test('renders header with navigation', () => {
+    renderWithRouter();
+    expect(screen.getByTestId('header')).toBeInTheDocument();
+    expect(screen.getByTestId('header-title')).toHaveTextContent('Personal Website');
   });
 
-  test('renders description text', () => {
-    render(<App />);
-    const descriptionElement = screen.getByText(/This is a modern website built with React and Material-UI/i);
-    expect(descriptionElement).toBeInTheDocument();
+  test('renders home page by default', () => {
+    renderWithRouter();
+    expect(screen.getByTestId('welcome-card')).toBeInTheDocument();
+    expect(screen.getByText(/Welcome to my Personal Website/i)).toBeInTheDocument();
   });
 
-  test('renders get started button', () => {
-    render(<App />);
-    const buttonElement = screen.getByRole('button', { name: /get started/i });
-    expect(buttonElement).toBeInTheDocument();
+  test('navigates to about page', () => {
+    renderWithRouter(['/about']);
+    expect(screen.getByRole('heading', { level: 1, name: /about me/i })).toBeInTheDocument();
+    expect(screen.getByText(/Full-Stack Developer & Technology Enthusiast/i)).toBeInTheDocument();
   });
 
-  test('get started button is clickable', () => {
-    render(<App />);
-    const buttonElement = screen.getByRole('button', { name: /get started/i });
-
-    // Verify button can be clicked
-    fireEvent.click(buttonElement);
-    expect(buttonElement).toBeInTheDocument();
+  test('navigates to projects page', () => {
+    renderWithRouter(['/projects']);
+    expect(screen.getByRole('heading', { level: 1, name: /projects/i })).toBeInTheDocument();
+    expect(screen.getByText(/Featured Projects/i)).toBeInTheDocument();
   });
 
-  test('app bar contains home icon', () => {
-    render(<App />);
-    // Check for the presence of the home icon (MUI icon)
-    const homeIcon = document.querySelector('[data-testid="HomeIcon"]');
-    expect(homeIcon).toBeInTheDocument();
+  test('navigates to experience page', () => {
+    renderWithRouter(['/experience']);
+    expect(screen.getByRole('heading', { level: 1, name: /work experience/i })).toBeInTheDocument();
   });
 
-  test('content is wrapped in container', () => {
-    render(<App />);
-    // Check that main content exists within the container structure
-    const welcomeHeading = screen.getByRole('heading', { name: /Welcome to my Personal Website/i });
-    expect(welcomeHeading).toBeInTheDocument();
+  test('navigates to education page', () => {
+    renderWithRouter(['/education']);
+    expect(screen.getByRole('heading', { level: 1, name: /education & certifications/i })).toBeInTheDocument();
+  });
+
+  test('navigates to AI page', () => {
+    renderWithRouter(['/ai']);
+    expect(screen.getByRole('heading', { level: 1, name: /ai development showcase/i })).toBeInTheDocument();
+    expect(screen.getByText(/AI Contribution Statistics/i)).toBeInTheDocument();
+  });
+
+  test('navigates to contact page', () => {
+    renderWithRouter(['/contact']);
+    expect(screen.getByRole('heading', { level: 1, name: /contact me/i })).toBeInTheDocument();
+    expect(screen.getByText(/Send a Message/i)).toBeInTheDocument();
   });
 
   test('applies material-ui theme', () => {
-    render(<App />);
-    // Check that ThemeProvider is working by verifying styled components render
-    const appBar = document.querySelector('.MuiAppBar-root');
-    expect(appBar).toBeInTheDocument();
-  });
-
-  test('paper component has elevation', () => {
-    render(<App />);
-    // Check for Material-UI Paper component with elevation
-    const paperElement = document.querySelector('.MuiPaper-elevation3');
-    expect(paperElement).toBeInTheDocument();
-  });
-
-  test('typography components use correct variants', () => {
-    render(<App />);
-    // Check for h1 heading (variant="h2" maps to h1 element with h2 styling)
-    const mainHeading = screen.getByRole('heading', { level: 1 });
-    expect(mainHeading).toBeInTheDocument();
-    expect(mainHeading).toHaveTextContent('Welcome to my Personal Website');
-  });
-
-  test('button has correct variant and size', () => {
-    render(<App />);
-    const buttonElement = screen.getByRole('button', { name: /get started/i });
-
-    // Material-UI adds specific classes for variant and size
-    expect(buttonElement).toHaveClass('MuiButton-contained');
-    expect(buttonElement).toHaveClass('MuiButton-sizeLarge');
+    renderWithRouter();
+    expect(document.querySelector('.MuiAppBar-root')).toBeInTheDocument();
   });
 
   test('css baseline is applied', () => {
-    render(<App />);
-    // CssBaseline should normalize default styles
-    // We can check that the body element has been styled
+    renderWithRouter();
     expect(document.body).toHaveStyle('margin: 0');
   });
 
-  test('responsive container max width', () => {
-    render(<App />);
-    // Check for Material-UI Container component
-    const containerElement = document.querySelector('.MuiContainer-maxWidthLg');
-    expect(containerElement).toBeInTheDocument();
+  test('app has proper layout structure', () => {
+    renderWithRouter();
+
+    // Check for main layout components
+    const header = screen.getByTestId('header');
+    const main = document.querySelector('main');
+
+    expect(header).toBeInTheDocument();
+    expect(main).toBeInTheDocument();
   });
 
-  test('app structure follows material design patterns', () => {
-    render(<App />);
+  test('theme configuration is applied', () => {
+    renderWithRouter();
 
-    // Check for key Material-UI components
-    expect(document.querySelector('.MuiAppBar-root')).toBeInTheDocument();
-    expect(document.querySelector('.MuiToolbar-root')).toBeInTheDocument();
-    expect(document.querySelector('.MuiContainer-root')).toBeInTheDocument();
-    expect(document.querySelector('.MuiPaper-root')).toBeInTheDocument();
-    expect(document.querySelector('.MuiButton-root')).toBeInTheDocument();
+    // Check that custom theme styles are applied
+    const buttons = document.querySelectorAll('.MuiButton-root');
+    if (buttons.length > 0) {
+      // Custom theme removes text transform
+      expect(buttons[0]).toHaveStyle('text-transform: none');
+    }
   });
 
-  test('accessibility: proper heading hierarchy', () => {
-    render(<App />);
+  test('router provides navigation context', () => {
+    renderWithRouter();
 
-    // Check heading hierarchy
-    const h1Elements = screen.getAllByRole('heading', { level: 1 });
-    expect(h1Elements).toHaveLength(1);
-    expect(h1Elements[0]).toHaveTextContent('Welcome to my Personal Website');
+    // Navigation buttons should be present (desktop view)
+    expect(screen.getByTestId('nav-home')).toBeInTheDocument();
+    expect(screen.getByTestId('nav-about')).toBeInTheDocument();
+    expect(screen.getByTestId('nav-projects')).toBeInTheDocument();
+    expect(screen.getByTestId('nav-experience')).toBeInTheDocument();
+    expect(screen.getByTestId('nav-education')).toBeInTheDocument();
+    expect(screen.getByTestId('nav-ai')).toBeInTheDocument();
+    expect(screen.getByTestId('nav-contact')).toBeInTheDocument();
   });
 
-  test('accessibility: button has accessible name', () => {
-    render(<App />);
-    const buttonElement = screen.getByRole('button', { name: /get started/i });
-    expect(buttonElement).toHaveAccessibleName('Get Started');
+  test('app structure follows accessibility guidelines', () => {
+    renderWithRouter();
+
+    // Check for semantic HTML structure
+    const header = screen.getByTestId('header');
+    const main = document.querySelector('main');
+
+    expect(header.tagName).toBe('HEADER');
+    expect(main?.tagName).toBe('MAIN');
+  });
+
+  test('responsive layout is configured', () => {
+    renderWithRouter();
+
+    // Check for responsive container
+    const container = document.querySelector('.MuiContainer-root');
+    expect(container).toBeInTheDocument();
+  });
+
+  test('navigation works with click events', () => {
+    renderWithRouter();
+
+    // Click on About navigation
+    const aboutButton = screen.getByTestId('nav-about');
+    fireEvent.click(aboutButton);
+
+    // Should navigate to about page
+    expect(screen.getByRole('heading', { level: 1, name: /about me/i })).toBeInTheDocument();
+  });
+
+  test('mobile navigation is available', () => {
+    const { useMediaQuery } = require('@mui/material');
+    useMediaQuery.mockReturnValue(true); // Mobile view
+
+    renderWithRouter();
+
+    // Should show mobile menu button
+    expect(screen.getByTestId('menu-button')).toBeInTheDocument();
+
+    // Click to open mobile menu
+    fireEvent.click(screen.getByTestId('menu-button'));
+
+    // Mobile navigation should be visible
+    expect(screen.getByTestId('mobile-menu')).toBeInTheDocument();
+  });
+
+  test('handles unknown routes gracefully', () => {
+    renderWithRouter(['/unknown-route']);
+
+    // Should still render the app structure
+    expect(screen.getByTestId('header')).toBeInTheDocument();
   });
 });
