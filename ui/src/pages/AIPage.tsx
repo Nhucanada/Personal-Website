@@ -59,17 +59,17 @@ const AIPage: React.FC = () => {
     },
     {
       category: 'Backend (API)',
-      totalLines: 628,
-      aiLines: 628,
+      totalLines: 769,
+      aiLines: 769,
       percentage: 100,
-      description: 'Spring Boot REST API with controllers, services, integration tests, and comprehensive test coverage'
+      description: 'Spring Boot REST API with controllers, services, integration tests, and comprehensive test coverage. Includes JaCoCo code coverage (96% instruction coverage) and Checkstyle quality enforcement.'
     },
     {
       category: 'Build & Config',
-      totalLines: 203,
-      aiLines: 203,
+      totalLines: 344,
+      aiLines: 344,
       percentage: 100,
-      description: 'Maven configuration, package.json, TypeScript config, and optimized build pipeline'
+      description: 'Maven configuration with JaCoCo and Checkstyle plugins, package.json, TypeScript config, custom checkstyle.xml rules, and optimized build pipeline with automated quality checks.'
     },
     {
       category: 'Documentation',
@@ -110,14 +110,21 @@ const AIPage: React.FC = () => {
       title: 'Full-Stack Architecture',
       description: 'Maven multi-module project with Spring Boot backend and React frontend integration',
       technologies: ['Maven', 'Spring Boot 2.7', 'React Router', 'REST APIs'],
-      linesOfCode: 628,
+      linesOfCode: 769,
+      complexity: 'High'
+    },
+    {
+      title: 'Code Quality Infrastructure',
+      description: 'JaCoCo code coverage analysis (96% instruction coverage), Checkstyle enforcement, and comprehensive quality metrics',
+      technologies: ['JaCoCo 0.8.8', 'Checkstyle 3.2.0', 'Maven Surefire', 'Quality Assurance'],
+      linesOfCode: 241,
       complexity: 'High'
     },
     {
       title: 'Build System Optimization',
-      description: 'Frontend-maven-plugin integration, Node.js version fixes, and CI/CD ready configuration',
+      description: 'Frontend-maven-plugin integration, Node.js version fixes, and CI/CD ready configuration with automated quality checks',
       technologies: ['Maven', 'Node.js 18+', 'npm', 'Build Optimization'],
-      linesOfCode: 203,
+      linesOfCode: 103,
       complexity: 'Medium'
     },
     {
@@ -133,13 +140,14 @@ const AIPage: React.FC = () => {
     'Complete project architecture design and implementation',
     'Real-time problem solving and debugging (Node.js compatibility, TypeScript errors)',
     'Dark theme design and Material-UI component customization',
-    'Comprehensive testing strategy development and execution (115+ tests)',
+    'Comprehensive testing strategy development and execution (125+ tests)',
     'Professional UI/UX design with accessibility compliance',
     'Dashboard architecture with widget-based layout design',
     'Integration of external data sources (LinkedIn PDF parsing)',
+    'Code quality infrastructure implementation (96% test coverage, Checkstyle enforcement)',
     'Technical documentation and development workflow creation',
     'Build system optimization and configuration management',
-    'Code quality assurance and best practices implementation'
+    'Automated quality assurance and best practices implementation'
   ];
 
   const technicalDecisions = [
@@ -148,6 +156,8 @@ const AIPage: React.FC = () => {
     { decision: 'Dashboard Architecture', rationale: 'Widget-based homepage showcasing all sections with AI emphasis' },
     { decision: 'Spring Boot 2.7', rationale: 'Robust REST API framework with minimal configuration' },
     { decision: 'Maven Multi-Module', rationale: 'Separation of concerns and build integration' },
+    { decision: 'JaCoCo Code Coverage', rationale: '96% instruction coverage with automated reporting and quality gates' },
+    { decision: 'Checkstyle Quality Enforcement', rationale: 'Consistent code style and best practices across Java codebase' },
     { decision: 'Comprehensive Testing', rationale: 'Theme testing, integration testing, and type-safe test patterns' },
     { decision: 'Frontend-Maven-Plugin', rationale: 'Unified build process for full-stack project' }
   ];

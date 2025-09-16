@@ -102,7 +102,7 @@
 
         <!-- Checks for class design -->
         <module name="FinalClass"/>
-        <module name="HideUtilityClassConstructor"/>
+        <!-- HideUtilityClassConstructor disabled for Spring Boot apps -->
         <module name="InterfaceIsType"/>
 
         <!-- Miscellaneous other checks. -->

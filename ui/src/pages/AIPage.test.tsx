@@ -29,7 +29,7 @@ describe('AIPage', () => {
 
   test('shows overall project statistics', () => {
     renderWithTheme(<AIPage />);
-    expect(screen.getByText(/6,673 lines of code/i)).toBeInTheDocument();
+    expect(screen.getByText(/6,955 lines of code/i)).toBeInTheDocument();
     expect(screen.getByText(/100% AI Generated/i)).toBeInTheDocument();
   });
 
@@ -44,8 +44,8 @@ describe('AIPage', () => {
 
     // Check for line counts (allowing for multiple occurrences)
     expect(screen.getAllByText(/4,645/).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText(/628/).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText(/203/).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/769/).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/344/).length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText(/1,197/).length).toBeGreaterThanOrEqual(1);
   });
 
@@ -156,7 +156,9 @@ describe('AIPage', () => {
     expect(screen.getByText('1847 lines')).toBeInTheDocument(); // Dark Theme Portfolio Design
     expect(screen.getByText('856 lines')).toBeInTheDocument(); // Professional Content Integration
     expect(screen.getByText('1253 lines')).toBeInTheDocument(); // Comprehensive Testing Suite
-    expect(screen.getByText('628 lines')).toBeInTheDocument(); // Full-Stack Architecture
+    expect(screen.getByText('769 lines')).toBeInTheDocument(); // Full-Stack Architecture
+    expect(screen.getByText('241 lines')).toBeInTheDocument(); // Code Quality Infrastructure
+    expect(screen.getByText('103 lines')).toBeInTheDocument(); // Build System Optimization
   });
 
   test('shows proper icon usage', () => {

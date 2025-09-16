@@ -40,15 +40,15 @@ describe('HomePage - Dashboard', () => {
     renderWithProviders(<HomePage />);
     expect(screen.getByText(/🤖 AI Development Showcase/i)).toBeInTheDocument();
     expect(screen.getByText(/100% AI Generated/i)).toBeInTheDocument();
-    expect(screen.getByText(/6,673/i)).toBeInTheDocument(); // Total lines of code
+    expect(screen.getByText(/6,955/i)).toBeInTheDocument(); // Total lines of code
   });
 
   test('shows AI statistics in hero section', () => {
     renderWithProviders(<HomePage />);
-    expect(screen.getByText('6,673')).toBeInTheDocument(); // Total Lines
+    expect(screen.getByText('6,955')).toBeInTheDocument(); // Total Lines
     expect(screen.getByText('100%')).toBeInTheDocument(); // AI Generated
     expect(screen.getByText('25+')).toBeInTheDocument(); // Components
-    expect(screen.getByText('115+')).toBeInTheDocument(); // Tests
+    expect(screen.getByText('125+')).toBeInTheDocument(); // Tests
   });
 
   test('renders About Me widget', () => {
