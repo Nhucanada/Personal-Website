@@ -20,28 +20,28 @@ This document tracks the contributions made by Claude Code (Anthropic's AI assis
 ## Contribution Summary
 
 ### Overall Statistics
-- **Total Project Lines**: 3,847 lines
-- **AI Generated Lines**: 3,847 lines (100%)
+- **Total Project Lines**: 6,673 lines
+- **AI Generated Lines**: 6,673 lines (100%)
 - **Human Written Lines**: 0 lines (0%)
 - **AI Contribution Percentage**: 100%
 
 ### Breakdown by Module
 
 #### Frontend (UI Module)
-- **Total Lines**: 2,234 lines
-- **AI Contribution**: 2,234 lines (100%)
+- **Total Lines**: 4,645 lines
+- **AI Contribution**: 4,645 lines (100%)
 
 #### Backend (API Module)
-- **Total Lines**: 267 lines
-- **AI Contribution**: 267 lines (100%)
+- **Total Lines**: 628 lines
+- **AI Contribution**: 628 lines (100%)
 
 #### Build & Configuration
-- **Total Lines**: 189 lines
-- **AI Contribution**: 189 lines (100%)
+- **Total Lines**: 203 lines
+- **AI Contribution**: 203 lines (100%)
 
 #### Documentation
-- **Total Lines**: 1,157 lines
-- **AI Contribution**: 1,157 lines (100%)
+- **Total Lines**: 1,197 lines
+- **AI Contribution**: 1,197 lines (100%)
 
 ## Detailed File Analysis
 
@@ -107,9 +107,13 @@ api/src/test/java/com/example/api/service/GreetingServiceTest.java (41 lines) - 
 
 #### Frontend Core (React/TypeScript)
 ```
-ui/src/App.tsx (43 lines) - AI_GENERATED
+ui/src/App.tsx (127 lines) - AI_GENERATED
 ├── BrowserRouter configuration with 7 routes
-├── Material-UI ThemeProvider with custom theme
+├── Material-UI ThemeProvider with comprehensive dark theme
+├── Dark mode palette with custom colors (#90caf9, #f48fb1)
+├── Dark background colors (#0a0a0a, #1a1a1a)
+├── Typography overrides for all heading levels
+├── Component style overrides (Card, Paper, AppBar, Chip)
 ├── Semantic HTML structure with header and main
 └── Route definitions for all pages
 
@@ -145,10 +149,18 @@ ui/src/components/WelcomeCard.tsx (58 lines) - AI_GENERATED
 
 #### Frontend Pages (Complete User Interface)
 ```
-ui/src/pages/HomePage.tsx (19 lines) - AI_GENERATED
-├── Container layout with Material-UI
-├── WelcomeCard integration with personalized props
-└── Responsive design structure
+ui/src/pages/HomePage.tsx (480 lines) - AI_GENERATED
+├── Comprehensive dashboard with widget-based architecture
+├── Hero section with AI development emphasis and dark theme gradients
+├── AI Development showcase widget with live statistics
+├── Dark theme compatible colors and styling
+├── About Me widget with skills and navigation
+├── Featured Projects widget with technology chips
+├── Work Experience widget with current position indicators
+├── Education widget with progress bars and language chips
+├── Contact section with social media integration
+├── Responsive grid layout with Material-UI cards
+└── Interactive navigation to all sections with useNavigate integration
 
 ui/src/pages/AboutPage.tsx (142 lines) - AI_GENERATED
 ├── Personal story section with Nathan's actual background
@@ -214,18 +226,30 @@ ui/src/components/WelcomeCard.test.tsx (73 lines) - AI_GENERATED
 ├── Accessibility and semantic HTML testing
 └── Material-UI styling verification
 
-ui/src/pages/*.test.tsx (545 lines total) - AI_GENERATED
+ui/src/pages/*.test.tsx (780+ lines total) - AI_GENERATED
 ├── Individual page component testing
-├── Content verification for personalized data
+├── Dashboard widget testing with comprehensive coverage
+├── Navigation interaction testing with useNavigate mocks
+├── AI development showcase testing
+├── Social media link verification
+├── Progress indicator and chip testing
 ├── Form interaction testing (ContactPage)
-├── Navigation link testing
 ├── Material-UI component integration
 └── Accessibility compliance testing
 
-ui/src/__tests__/integration.test.tsx (27 lines) - AI_GENERATED
+ui/src/__tests__/integration.test.tsx (114 lines) - AI_GENERATED
 ├── Full application integration testing
 ├── Material-UI theme provider testing
 └── Component interaction verification
+
+ui/src/Theme.test.tsx (160 lines) - AI_GENERATED
+├── Comprehensive dark theme testing
+├── Theme configuration validation
+├── Color palette testing (dark mode, primary, secondary)
+├── Background color validation (#0a0a0a, #1a1a1a)
+├── Typography color testing (white headings)
+├── Component styling tests (Card, Paper, AppBar, Chip)
+└── CSS baseline application testing
 
 ui/src/utils/api.ts (45 lines) - AI_GENERATED
 ├── API client functions with TypeScript interfaces
@@ -316,6 +340,15 @@ ui/tsconfig.json (25 lines) - AI_GENERATED
 - API documentation with endpoint specifications
 - Development workflow documentation
 
+#### 7. **Dark Theme Implementation (100% AI)**
+- Complete Material-UI dark theme configuration
+- Custom color palette with accessibility considerations
+- Dark backgrounds (#0a0a0a, #1a1a1a) with proper contrast
+- Component style overrides for Cards, Paper, AppBar, Chips
+- Typography color adjustments for all heading levels
+- Comprehensive test suite for theme validation
+- Dark theme compatible gradients and styling
+
 ### Technology Decisions Made by AI
 
 1. **Frontend Framework**: React 18 with TypeScript for type safety
@@ -403,4 +436,11 @@ The collaboration demonstrates AI's capability to handle complete software devel
 **Last Updated**: 2025-09-16
 **AI Assistant**: Claude Code (Anthropic)
 **Project**: Nathan Hu Personal Website
-**Total AI Contribution**: 3,847 lines (100%)
+**Total AI Contribution**: 6,673 lines (100%)
+
+### Recent Updates (2025-09-16)
+- **Dark Theme Implementation**: Complete Material-UI dark theme with custom colors
+- **Enhanced Testing**: Added Theme.test.tsx for comprehensive dark theme testing
+- **Updated Line Counts**: Accurate count of 6,673 total lines (5,159 source + 1,514 config/docs)
+- **Navigation Fix**: Resolved duplicate home button issue with single home icon
+- **UI Improvements**: Dark theme compatible gradients and styling throughout

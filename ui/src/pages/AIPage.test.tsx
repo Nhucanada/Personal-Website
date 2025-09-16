@@ -29,7 +29,7 @@ describe('AIPage', () => {
 
   test('shows overall project statistics', () => {
     renderWithTheme(<AIPage />);
-    expect(screen.getByText(/3,847 lines of code/i)).toBeInTheDocument();
+    expect(screen.getByText(/6,673 lines of code/i)).toBeInTheDocument();
     expect(screen.getByText(/100% AI Generated/i)).toBeInTheDocument();
   });
 
@@ -43,10 +43,10 @@ describe('AIPage', () => {
     expect(screen.getByText('Documentation')).toBeInTheDocument();
 
     // Check for line counts (allowing for multiple occurrences)
-    expect(screen.getAllByText(/2,234/).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText(/267/).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText(/189/).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText(/1,157/).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/4,645/).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/628/).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/203/).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/1,197/).length).toBeGreaterThanOrEqual(1);
   });
 
   test('renders AI-developed features section', () => {
@@ -54,7 +54,7 @@ describe('AIPage', () => {
     expect(screen.getByRole('heading', { name: /ai-developed features/i })).toBeInTheDocument();
 
     // Check for key features
-    expect(screen.getByText('Responsive Portfolio Design')).toBeInTheDocument();
+    expect(screen.getByText('Dark Theme Portfolio Design')).toBeInTheDocument();
     expect(screen.getByText('Professional Content Integration')).toBeInTheDocument();
     expect(screen.getByText('Comprehensive Testing Suite')).toBeInTheDocument();
     expect(screen.getByText('Full-Stack Architecture')).toBeInTheDocument();
@@ -153,10 +153,10 @@ describe('AIPage', () => {
 
   test('displays correct line counts for features', () => {
     renderWithTheme(<AIPage />);
-    expect(screen.getByText('1245 lines')).toBeInTheDocument(); // Responsive Portfolio Design
+    expect(screen.getByText('1847 lines')).toBeInTheDocument(); // Dark Theme Portfolio Design
     expect(screen.getByText('856 lines')).toBeInTheDocument(); // Professional Content Integration
-    expect(screen.getByText('623 lines')).toBeInTheDocument(); // Comprehensive Testing Suite
-    expect(screen.getByText('412 lines')).toBeInTheDocument(); // Full-Stack Architecture
+    expect(screen.getByText('1253 lines')).toBeInTheDocument(); // Comprehensive Testing Suite
+    expect(screen.getByText('628 lines')).toBeInTheDocument(); // Full-Stack Architecture
   });
 
   test('shows proper icon usage', () => {

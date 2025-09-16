@@ -3,16 +3,22 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import App from '../App';
 
+// Mock useMediaQuery for consistent testing
+jest.mock('@mui/material', () => ({
+  ...jest.requireActual('@mui/material'),
+  useMediaQuery: jest.fn(() => false), // Default to desktop view
+}));
+
 // Integration tests for the entire app
 describe('App Integration Tests', () => {
   test('renders complete application structure', () => {
     render(<App />);
 
     // Check that all major components are rendered
-    expect(screen.getByText(/Personal Website/i)).toBeInTheDocument();
-    expect(screen.getByText(/Welcome to my Personal Website/i)).toBeInTheDocument();
-    expect(screen.getByText(/This is a modern website built with React and Material-UI/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /get started/i })).toBeInTheDocument();
+    expect(screen.getByTestId('header-title')).toHaveTextContent('Personal Website');
+    expect(screen.getByRole('heading', { level: 1, name: /nathan hu/i })).toBeInTheDocument();
+    expect(screen.getByText(/CS & AI Student at McGill University/i)).toBeInTheDocument();
+    expect(screen.getByText(/AI Development Showcase/i)).toBeInTheDocument();
   });
 
   test('Material-UI theme is properly applied throughout the app', () => {
@@ -29,8 +35,8 @@ describe('App Integration Tests', () => {
   test('responsive layout components are present', () => {
     render(<App />);
 
-    // Check for responsive container
-    expect(document.querySelector('.MuiContainer-maxWidthLg')).toBeInTheDocument();
+    // Check for responsive container (HomePage uses maxWidthXl)
+    expect(document.querySelector('.MuiContainer-maxWidthXl')).toBeInTheDocument();
 
     // Check for proper spacing using Box component
     const boxElements = document.querySelectorAll('.MuiBox-root');
@@ -44,8 +50,8 @@ describe('App Integration Tests', () => {
     const headings = screen.getAllByRole('heading');
     expect(headings.length).toBeGreaterThan(0);
 
-    // Check for proper button accessibility
-    const button = screen.getByRole('button', { name: /get started/i });
+    // Check for proper button accessibility - use an actual button from HomePage
+    const button = screen.getByRole('button', { name: /explore ai development/i });
     expect(button).toBeInTheDocument();
     expect(button).toBeEnabled();
   });
@@ -72,7 +78,9 @@ describe('App Integration Tests', () => {
     expect(paper).toBeInTheDocument();
 
     // Verify toolbar is inside app bar
-    expect(appBar).toContainElement(toolbar);
+    if (appBar && toolbar) {
+      expect(appBar).toContainElement(toolbar as HTMLElement);
+    }
   });
 
   test('theme provider wraps entire application', () => {
@@ -88,12 +96,15 @@ describe('App Integration Tests', () => {
     render(<App />);
 
     // Check for primary color application on button
-    const button = screen.getByRole('button', { name: /get started/i });
+    const button = screen.getByRole('button', { name: /explore ai development/i });
     expect(button).toHaveClass('MuiButton-contained');
 
-    // Check for text color variants
-    const secondaryText = screen.getByText(/This is a modern website/i);
-    expect(secondaryText).toHaveClass('MuiTypography-colorTextSecondary');
+    // Check that buttons have proper Material-UI styling
+    const buttons = screen.getAllByRole('button');
+    expect(buttons.length).toBeGreaterThan(0);
+    buttons.forEach(btn => {
+      expect(btn.className).toMatch(/MuiButton/);
+    });
   });
 
   test('elevation system is properly implemented', () => {

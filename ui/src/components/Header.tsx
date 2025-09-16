@@ -47,7 +47,6 @@ const Header: React.FC<HeaderProps> = ({
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const navigationItems: NavigationItem[] = [
-    { label: 'Home', path: '/', icon: <HomeIcon /> },
     { label: 'About', path: '/about', icon: <PersonIcon /> },
     { label: 'Projects', path: '/projects', icon: <CodeIcon /> },
     { label: 'Experience', path: '/experience', icon: <WorkIcon /> },

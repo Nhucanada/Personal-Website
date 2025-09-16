@@ -17,23 +17,46 @@ import AIPage from './pages/AIPage';
 
 const theme = createTheme({
   palette: {
-    mode: 'light',
+    mode: 'dark',
     primary: {
-      main: '#1976d2',
+      main: '#90caf9',
     },
     secondary: {
-      main: '#dc004e',
+      main: '#f48fb1',
+    },
+    background: {
+      default: '#0a0a0a',
+      paper: '#1a1a1a',
+    },
+    text: {
+      primary: '#ffffff',
+      secondary: '#b0b0b0',
     },
   },
   typography: {
     h1: {
       fontWeight: 600,
+      color: '#ffffff',
     },
     h2: {
       fontWeight: 600,
+      color: '#ffffff',
     },
     h3: {
       fontWeight: 600,
+      color: '#ffffff',
+    },
+    h4: {
+      fontWeight: 600,
+      color: '#ffffff',
+    },
+    h5: {
+      fontWeight: 600,
+      color: '#ffffff',
+    },
+    h6: {
+      fontWeight: 600,
+      color: '#ffffff',
     },
   },
   components: {
@@ -41,6 +64,37 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: 'none',
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#1a1a1a',
+          border: '1px solid #333333',
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#1a1a1a',
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#1a1a1a',
+          borderBottom: '1px solid #333333',
+        },
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#333333',
+          color: '#ffffff',
         },
       },
     },

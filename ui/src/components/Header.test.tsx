@@ -48,13 +48,12 @@ describe('Header Component', () => {
   test('displays desktop navigation on large screens', () => {
     renderWithProviders(<Header />);
 
-    // Check for navigation buttons
-    expect(screen.getByTestId('nav-home')).toBeInTheDocument();
+    // Check for navigation buttons (no Home button - only home icon)
     expect(screen.getByTestId('nav-about')).toBeInTheDocument();
     expect(screen.getByTestId('nav-projects')).toBeInTheDocument();
     expect(screen.getByTestId('nav-experience')).toBeInTheDocument();
     expect(screen.getByTestId('nav-education')).toBeInTheDocument();
-    expect(screen.getByTestId('nav-ai')).toBeInTheDocument();
+    expect(screen.getByTestId('nav-ai development')).toBeInTheDocument();
     expect(screen.getByTestId('nav-contact')).toBeInTheDocument();
   });
 
@@ -81,12 +80,11 @@ describe('Header Component', () => {
   test('navigation items have correct icons and labels', () => {
     renderWithProviders(<Header />);
 
-    expect(screen.getByTestId('nav-home')).toHaveTextContent('Home');
     expect(screen.getByTestId('nav-about')).toHaveTextContent('About');
     expect(screen.getByTestId('nav-projects')).toHaveTextContent('Projects');
     expect(screen.getByTestId('nav-experience')).toHaveTextContent('Experience');
     expect(screen.getByTestId('nav-education')).toHaveTextContent('Education');
-    expect(screen.getByTestId('nav-ai')).toHaveTextContent('AI Development');
+    expect(screen.getByTestId('nav-ai development')).toHaveTextContent('AI Development');
     expect(screen.getByTestId('nav-contact')).toHaveTextContent('Contact');
   });
 
@@ -134,13 +132,12 @@ describe('Header Component', () => {
     const menuButton = screen.getByTestId('menu-button');
     fireEvent.click(menuButton);
 
-    // Check mobile navigation items
-    expect(screen.getByTestId('mobile-nav-home')).toBeInTheDocument();
+    // Check mobile navigation items (no home - only home icon)
     expect(screen.getByTestId('mobile-nav-about')).toBeInTheDocument();
     expect(screen.getByTestId('mobile-nav-projects')).toBeInTheDocument();
     expect(screen.getByTestId('mobile-nav-experience')).toBeInTheDocument();
     expect(screen.getByTestId('mobile-nav-education')).toBeInTheDocument();
-    expect(screen.getByTestId('mobile-nav-ai')).toBeInTheDocument();
+    expect(screen.getByTestId('mobile-nav-ai development')).toBeInTheDocument();
     expect(screen.getByTestId('mobile-nav-contact')).toBeInTheDocument();
   });
 });

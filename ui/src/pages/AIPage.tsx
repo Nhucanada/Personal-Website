@@ -52,31 +52,31 @@ const AIPage: React.FC = () => {
   const aiMetrics: AIMetric[] = [
     {
       category: 'Frontend (UI)',
-      totalLines: 2234,
-      aiLines: 2234,
+      totalLines: 4645,
+      aiLines: 4645,
       percentage: 100,
-      description: 'Complete React TypeScript frontend with Material-UI components, routing, and testing'
+      description: 'Complete React TypeScript frontend with Material-UI dark theme, dashboard design, routing, and comprehensive testing'
     },
     {
       category: 'Backend (API)',
-      totalLines: 267,
-      aiLines: 267,
+      totalLines: 628,
+      aiLines: 628,
       percentage: 100,
-      description: 'Spring Boot REST API with controllers, services, and comprehensive testing'
+      description: 'Spring Boot REST API with controllers, services, integration tests, and comprehensive test coverage'
     },
     {
       category: 'Build & Config',
-      totalLines: 189,
-      aiLines: 189,
+      totalLines: 203,
+      aiLines: 203,
       percentage: 100,
-      description: 'Maven configuration, package.json, TypeScript config, and build optimization'
+      description: 'Maven configuration, package.json, TypeScript config, and optimized build pipeline'
     },
     {
       category: 'Documentation',
-      totalLines: 1157,
-      aiLines: 1157,
+      totalLines: 1197,
+      aiLines: 1197,
       percentage: 100,
-      description: 'Comprehensive README files, API docs, testing guides, and project documentation'
+      description: 'Comprehensive README files, AI contribution tracking, testing guides, and development documentation'
     }
   ];
 
@@ -86,10 +86,10 @@ const AIPage: React.FC = () => {
 
   const keyFeatures: AIFeature[] = [
     {
-      title: 'Responsive Portfolio Design',
-      description: 'Complete UI/UX design with Material-UI components, responsive navigation, and accessibility features',
-      technologies: ['React 18', 'TypeScript', 'Material-UI v5', 'Emotion CSS-in-JS'],
-      linesOfCode: 1245,
+      title: 'Dark Theme Portfolio Design',
+      description: 'Complete UI/UX design with Material-UI dark theme, dashboard architecture, responsive navigation, and accessibility features',
+      technologies: ['React 18', 'TypeScript', 'Material-UI v5', 'Dark Theme', 'Emotion CSS-in-JS'],
+      linesOfCode: 1847,
       complexity: 'High'
     },
     {
@@ -101,39 +101,41 @@ const AIPage: React.FC = () => {
     },
     {
       title: 'Comprehensive Testing Suite',
-      description: '105 tests across frontend and backend with unit, integration, and component testing',
-      technologies: ['Jest', 'React Testing Library', 'JUnit', 'Mockito'],
-      linesOfCode: 623,
+      description: '115+ tests across frontend and backend with unit, integration, component, and theme testing',
+      technologies: ['Jest', 'React Testing Library', 'JUnit', 'Mockito', 'Theme Testing'],
+      linesOfCode: 1253,
       complexity: 'High'
     },
     {
       title: 'Full-Stack Architecture',
       description: 'Maven multi-module project with Spring Boot backend and React frontend integration',
       technologies: ['Maven', 'Spring Boot 2.7', 'React Router', 'REST APIs'],
-      linesOfCode: 412,
+      linesOfCode: 628,
       complexity: 'High'
     },
     {
       title: 'Build System Optimization',
       description: 'Frontend-maven-plugin integration, Node.js version fixes, and CI/CD ready configuration',
       technologies: ['Maven', 'Node.js 18+', 'npm', 'Build Optimization'],
-      linesOfCode: 189,
+      linesOfCode: 203,
       complexity: 'Medium'
     },
     {
       title: 'Documentation Excellence',
-      description: 'Detailed README files, API documentation, testing guides, and development workflows',
-      technologies: ['Markdown', 'Technical Writing', 'API Documentation'],
-      linesOfCode: 1157,
+      description: 'Detailed README files, AI contribution tracking, testing guides, and development workflows',
+      technologies: ['Markdown', 'Technical Writing', 'AI Tracking', 'API Documentation'],
+      linesOfCode: 1197,
       complexity: 'Medium'
     }
   ];
 
   const aiCapabilities = [
     'Complete project architecture design and implementation',
-    'Real-time problem solving and debugging (Node.js compatibility issues)',
-    'Comprehensive testing strategy development and execution',
+    'Real-time problem solving and debugging (Node.js compatibility, TypeScript errors)',
+    'Dark theme design and Material-UI component customization',
+    'Comprehensive testing strategy development and execution (115+ tests)',
     'Professional UI/UX design with accessibility compliance',
+    'Dashboard architecture with widget-based layout design',
     'Integration of external data sources (LinkedIn PDF parsing)',
     'Technical documentation and development workflow creation',
     'Build system optimization and configuration management',
@@ -142,10 +144,11 @@ const AIPage: React.FC = () => {
 
   const technicalDecisions = [
     { decision: 'React 18 + TypeScript', rationale: 'Type safety and modern React features' },
-    { decision: 'Material-UI v5', rationale: 'Professional design system and component library' },
+    { decision: 'Material-UI v5 Dark Theme', rationale: 'Professional design system with custom dark color palette' },
+    { decision: 'Dashboard Architecture', rationale: 'Widget-based homepage showcasing all sections with AI emphasis' },
     { decision: 'Spring Boot 2.7', rationale: 'Robust REST API framework with minimal configuration' },
     { decision: 'Maven Multi-Module', rationale: 'Separation of concerns and build integration' },
-    { decision: 'React Testing Library', rationale: 'Best practices for component testing' },
+    { decision: 'Comprehensive Testing', rationale: 'Theme testing, integration testing, and type-safe test patterns' },
     { decision: 'Frontend-Maven-Plugin', rationale: 'Unified build process for full-stack project' }
   ];
 

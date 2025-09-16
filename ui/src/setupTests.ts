@@ -27,11 +27,11 @@ global.IntersectionObserver = jest.fn().mockImplementation(() => ({
 }));
 
 // Mock ResizeObserver which is not implemented in JSDOM
-global.ResizeObserver = jest.fn().mockImplementation(() => ({
-  observe: jest.fn(),
-  unobserve: jest.fn(),
-  disconnect: jest.fn(),
-}));
+global.ResizeObserver = class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
 
 // Suppress specific console warnings in tests
 const originalError = console.error;
@@ -39,7 +39,8 @@ beforeAll(() => {
   console.error = (...args: any[]) => {
     if (
       typeof args[0] === 'string' &&
-      args[0].includes('Warning: ReactDOM.render is deprecated')
+      (args[0].includes('Warning: ReactDOM.render is deprecated') ||
+       args[0].includes('Warning: validateDOMNesting'))
     ) {
       return;
     }

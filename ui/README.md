@@ -10,7 +10,8 @@ This module contains the frontend user interface for Nathan Hu's personal portfo
 
 - **React 18** - JavaScript library for building user interfaces
 - **TypeScript** - Type-safe JavaScript superset
-- **Material-UI (MUI) 5** - React component library implementing Material Design
+- **Material-UI (MUI) 5** - React component library with custom dark theme implementation
+- **Dark Theme** - Professional dark color scheme with accessibility considerations
 - **Emotion** - CSS-in-JS library for styling
 - **React Scripts** - Build tooling and development server
 
@@ -241,7 +242,11 @@ src/
 ### Project Configuration
 
 - **TypeScript**: Configured in `tsconfig.json`
-- **Material-UI Theme**: Customized in `App.tsx` with typography and button overrides
+- **Material-UI Dark Theme**: Comprehensive dark theme configuration in `App.tsx` including:
+  - Dark mode palette with primary (#90caf9) and secondary (#f48fb1) colors
+  - Dark background colors (#0a0a0a for default, #1a1a1a for paper)
+  - White typography colors for all heading levels
+  - Component style overrides for Cards, Paper, AppBar, and Chips
 - **React Router**: Configured for client-side navigation between pages
 - **Build Settings**: Managed by React Scripts
 
@@ -307,7 +312,7 @@ The application uses React Router for client-side navigation:
 ```
 
 **Available Pages:**
-- **Home** (`/`) - Landing page featuring Nathan Hu, CS & AI Student at McGill
+- **Home** (`/`) - Dashboard featuring widget previews of all sections with prominent AI development showcase
 - **About** (`/about`) - Nathan's background, technical skills (Java, Python, React, TypeScript, Jenkins), and philosophy
 - **Projects** (`/projects`) - Portfolio showcasing GitHub projects including Personal Website, Java Search Engine, and Guardians of the Hive
 - **Experience** (`/experience`) - Professional timeline including internships at PointClickCare, Intact, and 360insights
