@@ -29,7 +29,7 @@ describe('AIPage', () => {
 
   test('shows overall project statistics', () => {
     renderWithTheme(<AIPage />);
-    expect(screen.getByText(/6,955 lines of code/i)).toBeInTheDocument();
+    expect(screen.getByText(/7,488 lines of code/i)).toBeInTheDocument();
     expect(screen.getByText(/100% AI Generated/i)).toBeInTheDocument();
   });
 
@@ -43,10 +43,10 @@ describe('AIPage', () => {
     expect(screen.getByText('Documentation')).toBeInTheDocument();
 
     // Check for line counts (allowing for multiple occurrences)
-    expect(screen.getAllByText(/4,645/).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText(/769/).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText(/344/).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText(/1,197/).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/5,031/).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/644/).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/394/).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/1,419/).length).toBeGreaterThanOrEqual(1);
   });
 
   test('renders AI-developed features section', () => {
@@ -153,12 +153,14 @@ describe('AIPage', () => {
 
   test('displays correct line counts for features', () => {
     renderWithTheme(<AIPage />);
+    expect(screen.getByText('827 lines')).toBeInTheDocument(); // Interactive Timeline Visualization
     expect(screen.getByText('1847 lines')).toBeInTheDocument(); // Dark Theme Portfolio Design
     expect(screen.getByText('856 lines')).toBeInTheDocument(); // Professional Content Integration
     expect(screen.getByText('1253 lines')).toBeInTheDocument(); // Comprehensive Testing Suite
-    expect(screen.getByText('769 lines')).toBeInTheDocument(); // Full-Stack Architecture
+    expect(screen.getByText('644 lines')).toBeInTheDocument(); // Full-Stack Architecture
     expect(screen.getByText('241 lines')).toBeInTheDocument(); // Code Quality Infrastructure
     expect(screen.getByText('103 lines')).toBeInTheDocument(); // Build System Optimization
+    expect(screen.getByText('1419 lines')).toBeInTheDocument(); // Documentation Excellence
   });
 
   test('shows proper icon usage', () => {
@@ -195,6 +197,9 @@ describe('AIPage', () => {
     // Each module should show 100% AI
     const percentageTexts = screen.getAllByText(/100% AI/);
     expect(percentageTexts.length).toBeGreaterThanOrEqual(4); // One for each module
+
+    // Check for Interactive Timeline Visualization feature
+    expect(screen.getByText('Interactive Timeline Visualization')).toBeInTheDocument();
   });
 
   test('renders grid layouts properly', () => {

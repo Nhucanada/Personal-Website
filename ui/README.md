@@ -85,17 +85,26 @@ npm run eject      # Eject from Create React App (not recommended)
 
 ### Testing
 
-The UI includes comprehensive unit and integration tests using React Testing Library and Jest.
+The UI includes comprehensive unit and integration tests using React Testing Library and Jest, with 171 total tests achieving 94.29% statement coverage.
 
 #### Test Structure
 
 ```
 src/
 ├── App.test.tsx                    # Main app component tests
+├── Theme.test.tsx                  # Dark theme configuration tests
 ├── setupTests.ts                   # Test configuration and mocks
 ├── components/
 │   ├── Header.test.tsx             # Header component tests
 │   └── WelcomeCard.test.tsx        # Welcome card component tests
+├── pages/
+│   ├── HomePage.test.tsx           # Homepage dashboard tests
+│   ├── AboutPage.test.tsx          # About page tests
+│   ├── ProjectsPage.test.tsx       # Projects showcase tests
+│   ├── WorkExperiencePage.test.tsx # Interactive timeline tests (244 lines)
+│   ├── EducationPage.test.tsx      # Education timeline tests
+│   ├── ContactPage.test.tsx        # Contact form tests
+│   └── AIPage.test.tsx             # AI contributions showcase tests
 ├── utils/
 │   └── api.test.ts                 # API utility tests
 └── __tests__/

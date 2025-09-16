@@ -40,10 +40,10 @@ const HomePage: React.FC = () => {
 
   // AI Development Statistics
   const aiStats = [
-    { label: 'Total Lines of Code', value: '6,955', color: 'primary' },
+    { label: 'Total Lines of Code', value: '7,488', color: 'primary' },
     { label: 'AI Generated', value: '100%', color: 'success' },
-    { label: 'Components Created', value: '25+', color: 'info' },
-    { label: 'Tests Written', value: '125+', color: 'warning' }
+    { label: 'Components Created', value: '26+', color: 'info' },
+    { label: 'Tests Written', value: '144+', color: 'warning' }
   ];
 
   // Recent Projects

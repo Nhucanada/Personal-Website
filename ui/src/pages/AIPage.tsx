@@ -52,29 +52,29 @@ const AIPage: React.FC = () => {
   const aiMetrics: AIMetric[] = [
     {
       category: 'Frontend (UI)',
-      totalLines: 4645,
-      aiLines: 4645,
+      totalLines: 5031,
+      aiLines: 5031,
       percentage: 100,
-      description: 'Complete React TypeScript frontend with Material-UI dark theme, dashboard design, routing, and comprehensive testing'
+      description: 'Complete React TypeScript frontend with Material-UI dark theme, interactive timeline visualization, dashboard design, routing, and comprehensive testing'
     },
     {
       category: 'Backend (API)',
-      totalLines: 769,
-      aiLines: 769,
+      totalLines: 644,
+      aiLines: 644,
       percentage: 100,
       description: 'Spring Boot REST API with controllers, services, integration tests, and comprehensive test coverage. Includes JaCoCo code coverage (96% instruction coverage) and Checkstyle quality enforcement.'
     },
     {
       category: 'Build & Config',
-      totalLines: 344,
-      aiLines: 344,
+      totalLines: 394,
+      aiLines: 394,
       percentage: 100,
       description: 'Maven configuration with JaCoCo and Checkstyle plugins, package.json, TypeScript config, custom checkstyle.xml rules, and optimized build pipeline with automated quality checks.'
     },
     {
       category: 'Documentation',
-      totalLines: 1197,
-      aiLines: 1197,
+      totalLines: 1419,
+      aiLines: 1419,
       percentage: 100,
       description: 'Comprehensive README files, AI contribution tracking, testing guides, and development documentation'
     }
@@ -85,6 +85,13 @@ const AIPage: React.FC = () => {
   const overallPercentage = Math.round((totalAILines / totalLines) * 100);
 
   const keyFeatures: AIFeature[] = [
+    {
+      title: 'Interactive Timeline Visualization',
+      description: 'Advanced timeline component for overlapping work experiences with interactive selection, tooltips, and responsive design',
+      technologies: ['React 18', 'TypeScript', 'Material-UI v5', 'Styled Components', 'Interactive UI'],
+      linesOfCode: 827,
+      complexity: 'High'
+    },
     {
       title: 'Dark Theme Portfolio Design',
       description: 'Complete UI/UX design with Material-UI dark theme, dashboard architecture, responsive navigation, and accessibility features',
@@ -110,7 +117,7 @@ const AIPage: React.FC = () => {
       title: 'Full-Stack Architecture',
       description: 'Maven multi-module project with Spring Boot backend and React frontend integration',
       technologies: ['Maven', 'Spring Boot 2.7', 'React Router', 'REST APIs'],
-      linesOfCode: 769,
+      linesOfCode: 644,
       complexity: 'High'
     },
     {
@@ -131,7 +138,7 @@ const AIPage: React.FC = () => {
       title: 'Documentation Excellence',
       description: 'Detailed README files, AI contribution tracking, testing guides, and development workflows',
       technologies: ['Markdown', 'Technical Writing', 'AI Tracking', 'API Documentation'],
-      linesOfCode: 1197,
+      linesOfCode: 1419,
       complexity: 'Medium'
     }
   ];

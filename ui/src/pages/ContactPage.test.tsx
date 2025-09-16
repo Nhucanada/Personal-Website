@@ -35,13 +35,13 @@ describe('ContactPage', () => {
     renderWithTheme(<ContactPage />);
     expect(screen.getByRole('heading', { name: /get in touch/i })).toBeInTheDocument();
 
-    // Check contact info items
-    expect(screen.getByText(/Email/i)).toBeInTheDocument();
-    expect(screen.getByText(/nhucanada0628@gmail.com/i)).toBeInTheDocument();
-    expect(screen.getByText(/nathan.hu@mail.mcgill.ca/i)).toBeInTheDocument();
-    expect(screen.getByText(/LinkedIn/i)).toBeInTheDocument();
-    expect(screen.getByText(/GitHub/i)).toBeInTheDocument();
-    expect(screen.getByText(/Location/i)).toBeInTheDocument();
+    // Check contact info items (allowing multiple occurrences)
+    expect(screen.getAllByText(/Email/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/nhucanada0628@gmail.com/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/nathan.hu@mail.mcgill.ca/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/LinkedIn/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/GitHub/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Location/i).length).toBeGreaterThan(0);
   });
 
   test('form validation works correctly', () => {
@@ -88,8 +88,8 @@ describe('ContactPage', () => {
 
   test('displays professional networks information', () => {
     renderWithTheme(<ContactPage />);
-    expect(screen.getByText(/Professional Networks/i)).toBeInTheDocument();
-    expect(screen.getByText(/Connect with me on LinkedIn/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Professional Networks/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Connect with me on LinkedIn/i).length).toBeGreaterThan(0);
   });
 
   test('shows social media links', () => {
