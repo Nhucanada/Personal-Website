@@ -387,6 +387,7 @@ describe('WorkExperiencePage - Timeline Visualization', () => {
     renderWithTheme(<WorkExperiencePage />);
     expect(screen.getByText('Error loading work experience')).toBeInTheDocument();
     expect(screen.getByText('Failed to load experiences')).toBeInTheDocument();
+    expect(screen.getByText('Unable to connect to the backend service. Please try again later.')).toBeInTheDocument();
   });
 
   test('handles empty experiences list', () => {

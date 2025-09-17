@@ -24,23 +24,23 @@ const mockPersonalInfo = {
   description: 'Passionate about software development and machine learning.',
   languages: [
     { language: 'English', proficiency: 'Native' },
-    { language: 'French', proficiency: 'Intermediate' }
+    { language: 'French', proficiency: 'Intermediate' },
   ],
   contact: {
     email: 'nathan@example.com',
     mcgillEmail: 'nathan.hu@mail.mcgill.ca',
     linkedin: 'https://linkedin.com/in/nathanhu',
     github: 'https://github.com/nathanhu',
-    location: 'Montreal, QC'
-  }
+    location: 'Montreal, QC',
+  },
 };
 
 const mockSkills = {
   technicalSkills: ['Java', 'React', 'TypeScript', 'Jenkins'],
   categories: {
-    'Areas of Interest': ['Backend Development', 'Machine Learning']
+    'Areas of Interest': ['Backend Development', 'Machine Learning'],
   },
-  proficiencyLevels: {}
+  proficiencyLevels: {},
 };
 
 describe('AboutPage', () => {
@@ -54,13 +54,13 @@ describe('AboutPage', () => {
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useSkills').mockReturnValue({
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<AboutPage />);
@@ -73,13 +73,13 @@ describe('AboutPage', () => {
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useSkills').mockReturnValue({
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<AboutPage />);
@@ -92,13 +92,13 @@ describe('AboutPage', () => {
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useSkills').mockReturnValue({
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<AboutPage />);
@@ -111,13 +111,13 @@ describe('AboutPage', () => {
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useSkills').mockReturnValue({
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<AboutPage />);
@@ -129,18 +129,19 @@ describe('AboutPage', () => {
       data: null,
       loading: false,
       error: 'Failed to fetch personal info',
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useSkills').mockReturnValue({
       data: null,
       loading: false,
       error: 'Failed to fetch skills',
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<AboutPage />);
     expect(screen.getByText(/Error loading personal information/i)).toBeInTheDocument();
     expect(screen.getByText(/Failed to fetch personal info/i)).toBeInTheDocument();
+    expect(screen.getByText('Unable to connect to the backend service. Please try again later.')).toBeInTheDocument();
   });
 
   test('displays my story section when data loads successfully', async () => {
@@ -148,13 +149,13 @@ describe('AboutPage', () => {
       data: mockPersonalInfo,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useSkills').mockReturnValue({
       data: mockSkills,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<AboutPage />);
@@ -170,13 +171,13 @@ describe('AboutPage', () => {
       data: mockPersonalInfo,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useSkills').mockReturnValue({
       data: mockSkills,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<AboutPage />);
@@ -196,13 +197,13 @@ describe('AboutPage', () => {
       data: mockPersonalInfo,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useSkills').mockReturnValue({
       data: mockSkills,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<AboutPage />);
@@ -218,13 +219,13 @@ describe('AboutPage', () => {
       data: mockPersonalInfo,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useSkills').mockReturnValue({
       data: mockSkills,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<AboutPage />);
@@ -240,13 +241,13 @@ describe('AboutPage', () => {
       data: mockPersonalInfo,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useSkills').mockReturnValue({
       data: mockSkills,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<AboutPage />);
@@ -262,13 +263,13 @@ describe('AboutPage', () => {
       data: mockPersonalInfo,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useSkills').mockReturnValue({
       data: mockSkills,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<AboutPage />);
@@ -284,13 +285,13 @@ describe('AboutPage', () => {
       data: null,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useSkills').mockReturnValue({
       data: null,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<AboutPage />);

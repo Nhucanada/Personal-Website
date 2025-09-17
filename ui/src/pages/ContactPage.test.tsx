@@ -24,15 +24,15 @@ const mockPersonalInfo = {
   description: 'Passionate about software development and machine learning.',
   languages: [
     { language: 'English', proficiency: 'Native' },
-    { language: 'French', proficiency: 'Intermediate' }
+    { language: 'French', proficiency: 'Intermediate' },
   ],
   contact: {
     email: 'nhucanada0628@gmail.com',
     mcgillEmail: 'nathan.hu@mail.mcgill.ca',
     linkedin: 'https://linkedin.com/in/nathanhu',
     github: 'https://github.com/nathanhu',
-    location: 'Montreal, QC'
-  }
+    location: 'Montreal, QC',
+  },
 };
 
 describe('ContactPage', () => {
@@ -43,7 +43,7 @@ describe('ContactPage', () => {
       data: mockPersonalInfo,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
   });
 
@@ -174,5 +174,46 @@ describe('ContactPage', () => {
     expect(emailField.value).toBe('');
     expect(subjectField.value).toBe('');
     expect(messageField.value).toBe('');
+  });
+
+  test('displays loading state', () => {
+    jest.spyOn(useProfileData, 'usePersonalInfo').mockReturnValue({
+      data: null,
+      loading: true,
+      error: null,
+      refetch: jest.fn(),
+    });
+
+    renderWithTheme(<ContactPage />);
+    expect(screen.getByText('Loading contact information...')).toBeInTheDocument();
+  });
+
+  test('displays error state with generic message', () => {
+    jest.spyOn(useProfileData, 'usePersonalInfo').mockReturnValue({
+      data: null,
+      loading: false,
+      error: 'Failed to load contact info',
+      refetch: jest.fn(),
+    });
+
+    renderWithTheme(<ContactPage />);
+    expect(screen.getByText('Error loading contact information')).toBeInTheDocument();
+    expect(screen.getByText('Failed to load contact info')).toBeInTheDocument();
+    expect(screen.getByText('Unable to connect to the backend service. Please try again later.')).toBeInTheDocument();
+
+    // Should not show loading text when there's an error
+    expect(screen.queryByText('Loading contact information...')).not.toBeInTheDocument();
+  });
+
+  test('shows fallback text when no data and no error', () => {
+    jest.spyOn(useProfileData, 'usePersonalInfo').mockReturnValue({
+      data: null,
+      loading: false,
+      error: null,
+      refetch: jest.fn(),
+    });
+
+    renderWithTheme(<ContactPage />);
+    expect(screen.getByText('Contact information unavailable.')).toBeInTheDocument();
   });
 });

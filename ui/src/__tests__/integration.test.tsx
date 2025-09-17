@@ -18,31 +18,31 @@ describe('App Integration Tests', () => {
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useSkills').mockReturnValue({
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useProjects').mockReturnValue({
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useExperiences').mockReturnValue({
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useEducation').mockReturnValue({
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
   });
 

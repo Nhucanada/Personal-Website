@@ -150,31 +150,31 @@ describe('App Component', () => {
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useSkills').mockReturnValue({
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useProjects').mockReturnValue({
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useExperiences').mockReturnValue({
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
     jest.spyOn(useProfileData, 'useEducation').mockReturnValue({
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
   });
 
@@ -234,12 +234,12 @@ describe('App Component', () => {
           mcgillEmail: 'nathan.hu@mail.mcgill.ca',
           linkedin: 'https://linkedin.com/in/nathanhu',
           github: 'https://github.com/nathanhu',
-          location: 'Montreal, QC'
-        }
+          location: 'Montreal, QC',
+        },
       },
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithRouter(['/contact']);

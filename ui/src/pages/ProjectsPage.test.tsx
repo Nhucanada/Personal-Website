@@ -24,7 +24,7 @@ const mockProjects = [
     technologies: ['React', 'TypeScript', 'Material-UI', 'Spring Boot'],
     githubUrl: 'https://github.com/example/personal-website',
     liveUrl: 'https://example.com',
-    featured: true
+    featured: true,
   },
   {
     id: 2,
@@ -32,8 +32,8 @@ const mockProjects = [
     description: 'Another cool project description.',
     technologies: ['Java', 'Node.js'],
     githubUrl: 'https://github.com/example/another-project',
-    featured: false
-  }
+    featured: false,
+  },
 ];
 
 describe('ProjectsPage', () => {
@@ -47,7 +47,7 @@ describe('ProjectsPage', () => {
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<ProjectsPage />);
@@ -59,7 +59,7 @@ describe('ProjectsPage', () => {
       data: null,
       loading: true,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<ProjectsPage />);
@@ -71,12 +71,13 @@ describe('ProjectsPage', () => {
       data: null,
       loading: false,
       error: 'Failed to fetch projects',
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<ProjectsPage />);
     expect(screen.getByText(/Error loading projects/i)).toBeInTheDocument();
     expect(screen.getByText(/Failed to fetch projects/i)).toBeInTheDocument();
+    expect(screen.getByText('Unable to connect to the backend service. Please try again later.')).toBeInTheDocument();
   });
 
   test('displays featured projects section when data loads successfully', async () => {
@@ -84,7 +85,7 @@ describe('ProjectsPage', () => {
       data: mockProjects,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<ProjectsPage />);
@@ -99,7 +100,7 @@ describe('ProjectsPage', () => {
       data: mockProjects,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<ProjectsPage />);
@@ -114,7 +115,7 @@ describe('ProjectsPage', () => {
       data: mockProjects,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<ProjectsPage />);
@@ -130,7 +131,7 @@ describe('ProjectsPage', () => {
       data: mockProjects,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<ProjectsPage />);
@@ -150,7 +151,7 @@ describe('ProjectsPage', () => {
       data: mockProjects,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<ProjectsPage />);
@@ -167,7 +168,7 @@ describe('ProjectsPage', () => {
       data: mockProjects,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<ProjectsPage />);
@@ -183,7 +184,7 @@ describe('ProjectsPage', () => {
       data: mockProjects,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<ProjectsPage />);
@@ -202,7 +203,7 @@ describe('ProjectsPage', () => {
       data: mockProjects,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<ProjectsPage />);
@@ -218,7 +219,7 @@ describe('ProjectsPage', () => {
       data: mockProjects,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<ProjectsPage />);
@@ -234,7 +235,7 @@ describe('ProjectsPage', () => {
       data: null,
       loading: false,
       error: null,
-      refetch: jest.fn()
+      refetch: jest.fn(),
     });
 
     renderWithTheme(<ProjectsPage />);

@@ -128,7 +128,7 @@ The project is configured for easy deployment:
 - **Contact** - Professional contact information and social media links (API-driven)
 - **Responsive Design** - Mobile-friendly interface with Material-UI components
 - **Interactive Navigation** - Smooth routing between pages with widget-based previews
-- **API Error Handling** - Loading states, error handling, and empty data scenarios
+- **API Error Handling** - Loading states, deployment-agnostic error handling, and empty data scenarios
 - **Code Quality Assurance** - ESLint integration with comprehensive React and TypeScript rules
 - **AI Contribution Tracking** - Detailed methodology for tracking AI vs human contributions
 
