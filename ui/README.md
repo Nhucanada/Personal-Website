@@ -85,7 +85,7 @@ npm run eject      # Eject from Create React App (not recommended)
 
 ### Testing
 
-The UI includes comprehensive unit and integration tests using React Testing Library and Jest, with 171 total tests achieving 94.29% statement coverage.
+The UI includes comprehensive unit and integration tests using React Testing Library and Jest, with 170+ total tests achieving 94.29% statement coverage.
 
 #### Test Structure
 
@@ -324,7 +324,7 @@ The application uses React Router for client-side navigation:
 - **Home** (`/`) - Dashboard featuring widget previews of all sections with prominent AI development showcase
 - **About** (`/about`) - Nathan's background, technical skills (Java, Python, React, TypeScript, Jenkins), and philosophy
 - **Projects** (`/projects`) - Portfolio showcasing GitHub projects including Personal Website, Java Search Engine, and Guardians of the Hive
-- **Experience** (`/experience`) - Professional timeline including internships at PointClickCare, Intact, and 360insights
+- **Experience** (`/experience`) - Enhanced horizontal timeline with drilldown panels, click-to-expand experience details
 - **Education** (`/education`) - McGill University Software Engineering degree and certifications
 - **AI Development** (`/ai`) - Comprehensive showcase of AI contributions, featuring statistics, methodology, and problem-solving examples
 - **Contact** (`/contact`) - Professional contact information and LinkedIn/GitHub profiles

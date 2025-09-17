@@ -40,15 +40,11 @@ describe('Header Component', () => {
     expect(screen.getByTestId('header-title')).toHaveTextContent(customTitle);
   });
 
-  test('renders home icon button', () => {
-    renderWithProviders(<Header />);
-    expect(screen.getByTestId('home-icon-button')).toBeInTheDocument();
-  });
 
   test('displays desktop navigation on large screens', () => {
     renderWithProviders(<Header />);
 
-    // Check for navigation buttons (no Home button - only home icon)
+    // Check for navigation buttons (Home accessible via clickable title)
     expect(screen.getByTestId('nav-about')).toBeInTheDocument();
     expect(screen.getByTestId('nav-projects')).toBeInTheDocument();
     expect(screen.getByTestId('nav-experience')).toBeInTheDocument();
@@ -132,7 +128,7 @@ describe('Header Component', () => {
     const menuButton = screen.getByTestId('menu-button');
     fireEvent.click(menuButton);
 
-    // Check mobile navigation items (no home - only home icon)
+    // Check mobile navigation items (Home accessible via clickable title)
     expect(screen.getByTestId('mobile-nav-about')).toBeInTheDocument();
     expect(screen.getByTestId('mobile-nav-projects')).toBeInTheDocument();
     expect(screen.getByTestId('mobile-nav-experience')).toBeInTheDocument();

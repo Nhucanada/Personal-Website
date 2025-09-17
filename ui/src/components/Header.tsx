@@ -17,7 +17,6 @@ import {
   useTheme
 } from '@mui/material';
 import {
-  Home as HomeIcon,
   Menu as MenuIcon,
   Person as PersonIcon,
   Work as WorkIcon,
@@ -124,14 +123,6 @@ const Header: React.FC<HeaderProps> = ({
     <>
       <AppBar position="static" data-testid="header">
         <Toolbar>
-          <IconButton
-            color="inherit"
-            onClick={() => handleNavigation('/')}
-            sx={{ mr: 2 }}
-            data-testid="home-icon-button"
-          >
-            <HomeIcon />
-          </IconButton>
           <Typography
             variant="h6"
             component="div"
