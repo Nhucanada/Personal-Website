@@ -97,6 +97,9 @@ const EducationPage: React.FC = () => {
             <Box sx={{ my: 4, p: 2, bgcolor: 'error.light', borderRadius: 1 }}>
               <Typography variant="h6" color="error.dark">Error loading education information</Typography>
               <Typography variant="body2" color="error.dark">{error}</Typography>
+              <Typography variant="body2" color="error.dark" sx={{ mt: 1 }}>
+                Unable to connect to the backend service. Please try again later.
+              </Typography>
             </Box>
           )}
 

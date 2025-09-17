@@ -132,7 +132,7 @@ const ContactPage: React.FC = () => {
           </Box>
 
           <Typography variant="body1" paragraph color="text.secondary">
-            {personalInfo ? (
+            {!loading && !error && personalInfo ? (
               <>
                 Feel free to contact me at {personalInfo.contact.email} or
                 {personalInfo.contact.mcgillEmail}.
@@ -140,9 +140,9 @@ const ContactPage: React.FC = () => {
                 and conversations about
                 software development, DevOps, and machine learning!
               </>
-            ) : (
-              'Loading contact information...'
-            )}
+            ) : !loading && !error ? (
+              'Contact information unavailable.'
+            ) : null}
           </Typography>
 
           {/* Loading State */}
@@ -157,6 +157,9 @@ const ContactPage: React.FC = () => {
             <Box sx={{ my: 4, p: 2, bgcolor: 'error.light', borderRadius: 1 }}>
               <Typography variant="h6" color="error.dark">Error loading contact information</Typography>
               <Typography variant="body2" color="error.dark">{error}</Typography>
+              <Typography variant="body2" color="error.dark" sx={{ mt: 1 }}>
+                Unable to connect to the backend service. Please try again later.
+              </Typography>
             </Box>
           )}
 
