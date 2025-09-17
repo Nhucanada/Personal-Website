@@ -329,6 +329,10 @@ const WorkExperiencePage: React.FC = () => {
             <Box sx={{ my: 4, p: 2, bgcolor: 'error.light', borderRadius: 1 }}>
               <Typography variant="h6" color="error.dark">Error loading work experience</Typography>
               <Typography variant="body2" color="error.dark">{error}</Typography>
+              <Typography variant="body2" color="error.dark" sx={{ mt: 1 }}>
+                Backend API is not available. Please ensure the Spring Boot server is
+                running on port 8080.
+              </Typography>
             </Box>
           )}
 

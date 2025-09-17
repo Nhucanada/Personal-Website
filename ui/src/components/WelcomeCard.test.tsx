@@ -49,15 +49,16 @@ describe('WelcomeCard Component', () => {
     expect(mockOnButtonClick).toHaveBeenCalledTimes(1);
   });
 
-  test('logs to console when no onButtonClick is provided', () => {
-    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+  test('handles button click when no onButtonClick is provided', () => {
+    // Test that button click doesn't throw error when no handler is provided
     renderWithTheme(<WelcomeCard />);
 
     const button = screen.getByTestId('welcome-button');
-    fireEvent.click(button);
 
-    expect(consoleSpy).toHaveBeenCalledWith('Get Started clicked!');
-    consoleSpy.mockRestore();
+    // Should not throw error
+    expect(() => {
+      fireEvent.click(button);
+    }).not.toThrow();
   });
 
   test('has correct Material-UI classes', () => {

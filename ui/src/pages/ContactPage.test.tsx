@@ -3,6 +3,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import ContactPage from './ContactPage';
+import * as useProfileData from '../hooks/useProfileData';
 
 const theme = createTheme();
 
@@ -14,7 +15,38 @@ const renderWithTheme = (component: React.ReactElement) => {
   );
 };
 
+// Mock data
+const mockPersonalInfo = {
+  name: 'Nathan Hu',
+  title: 'CS & AI Student at McGill University',
+  location: 'Montreal, QC',
+  bio: 'Nathan Hu, currently pursuing Computer Science and AI at McGill University.',
+  description: 'Passionate about software development and machine learning.',
+  languages: [
+    { language: 'English', proficiency: 'Native' },
+    { language: 'French', proficiency: 'Intermediate' }
+  ],
+  contact: {
+    email: 'nhucanada0628@gmail.com',
+    mcgillEmail: 'nathan.hu@mail.mcgill.ca',
+    linkedin: 'https://linkedin.com/in/nathanhu',
+    github: 'https://github.com/nathanhu',
+    location: 'Montreal, QC'
+  }
+};
+
 describe('ContactPage', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    // Mock successful data load by default
+    jest.spyOn(useProfileData, 'usePersonalInfo').mockReturnValue({
+      data: mockPersonalInfo,
+      loading: false,
+      error: null,
+      refetch: jest.fn()
+    });
+  });
+
   test('renders main heading', () => {
     renderWithTheme(<ContactPage />);
     expect(screen.getByRole('heading', { level: 1, name: /contact me/i })).toBeInTheDocument();

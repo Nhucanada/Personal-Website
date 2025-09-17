@@ -138,7 +138,7 @@ This project serves as a showcase of AI-powered software development, with **100
 
 - **Complete Full-Stack Implementation** - From React frontend to Spring Boot backend with JSON data architecture
 - **Professional UI/UX Design** - Material-UI dark theme with accessibility considerations
-- **Comprehensive Testing** - 171+ unit tests with 94.29% frontend and 96% backend coverage
+- **Comprehensive Testing** - 184+ unit tests with 94.29% frontend and 96% backend coverage
 - **Interactive Timeline Components** - Advanced visualization with horizontal scrolling for comprehensive work experience showcase
 - **Backend JSON Data Management** - Profile data architecture with REST API endpoints and React hooks
 - **Code Quality Assurance** - Automated quality checks with JaCoCo, Checkstyle, and ESLint

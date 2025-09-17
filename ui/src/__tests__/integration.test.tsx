@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import App from '../App';
+import * as useProfileData from '../hooks/useProfileData';
 
 // Mock useMediaQuery for consistent testing
 jest.mock('@mui/material', () => ({
@@ -11,6 +12,40 @@ jest.mock('@mui/material', () => ({
 
 // Integration tests for the entire app
 describe('App Integration Tests', () => {
+  beforeEach(() => {
+    // Mock profile data hooks with loading state
+    jest.spyOn(useProfileData, 'usePersonalInfo').mockReturnValue({
+      data: null,
+      loading: true,
+      error: null,
+      refetch: jest.fn()
+    });
+    jest.spyOn(useProfileData, 'useSkills').mockReturnValue({
+      data: null,
+      loading: true,
+      error: null,
+      refetch: jest.fn()
+    });
+    jest.spyOn(useProfileData, 'useProjects').mockReturnValue({
+      data: null,
+      loading: true,
+      error: null,
+      refetch: jest.fn()
+    });
+    jest.spyOn(useProfileData, 'useExperiences').mockReturnValue({
+      data: null,
+      loading: true,
+      error: null,
+      refetch: jest.fn()
+    });
+    jest.spyOn(useProfileData, 'useEducation').mockReturnValue({
+      data: null,
+      loading: true,
+      error: null,
+      refetch: jest.fn()
+    });
+  });
+
   test('renders complete application structure', () => {
     render(<App />);
 

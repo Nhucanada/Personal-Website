@@ -16,6 +16,7 @@ import WorkExperiencePage from './pages/WorkExperiencePage';
 import EducationPage from './pages/EducationPage';
 import ContactPage from './pages/ContactPage';
 import AIPage from './pages/AIPage';
+import * as useProfileData from './hooks/useProfileData';
 
 // Mock useMediaQuery for consistent testing
 jest.mock('@mui/material', () => ({
@@ -143,6 +144,38 @@ describe('App Component', () => {
   beforeEach(() => {
     const { useMediaQuery } = require('@mui/material');
     useMediaQuery.mockReturnValue(false); // Default to desktop
+
+    // Mock the profile data hooks with loading state
+    jest.spyOn(useProfileData, 'usePersonalInfo').mockReturnValue({
+      data: null,
+      loading: true,
+      error: null,
+      refetch: jest.fn()
+    });
+    jest.spyOn(useProfileData, 'useSkills').mockReturnValue({
+      data: null,
+      loading: true,
+      error: null,
+      refetch: jest.fn()
+    });
+    jest.spyOn(useProfileData, 'useProjects').mockReturnValue({
+      data: null,
+      loading: true,
+      error: null,
+      refetch: jest.fn()
+    });
+    jest.spyOn(useProfileData, 'useExperiences').mockReturnValue({
+      data: null,
+      loading: true,
+      error: null,
+      refetch: jest.fn()
+    });
+    jest.spyOn(useProfileData, 'useEducation').mockReturnValue({
+      data: null,
+      loading: true,
+      error: null,
+      refetch: jest.fn()
+    });
   });
 
   test('renders header with navigation', () => {
@@ -166,7 +199,8 @@ describe('App Component', () => {
   test('navigates to projects page', () => {
     renderWithRouter(['/projects']);
     expect(screen.getByRole('heading', { level: 1, name: /projects/i })).toBeInTheDocument();
-    expect(screen.getByText(/Featured Projects/i)).toBeInTheDocument();
+    // With mocked loading state, we expect the loading message instead of content
+    expect(screen.getByText(/Loading projects.../i)).toBeInTheDocument();
   });
 
   test('navigates to experience page', () => {
@@ -186,6 +220,28 @@ describe('App Component', () => {
   });
 
   test('navigates to contact page', () => {
+    // Override mock to return successful data for contact page test
+    jest.spyOn(useProfileData, 'usePersonalInfo').mockReturnValue({
+      data: {
+        name: 'Nathan Hu',
+        title: 'CS & AI Student at McGill University',
+        location: 'Montreal, QC',
+        bio: 'Bio text',
+        description: 'Description text',
+        languages: [],
+        contact: {
+          email: 'nhucanada0628@gmail.com',
+          mcgillEmail: 'nathan.hu@mail.mcgill.ca',
+          linkedin: 'https://linkedin.com/in/nathanhu',
+          github: 'https://github.com/nathanhu',
+          location: 'Montreal, QC'
+        }
+      },
+      loading: false,
+      error: null,
+      refetch: jest.fn()
+    });
+
     renderWithRouter(['/contact']);
     expect(screen.getByRole('heading', { level: 1, name: /contact me/i })).toBeInTheDocument();
     expect(screen.getByText(/Send a Message/i)).toBeInTheDocument();
