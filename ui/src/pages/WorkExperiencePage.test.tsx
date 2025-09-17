@@ -2,14 +2,13 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { useExperiences } from '../hooks/useProfileData';
 import WorkExperiencePage from './WorkExperiencePage';
 
 // Mock the useExperiences hook
 jest.mock('../hooks/useProfileData', () => ({
   useExperiences: jest.fn(),
 }));
-
-import { useExperiences } from '../hooks/useProfileData';
 
 const mockedUseExperiences = useExperiences as jest.MockedFunction<typeof useExperiences>;
 

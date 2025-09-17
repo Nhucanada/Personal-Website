@@ -128,7 +128,8 @@ const EducationPage: React.FC = () => {
                                 {edu.institution}
                               </Typography>
                               <Typography variant="body2" color="text.secondary">
-                                {edu.location} • {formatDate(edu.startDate)} - {formatDate(edu.endDate)}
+                                {edu.location} • {formatDate(edu.startDate)} -
+                                {formatDate(edu.endDate)}
                                 {edu.gpa && (
                                   <Chip
                                     label={`GPA: ${edu.gpa}`}
@@ -153,7 +154,7 @@ const EducationPage: React.FC = () => {
                                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mb: 2 }}>
                                   {edu.relevantCourses.map((course, idx) => (
                                     <Chip
-                                      key={idx}
+                                      key={`course-${course}`}
                                       label={course}
                                       size="small"
                                       variant="outlined"
@@ -168,7 +169,10 @@ const EducationPage: React.FC = () => {
                                 </Typography>
                                 <List dense>
                                   {edu.achievements.map((achievement, idx) => (
-                                    <ListItem key={idx} sx={{ py: 0.5 }}>
+                                    <ListItem
+                                      key={`achievement-${achievement.slice(0, 20)}`}
+                                      sx={{ py: 0.5 }}
+                                    >
                                       <ListItemIcon sx={{ minWidth: 24 }}>
                                         <StarIcon fontSize="small" color="primary" />
                                       </ListItemIcon>
@@ -233,9 +237,12 @@ const EducationPage: React.FC = () => {
               Languages & Skills
                 </Typography>
                 <Typography variant="body1">
-              I'm trilingual, speaking English (Native), French (Native), and Mandarin (Full Professional).
-              Currently expanding my technical expertise through hands-on internship experience in
-              software engineering, DevOps, and machine learning while pursuing my degree at McGill University.
+              I&apos;m trilingual, speaking English (Native), French (Native),
+              and Mandarin (Full Professional).
+              Currently expanding my technical expertise through hands-on internship
+              experience in
+              software engineering, DevOps, and machine learning while pursuing my degree
+              at McGill University.
                 </Typography>
               </Box>
             </>

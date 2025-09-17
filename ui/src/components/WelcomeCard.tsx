@@ -18,7 +18,7 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({
     if (onButtonClick) {
       onButtonClick();
     } else {
-      console.log('Get Started clicked!');
+      // console.log('Get Started clicked!');
     }
   };
 

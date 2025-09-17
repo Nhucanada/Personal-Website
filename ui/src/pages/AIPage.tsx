@@ -187,9 +187,9 @@ const AIPage: React.FC = () => {
           </Box>
 
           <Typography variant="body1" paragraph color="text.secondary">
-            This page details the comprehensive AI contribution to Nathan Hu's personal website,
-            showcasing how Claude Code (Anthropic's AI assistant) built a complete full-stack
-            application from requirements to deployment.
+            This page details the comprehensive AI contribution to Nathan Hu&apos;s personal
+            website, showcasing how Claude Code (Anthropic&apos;s AI assistant) built a complete
+            full-stack application from requirements to deployment.
           </Typography>
 
           {/* Overall Statistics */}
@@ -203,13 +203,14 @@ const AIPage: React.FC = () => {
                 Total Project: {totalLines.toLocaleString()} lines of code
               </Typography>
               <Typography variant="body1">
-                <strong>{overallPercentage}% AI Generated</strong> • {totalAILines.toLocaleString()} lines written by AI
+                <strong>{overallPercentage}% AI Generated</strong> •{' '}
+                {totalAILines.toLocaleString()} lines written by AI
               </Typography>
             </Alert>
 
             <Grid container spacing={3}>
-              {aiMetrics.map((metric, index) => (
-                <Grid item xs={12} md={6} key={index}>
+              {aiMetrics.map((metric) => (
+                <Grid item xs={12} md={6} key={metric.category}>
                   <Card elevation={2}>
                     <CardContent>
                       <Typography variant="h6" gutterBottom>
@@ -223,7 +224,8 @@ const AIPage: React.FC = () => {
                         />
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
                           <Typography variant="body2" color="text.secondary">
-                            {metric.aiLines.toLocaleString()} / {metric.totalLines.toLocaleString()} lines
+                            {metric.aiLines.toLocaleString()} /{' '}
+                            {metric.totalLines.toLocaleString()} lines
                           </Typography>
                           <Typography variant="body2" color="primary.main" fontWeight="bold">
                             {metric.percentage}% AI
@@ -246,8 +248,8 @@ const AIPage: React.FC = () => {
               AI-Developed Features
             </Typography>
             <Grid container spacing={3}>
-              {keyFeatures.map((feature, index) => (
-                <Grid item xs={12} md={6} key={index}>
+              {keyFeatures.map((feature) => (
+                <Grid item xs={12} md={6} key={feature.title}>
                   <Card elevation={2} sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                     <CardContent sx={{ flexGrow: 1 }}>
                       <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -274,9 +276,9 @@ const AIPage: React.FC = () => {
                         />
                       </Box>
                       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                        {feature.technologies.map((tech, idx) => (
+                        {feature.technologies.map((tech) => (
                           <Chip
-                            key={idx}
+                            key={tech}
                             label={tech}
                             size="small"
                             variant="outlined"
@@ -299,8 +301,8 @@ const AIPage: React.FC = () => {
             <Card elevation={2}>
               <CardContent>
                 <List>
-                  {aiCapabilities.map((capability, index) => (
-                    <ListItem key={index}>
+                  {aiCapabilities.map((capability) => (
+                    <ListItem key={capability}>
                       <ListItemIcon>
                         <AutoIcon color="primary" />
                       </ListItemIcon>
@@ -318,8 +320,8 @@ const AIPage: React.FC = () => {
               AI Technical Decisions
             </Typography>
             <Grid container spacing={2}>
-              {technicalDecisions.map((decision, index) => (
-                <Grid item xs={12} md={6} key={index}>
+              {technicalDecisions.map((decision) => (
+                <Grid item xs={12} md={6} key={decision.decision}>
                   <Accordion>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                       <Typography variant="h6">
@@ -392,15 +394,18 @@ const AIPage: React.FC = () => {
               </AccordionSummary>
               <AccordionDetails>
                 <Typography variant="body2" paragraph>
-                  <strong>Problem:</strong> Build failure due to Node.js version incompatibility in frontend-maven-plugin.
+                  <strong>Problem:</strong> Build failure due to Node.js version
+                  incompatibility in frontend-maven-plugin.
                 </Typography>
                 <Typography variant="body2" paragraph>
-                  <strong>AI Solution:</strong> Diagnosed the issue by analyzing error logs, identified the version mismatch,
-                  and updated ui/pom.xml to use Node.js v18.19.0 and npm v10.2.3, ensuring compatibility with
-                  package.json engine requirements.
+                  <strong>AI Solution:</strong> Diagnosed the issue by analyzing error logs,
+                  identified the version mismatch, and updated ui/pom.xml to use Node.js
+                  v18.19.0 and npm v10.2.3, ensuring compatibility with package.json engine
+                  requirements.
                 </Typography>
                 <Typography variant="body2">
-                  <strong>Result:</strong> Successful Maven build integration and CI/CD ready configuration.
+                  <strong>Result:</strong> Successful Maven build integration and CI/CD
+                  ready configuration.
                 </Typography>
               </AccordionDetails>
             </Accordion>
@@ -412,14 +417,17 @@ const AIPage: React.FC = () => {
               </AccordionSummary>
               <AccordionDetails>
                 <Typography variant="body2" paragraph>
-                  <strong>Problem:</strong> Timeline components were imported from @mui/material but are actually located in @mui/lab.
+                  <strong>Problem:</strong> Timeline components were imported from
+                  @mui/material but are actually located in @mui/lab.
                 </Typography>
                 <Typography variant="body2" paragraph>
-                  <strong>AI Solution:</strong> Identified the correct import location, added @mui/lab dependency to package.json,
-                  and updated import statements in WorkExperiencePage.tsx and EducationPage.tsx.
+                  <strong>AI Solution:</strong> Identified the correct import location, added
+                  @mui/lab dependency to package.json, and updated import statements in
+                  WorkExperiencePage.tsx and EducationPage.tsx.
                 </Typography>
                 <Typography variant="body2">
-                  <strong>Result:</strong> Functional timeline components with proper Material-UI integration.
+                  <strong>Result:</strong> Functional timeline components with proper
+                  Material-UI integration.
                 </Typography>
               </AccordionDetails>
             </Accordion>
@@ -431,16 +439,19 @@ const AIPage: React.FC = () => {
               </AccordionSummary>
               <AccordionDetails>
                 <Typography variant="body2" paragraph>
-                  <strong>Challenge:</strong> Extract and integrate real professional information from PDF format.
+                  <strong>Challenge:</strong> Extract and integrate real professional
+                  information from PDF format.
                 </Typography>
                 <Typography variant="body2" paragraph>
-                  <strong>AI Solution:</strong> Parsed LinkedIn PDF content, extracted relevant information including
-                  internship experience, education details, and contact information, then updated all pages
-                  to reflect accurate personal and professional data.
+                  <strong>AI Solution:</strong> Parsed LinkedIn PDF content, extracted relevant
+                  information including internship experience, education details, and contact
+                  information, then updated all pages to reflect accurate personal and
+                  professional data.
                 </Typography>
                 <Typography variant="body2">
-                  <strong>Result:</strong> Authentic portfolio website with real internship experience at PointClickCare,
-                  Intact, and 360insights, plus accurate education information from McGill University.
+                  <strong>Result:</strong> Authentic portfolio website with real internship
+                  experience at PointClickCare, Intact, and 360insights, plus accurate
+                  education information from McGill University.
                 </Typography>
               </AccordionDetails>
             </Accordion>
@@ -452,8 +463,9 @@ const AIPage: React.FC = () => {
               AI Development Resources
             </Typography>
             <Typography variant="body1" paragraph>
-              This project demonstrates the capabilities of Claude Code (Anthropic's AI assistant) in full-stack
-              web development. For detailed contribution tracking and methodology, see:
+              This project demonstrates the capabilities of Claude Code (Anthropic&apos;s AI
+              assistant) in full-stack web development. For detailed contribution tracking
+              and methodology, see:
             </Typography>
             <Typography variant="body2">
               <Link href="/AI_CONTRIBUTIONS.md" target="_blank" rel="noopener noreferrer">

@@ -102,7 +102,7 @@ const ContactPage: React.FC = () => {
       await new Promise(resolve => setTimeout(resolve, 2000));
 
       // In a real application, you would send the form data to your backend
-      console.log('Form submitted:', formData);
+      // console.log('Form submitted:', formData);
 
       setSubmitStatus('success');
       setFormData({
@@ -134,8 +134,10 @@ const ContactPage: React.FC = () => {
           <Typography variant="body1" paragraph color="text.secondary">
             {personalInfo ? (
               <>
-                Feel free to contact me at {personalInfo.contact.email} or {personalInfo.contact.mcgillEmail}.
-                I'm always interested in new opportunities, collaborations, and conversations about
+                Feel free to contact me at {personalInfo.contact.email} or
+                {personalInfo.contact.mcgillEmail}.
+                I&apos;m always interested in new opportunities, collaborations,
+                and conversations about
                 software development, DevOps, and machine learning!
               </>
             ) : (
@@ -222,13 +224,14 @@ const ContactPage: React.FC = () => {
 
                       {submitStatus === 'success' && (
                         <Alert severity="success" sx={{ mt: 2 }}>
-                        Thank you for your message! I'll get back to you soon.
+                        Thank you for your message! I&apos;ll get back to you soon.
                         </Alert>
                       )}
 
                       {submitStatus === 'error' && (
                         <Alert severity="error" sx={{ mt: 2 }}>
-                        Sorry, there was an error sending your message. Please try again or contact me directly.
+                        Sorry, there was an error sending your message. Please try again or
+                        contact me directly.
                         </Alert>
                       )}
 
@@ -260,7 +263,7 @@ const ContactPage: React.FC = () => {
                     </Typography>
                     <List>
                       {contactInfo.map((contact, index) => (
-                        <ListItem key={index} sx={{ px: 0 }}>
+                        <ListItem key={`contact-${contact.label}`} sx={{ px: 0 }}>
                           <ListItemIcon sx={{ color: 'primary.main' }}>
                             {contact.icon}
                           </ListItemIcon>
@@ -302,11 +305,13 @@ const ContactPage: React.FC = () => {
                 <Card elevation={2} sx={{ mt: 3 }}>
                   <CardContent>
                     <Typography variant="h6" gutterBottom>
-                    Let's Connect
+                    Let&apos;s Connect
                     </Typography>
                     <Typography variant="body2" color="text.secondary" paragraph>
-                    Whether you're looking to discuss a project, explore collaboration opportunities,
-                    or just want to chat about technology, I'd love to hear from you.
+                    Whether you&apos;re looking to discuss a project, explore collaboration
+                    opportunities,
+                    or just want to chat about technology, I&apos;d love to hear
+                    from you.
                     </Typography>
                     <Box sx={{ display: 'flex', gap: 1 }}>
                       <Button

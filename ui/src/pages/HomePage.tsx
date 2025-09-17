@@ -186,7 +186,7 @@ const HomePage: React.FC = () => {
 
               <Grid container spacing={2} sx={{ mb: 3 }}>
                 {aiStats.map((stat, index) => (
-                  <Grid item xs={6} md={3} key={index}>
+                  <Grid item xs={6} md={3} key={`stat-${stat.label}`}>
                     <Paper elevation={2} sx={{ p: 2, textAlign: 'center' }}>
                       <Typography variant="h4" color={`${stat.color}.main`} fontWeight="bold">
                         {stat.value}
@@ -240,12 +240,13 @@ const HomePage: React.FC = () => {
                   </Typography>
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                     {topSkills.slice(0, 6).map((skill, index) => (
-                      <Chip key={index} label={skill} size="small" variant="outlined" />
+                      <Chip key={`skill-${skill}`} label={skill} size="small" variant="outlined" />
                     ))}
                   </Box>
                 </Box>
                 <Typography variant="body2" color="text.secondary">
-                  "I'm always eager to learn new things and build impactful projects!"
+                  &quot;I&apos;m always eager to learn new things and build impactful
+                  projects!&quot;
                 </Typography>
               </CardContent>
               <CardActions>
@@ -270,7 +271,7 @@ const HomePage: React.FC = () => {
                   </Typography>
                 </Box>
                 {featuredProjects.map((project, index) => (
-                  <Box key={index} sx={{ mb: 2, pb: 1, borderBottom: index < featuredProjects.length - 1 ? 1 : 0, borderColor: 'divider' }}>
+                  <Box key={`project-${project.title}`} sx={{ mb: 2, pb: 1, borderBottom: index < featuredProjects.length - 1 ? 1 : 0, borderColor: 'divider' }}>
                     <Typography variant="subtitle1" fontWeight="bold">
                       {project.title}
                     </Typography>
@@ -279,7 +280,7 @@ const HomePage: React.FC = () => {
                     </Typography>
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                       {project.technologies.map((tech, idx) => (
-                        <Chip key={idx} label={tech} size="small" variant="outlined" />
+                        <Chip key={`tech-${tech}`} label={tech} size="small" variant="outlined" />
                       ))}
                     </Box>
                   </Box>
@@ -308,7 +309,7 @@ const HomePage: React.FC = () => {
                 </Box>
                 <List dense>
                   {recentExperience.map((exp, index) => (
-                    <ListItem key={index} sx={{ px: 0 }}>
+                    <ListItem key={`exp-${exp.company}-${exp.position}`} sx={{ px: 0 }}>
                       <ListItemIcon>
                         <EngineeringIcon color={exp.current ? 'success' : 'action'} />
                       </ListItemIcon>
@@ -414,14 +415,14 @@ const HomePage: React.FC = () => {
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
                 <ContactIcon sx={{ mr: 2, color: 'primary.main' }} />
                 <Typography variant="h5" component="h3">
-                  Let's Connect
+                  Let&apos;s Connect
                 </Typography>
               </Box>
               <Grid container spacing={3} alignItems="center">
                 <Grid item xs={12} md={8}>
                   <Typography variant="body1" paragraph>
                     Interested in discussing opportunities, collaborations, or learning more about
-                    AI-driven development? I'd love to connect!
+                    AI-driven development? I&apos;d love to connect!
                   </Typography>
                   <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
                     <Button

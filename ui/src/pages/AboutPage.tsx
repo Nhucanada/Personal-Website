@@ -90,7 +90,7 @@ const AboutPage: React.FC = () => {
                       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                         {personalInfo.languages.map((lang, index) => (
                           <Chip
-                            key={index}
+                            key={`lang-${lang.language}-${lang.proficiency}`}
                             label={`${lang.language} (${lang.proficiency})`}
                             variant="outlined"
                             size="small"
@@ -113,7 +113,7 @@ const AboutPage: React.FC = () => {
                         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                           {skillsData.technicalSkills.map((skill, index) => (
                             <Chip
-                              key={index}
+                              key={`tech-skill-${skill}`}
                               label={skill}
                               variant="outlined"
                               size="small"
@@ -139,7 +139,7 @@ const AboutPage: React.FC = () => {
                             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 1 }}>
                               {categorySkills.map((skill, index) => (
                                 <Chip
-                                  key={index}
+                                  key={`${category}-skill-${skill}`}
                                   label={skill}
                                   variant="filled"
                                   size="small"
@@ -160,7 +160,7 @@ const AboutPage: React.FC = () => {
               Philosophy
                 </Typography>
                 <Typography variant="body1" fontStyle="italic">
-              "I'm always eager to learn new things and build impactful projects!"
+              &quot;I&apos;m always eager to learn new things and build impactful projects!&quot;
                 </Typography>
               </Box>
             </>

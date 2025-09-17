@@ -139,7 +139,9 @@ const WorkExperiencePage: React.FC = () => {
   // Calculate timeline positioning
   const timelineData = useMemo(() => {
     if (!experiences || experiences.length === 0) {
-      return { positionedExperiences: [], totalMonths: 0, earliestDate: new Date(), latestDate: new Date() };
+      return {
+        positionedExperiences: [], totalMonths: 0, earliestDate: new Date(), latestDate: new Date(),
+      };
     }
 
     const sortedExperiences = [...experiences].sort((a, b) =>
@@ -183,7 +185,8 @@ const WorkExperiencePage: React.FC = () => {
           // Check for true overlap - consecutive experiences should not overlap
           // Allow experiences that start exactly when another ends (or within 1 month tolerance)
           const hasNoOverlap = startPos >= trackInfo.end || endPos <= trackInfo.start;
-          const isConsecutiveOrClose = Math.abs(trackInfo.end - startPos) <= 1.0; // 1% tolerance for consecutive/close experiences
+          const isConsecutiveOrClose = Math.abs(trackInfo.end - startPos) <= 1.0;
+          // 1% tolerance for consecutive/close experiences
 
           if (hasNoOverlap || isConsecutiveOrClose) {
             break;
@@ -248,7 +251,8 @@ const WorkExperiencePage: React.FC = () => {
           sx={{
             left: `${startPos}%`,
             width: `${duration}%`,
-            bottom: `${track * 70 + 50}px`, // Position relative to bottom to align with timeline axis
+            bottom: `${track * 70 + 50}px`,
+            // Position relative to bottom to align with timeline axis
           }}
         >
           <Box
@@ -309,7 +313,8 @@ const WorkExperiencePage: React.FC = () => {
 
           <Typography variant="body1" paragraph color="text.secondary">
             My professional journey as a Computer Science and AI student at McGill University,
-            with internship experience at leading companies in healthcare, insurance, and data analytics.
+            with internship experience at leading companies in healthcare, insurance,
+            and data analytics.
           </Typography>
 
           {/* Loading State */}
@@ -339,7 +344,8 @@ const WorkExperiencePage: React.FC = () => {
                 </Box>
 
                 <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-              Interactive horizontal timeline showcasing my professional journey. Click on any experience bar to view detailed information in the drilldown panel below.
+              Interactive horizontal timeline showcasing my professional journey.
+              Click on any experience bar to view detailed information in the drilldown panel below.
                 </Typography>
 
                 {/* Legend */}
@@ -360,7 +366,13 @@ const WorkExperiencePage: React.FC = () => {
 
                 <TimelineContainer
                   sx={{
-                    height: `${Math.max(timelineData.positionedExperiences.reduce((max, exp) => Math.max(max, exp.track), 0) * 70 + 150, 200)}px`,
+                    height: `${Math.max(
+                      timelineData.positionedExperiences.reduce(
+                        (max, exp) => Math.max(max, exp.track),
+                        0,
+                      ) * 70 + 150,
+                      200,
+                    )}px`,
                   }}
                 >
                   <TimelineScrollContainer>
@@ -383,7 +395,7 @@ const WorkExperiencePage: React.FC = () => {
                     {/* Timeline labels */}
                     {generateTimelineLabels().map((label, index) => (
                       <Box
-                        key={index}
+                        key={`timeline-label-${label.label}`}
                         sx={{
                           position: 'absolute',
                           bottom: '10px',
@@ -425,7 +437,9 @@ const WorkExperiencePage: React.FC = () => {
                           {selectedExperience.company}
                         </Typography>
                         <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
-                          {selectedExperience.location} • {formatDate(selectedExperience.startDate)} - {formatDate(selectedExperience.endDate)}
+                          {selectedExperience.location} •
+                          {formatDate(selectedExperience.startDate)} -
+                          {formatDate(selectedExperience.endDate)}
                           {selectedExperience.current && (
                             <Chip
                               label="Current Position"
@@ -453,7 +467,7 @@ const WorkExperiencePage: React.FC = () => {
                         </Typography>
                         <Box component="ul" sx={{ pl: 2, mb: 0 }}>
                           {selectedExperience.description.map((item, idx) => (
-                            <Typography key={idx} variant="body1" component="li" sx={{ mb: 1, lineHeight: 1.6 }}>
+                            <Typography key={`desc-${item.slice(0, 20)}`} variant="body1" component="li" sx={{ mb: 1, lineHeight: 1.6 }}>
                               {item}
                             </Typography>
                           ))}
@@ -466,7 +480,7 @@ const WorkExperiencePage: React.FC = () => {
                         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                           {selectedExperience.technologies.map((tech, idx) => (
                             <Chip
-                              key={idx}
+                              key={`tech-${tech}`}
                               label={tech}
                               size="medium"
                               variant="outlined"
@@ -507,7 +521,9 @@ const WorkExperiencePage: React.FC = () => {
                   <Grid item xs={12} md={4}>
                     <Card elevation={1} sx={{ textAlign: 'center', p: 2 }}>
                       <Typography variant="h4" color="primary.main" fontWeight="bold">
-                        {experiences ? Array.from(new Set(experiences.flatMap(exp => exp.technologies))).length : 0}
+                        {experiences
+                          ? Array.from(new Set(experiences.flatMap(exp => exp.technologies))).length
+                          : 0}
                       </Typography>
                       <Typography variant="body1">
                     Technologies Used

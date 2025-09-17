@@ -38,7 +38,7 @@ const ProjectsPage: React.FC = () => {
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mb: 2 }}>
           {project.technologies.map((tech, index) => (
             <Chip
-              key={index}
+              key={`tech-${tech}`}
               label={tech}
               size="small"
               variant="outlined"
@@ -88,7 +88,8 @@ const ProjectsPage: React.FC = () => {
           </Box>
 
           <Typography variant="body1" paragraph color="text.secondary">
-            Here's a collection of projects I've worked on, showcasing my skills in full-stack
+            Here&apos;s a collection of projects I&apos;ve worked on, showcasing my skills
+            in full-stack
             development, problem-solving, and technology exploration.
           </Typography>
 
