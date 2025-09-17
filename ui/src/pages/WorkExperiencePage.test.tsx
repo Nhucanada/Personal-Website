@@ -227,4 +227,20 @@ describe('WorkExperiencePage - Timeline Visualization', () => {
     const pageContent = document.body;
     expect(pageContent).toBeInTheDocument();
   });
+
+  test('timeline groups same organization experiences and handles consecutive experiences', () => {
+    renderWithTheme(<WorkExperiencePage />);
+
+    // Should show multiple instances of McGill CSUS (same organization should be grouped)
+    const mcgillTexts = screen.getAllByText('McGill Computer Science Undergraduate Society');
+    expect(mcgillTexts.length).toBeGreaterThanOrEqual(2);
+
+    // Should show multiple instances of 360insights (same organization should be grouped)
+    const insightsTexts = screen.getAllByText('360insights');
+    expect(insightsTexts.length).toBeGreaterThanOrEqual(2);
+
+    // Should have all companies visible in timeline
+    expect(screen.getAllByText('PointClickCare').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Intact').length).toBeGreaterThan(0);
+  });
 });

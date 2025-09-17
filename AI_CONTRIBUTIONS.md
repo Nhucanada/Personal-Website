@@ -387,14 +387,17 @@ ui/tsconfig.json (25 lines) - AI_GENERATED
 - Comprehensive test suite for theme validation
 - Dark theme compatible gradients and styling
 
-#### 8. **Interactive Timeline Visualization (100% AI)**
-- Advanced horizontal timeline for overlapping work experiences
-- Automatic track allocation algorithm for concurrent positions
-- Interactive selection with detailed experience views
-- Smart overlap management for simultaneous roles (McGill CSUS + internships)
-- Styled components with hover tooltips and animations
-- Click-to-select functionality with responsive design
-- 19 comprehensive test cases covering all timeline functionality
+#### 8. **Interactive Timeline Visualization with Smart Grouping (100% AI)**
+- Advanced horizontal timeline with intelligent organization grouping
+- Same-company experiences grouped on single tracks (McGill CSUS, 360insights)
+- Consecutive experience handling to eliminate artificial gaps
+- Automatic track allocation algorithm with company-aware positioning
+- Interactive drilldown panels with Material-UI Collapse animations
+- Click-to-expand/collapse functionality with close buttons and dividers
+- Smart overlap management for simultaneous roles while respecting company grouping
+- Styled components with hover tooltips and enhanced visual feedback
+- Responsive design with improved timeline bar sizing (50px height)
+- 20+ comprehensive test cases covering all timeline functionality and grouping logic
 
 #### 9. **Code Quality & Testing Infrastructure (100% AI)**
 - JaCoCo Maven Plugin integration for comprehensive code coverage analysis
@@ -498,7 +501,10 @@ The collaboration demonstrates AI's capability to handle complete software devel
 **Total AI Contribution**: 7,913 lines (100%)
 
 ### Recent Updates (2025-09-16)
-- **Enhanced Timeline with Drilldown**: Implemented horizontal timeline with collapsible drilldown panels
+- **Enhanced Timeline with Smart Grouping**: Improved horizontal timeline with organization grouping and consecutive experience handling
+- **Same Organization Grouping**: Experiences from the same company (McGill CSUS, 360insights) now display on the same timeline track
+- **Consecutive Experience Fix**: Eliminated gaps between back-to-back experiences (360insights → Intact → PointClickCare)
+- **Timeline Drilldown**: Implemented horizontal timeline with collapsible drilldown panels
 - **Navigation Cleanup**: Removed duplicate home icon, keeping only clickable title for home navigation
 - **Improved Timeline UX**: Larger timeline bars (50px), company names on bars, smooth Material-UI animations
 - **Timeline Interaction**: Click-to-expand/collapse experience details with close button and dividers

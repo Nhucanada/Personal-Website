@@ -258,8 +258,9 @@ const WorkExperiencePage: React.FC = () => {
     const totalMonths = (latestDate.getFullYear() - earliestDate.getFullYear()) * 12 +
                        (latestDate.getMonth() - earliestDate.getMonth());
 
-    // Track allocation for overlapping experiences
-    const tracks: { start: number; end: number }[] = [];
+    // Track allocation with company grouping and consecutive experience handling
+    const companyTracks: { [company: string]: number } = {};
+    const tracks: { start: number; end: number; companies: Set<string> }[] = [];
 
     const positionedExperiences = sortedExperiences.map(exp => {
       const startDate = parseDate(exp.startDate);
@@ -271,18 +272,46 @@ const WorkExperiencePage: React.FC = () => {
                      (endDate.getMonth() - earliestDate.getMonth())) / totalMonths * 100;
       const duration = endPos - startPos;
 
-      // Find available track
-      let track = 0;
-      while (track < tracks.length &&
-             tracks[track].end > startPos &&
-             tracks[track].start < endPos) {
-        track++;
-      }
+      let track: number;
 
-      if (track >= tracks.length) {
-        tracks.push({ start: startPos, end: endPos });
+      // Check if this company already has a track assigned
+      if (companyTracks[exp.company] !== undefined) {
+        track = companyTracks[exp.company];
+        // Extend the track if this experience goes further
+        if (tracks[track] && endPos > tracks[track].end) {
+          tracks[track].end = endPos;
+        }
       } else {
-        tracks[track] = { start: startPos, end: endPos };
+        // Find available track, considering consecutive experiences as non-overlapping
+        track = 0;
+        while (track < tracks.length) {
+          const trackInfo = tracks[track];
+
+          // Check for true overlap (not just consecutive)
+          const hasGap = startPos >= trackInfo.end || endPos <= trackInfo.start;
+          const isConsecutive = Math.abs(trackInfo.end - startPos) < 0.5; // Small tolerance for consecutive
+
+          if (hasGap || isConsecutive) {
+            break;
+          }
+          track++;
+        }
+
+        // Assign track to company
+        companyTracks[exp.company] = track;
+
+        if (track >= tracks.length) {
+          tracks.push({
+            start: startPos,
+            end: endPos,
+            companies: new Set([exp.company])
+          });
+        } else {
+          // Update existing track
+          tracks[track].start = Math.min(tracks[track].start, startPos);
+          tracks[track].end = Math.max(tracks[track].end, endPos);
+          tracks[track].companies.add(exp.company);
+        }
       }
 
       return {

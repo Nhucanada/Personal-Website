@@ -111,7 +111,7 @@ The project is configured for easy deployment:
 - **Dark Theme Design** - Professional dark color scheme with Material-UI integration
 - **About Me** - Information about Nathan's background, skills, and interests
 - **Projects** - Showcase of personal and academic projects with GitHub links
-- **Enhanced Interactive Timeline** - Horizontal timeline with drilldown panels, company names on bars, and smooth animations
+- **Smart Interactive Timeline** - Horizontal timeline with intelligent organization grouping, consecutive experience handling, and drilldown panels
 - **Education** - Academic background at McGill University and certifications
 - **AI Development** - Comprehensive showcase of AI contributions to this project
 - **Contact** - Professional contact information and social media links

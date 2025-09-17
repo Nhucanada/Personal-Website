@@ -324,7 +324,7 @@ The application uses React Router for client-side navigation:
 - **Home** (`/`) - Dashboard featuring widget previews of all sections with prominent AI development showcase
 - **About** (`/about`) - Nathan's background, technical skills (Java, Python, React, TypeScript, Jenkins), and philosophy
 - **Projects** (`/projects`) - Portfolio showcasing GitHub projects including Personal Website, Java Search Engine, and Guardians of the Hive
-- **Experience** (`/experience`) - Enhanced horizontal timeline with drilldown panels, click-to-expand experience details
+- **Experience** (`/experience`) - Smart horizontal timeline with organization grouping, consecutive experience handling, and drilldown panels
 - **Education** (`/education`) - McGill University Software Engineering degree and certifications
 - **AI Development** (`/ai`) - Comprehensive showcase of AI contributions, featuring statistics, methodology, and problem-solving examples
 - **Contact** (`/contact`) - Professional contact information and LinkedIn/GitHub profiles
