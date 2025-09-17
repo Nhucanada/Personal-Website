@@ -12,7 +12,7 @@ const WelcomeCard: React.FC<WelcomeCardProps> = ({
   title = 'Welcome to my Personal Website',
   subtitle = 'This is a modern website built with React and Material-UI',
   buttonText = 'Get Started',
-  onButtonClick
+  onButtonClick,
 }) => {
   const handleButtonClick = () => {
     if (onButtonClick) {

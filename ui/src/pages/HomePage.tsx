@@ -17,7 +17,6 @@ import {
   ListItemIcon,
   ListItemText,
   Paper,
-  Divider
 } from '@mui/material';
 import {
   Person as PersonIcon,
@@ -32,7 +31,7 @@ import {
   GitHub as GitHubIcon,
   LinkedIn as LinkedInIcon,
   Email as EmailIcon,
-  ArrowForward as ArrowIcon
+  ArrowForward as ArrowIcon,
 } from '@mui/icons-material';
 
 const HomePage: React.FC = () => {
@@ -43,7 +42,7 @@ const HomePage: React.FC = () => {
     { label: 'Total Lines of Code', value: '7,488', color: 'primary' },
     { label: 'AI Generated', value: '100%', color: 'success' },
     { label: 'Components Created', value: '26+', color: 'info' },
-    { label: 'Tests Written', value: '144+', color: 'warning' }
+    { label: 'Tests Written', value: '144+', color: 'warning' },
   ];
 
   // Recent Projects
@@ -52,20 +51,20 @@ const HomePage: React.FC = () => {
       title: 'Personal Website',
       description: 'Full-stack React & Spring Boot application with AI development tracking',
       technologies: ['React', 'TypeScript', 'Spring Boot'],
-      featured: true
+      featured: true,
     },
     {
       title: 'Java Search Engine',
       description: 'Comprehensive search engine with web crawling and ranking algorithms',
       technologies: ['Java', 'XML Parsing', 'Algorithms'],
-      featured: true
+      featured: true,
     },
     {
       title: 'Guardians of the Hive',
       description: 'Tower defense game with strategic gameplay and AI enemy behavior',
       technologies: ['Java', 'Game Development', 'Swing GUI'],
-      featured: true
-    }
+      featured: true,
+    },
   ];
 
   // Work Experience Summary
@@ -74,26 +73,26 @@ const HomePage: React.FC = () => {
       company: 'PointClickCare',
       position: 'SWE Intern',
       period: 'May 2025 - Aug 2025',
-      current: false
+      current: false,
     },
     {
       company: 'Intact',
       position: 'DevOps I',
       period: 'Jan 2025 - Apr 2025',
-      current: false
+      current: false,
     },
     {
       company: 'McGill CSUS',
       position: 'Social Media Executive',
       period: 'Apr 2025 - Present',
-      current: true
-    }
+      current: true,
+    },
   ];
 
   // Technical Skills
   const topSkills = [
     'Java', 'Python', 'React', 'TypeScript', 'Spring Boot',
-    'Jenkins', 'CI/CD', 'Machine Learning', 'DevOps'
+    'Jenkins', 'CI/CD', 'Machine Learning', 'DevOps',
   ];
 
   return (
@@ -107,7 +106,7 @@ const HomePage: React.FC = () => {
             mb: 4,
             background: 'linear-gradient(135deg, #90caf9 0%, #64b5f6 100%)',
             color: 'black',
-            textAlign: 'center'
+            textAlign: 'center',
           }}
         >
           <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
@@ -116,7 +115,7 @@ const HomePage: React.FC = () => {
                 width: 120,
                 height: 120,
                 bgcolor: 'rgba(0, 0, 0, 0.2)',
-                fontSize: '3rem'
+                fontSize: '3rem',
               }}
             >
               <PersonIcon fontSize="large" />
@@ -139,7 +138,7 @@ const HomePage: React.FC = () => {
               onClick={() => navigate('/ai')}
               sx={{
                 bgcolor: 'rgba(0, 0, 0, 0.2)',
-                '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.3)' }
+                '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.3)' },
               }}
             >
               Explore AI Development
@@ -152,7 +151,7 @@ const HomePage: React.FC = () => {
               sx={{
                 borderColor: 'black',
                 color: 'black',
-                '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.1)' }
+                '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.1)' },
               }}
             >
               View Projects
@@ -164,7 +163,7 @@ const HomePage: React.FC = () => {
         <Box sx={{ mb: 4 }}>
           <Card elevation={3} sx={{
             border: '2px solid #90caf9',
-            background: 'linear-gradient(135deg, #263238 0%, #37474f 100%)'
+            background: 'linear-gradient(135deg, #263238 0%, #37474f 100%)',
           }}>
             <CardContent sx={{ pb: 1 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>

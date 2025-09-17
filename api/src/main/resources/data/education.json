@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "institution": "McGill University",
+    "degree": "Bachelor of Science",
+    "field": "Software Engineering",
+    "location": "Montreal, Quebec, Canada",
+    "startDate": "2023-08",
+    "endDate": "2027-12",
+    "description": "Comprehensive Software Engineering program with emphasis on Computer Science and AI. Gaining strong foundation in programming languages, data structures, software engineering principles, and artificial intelligence.",
+    "relevantCourses": [
+      "Data Structures and Algorithms",
+      "Object-Oriented Programming",
+      "Software Engineering",
+      "Computer Science Fundamentals",
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Database Systems",
+      "Software Design Patterns",
+      "Discrete Mathematics"
+    ],
+    "achievements": [
+      "Active member of McGill Computer Science Undergraduate Society",
+      "Communications Executive and Social Media Executive roles",
+      "Completed multiple software engineering internships",
+      "Demonstrated proficiency in Java, Python, TypeScript, and Groovy"
+    ],
+    "gpa": "3.8"
+  },
+  {
+    "id": 2,
+    "institution": "Iroquois Ridge High School",
+    "degree": "High School Diploma",
+    "field": "General Studies",
+    "location": "Oakville, Ontario, Canada",
+    "startDate": "2019-09",
+    "endDate": "2023-06",
+    "description": "Completed high school education with strong academic performance, preparing for university studies in computer science and engineering.",
+    "relevantCourses": [
+      "Advanced Mathematics",
+      "Computer Science",
+      "Physics",
+      "Chemistry",
+      "English",
+      "French"
+    ],
+    "achievements": [
+      "International Finalist",
+      "1st Place in DECA Virtual Business Challenge",
+      "4th Place Overall Finalist",
+      "RCM Level 8 Piano certification"
+    ]
+  }
+]

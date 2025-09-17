@@ -4,17 +4,132 @@ import '@testing-library/jest-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import WorkExperiencePage from './WorkExperiencePage';
 
+// Mock the useExperiences hook
+jest.mock('../hooks/useProfileData', () => ({
+  useExperiences: jest.fn(),
+}));
+
+import { useExperiences } from '../hooks/useProfileData';
+
+const mockedUseExperiences = useExperiences as jest.MockedFunction<typeof useExperiences>;
+
 const theme = createTheme();
+
+const mockExperiences = [
+  {
+    id: 1,
+    company: 'PointClickCare',
+    position: 'SWE Intern',
+    location: 'Mississauga, Ontario, Canada',
+    startDate: '2025-05-01',
+    endDate: '2025-08-31',
+    current: false,
+    description: [
+      'Full Stack Development on Senior Living Dashboards',
+      'Developed enterprise healthcare software solutions',
+    ],
+    technologies: ['Java', 'Spring Boot', 'React', 'TypeScript', 'REST APIs'],
+    type: 'internship',
+  },
+  {
+    id: 2,
+    company: 'Intact',
+    position: 'Software Engineering Intern',
+    location: 'Toronto, Ontario, Canada',
+    startDate: '2024-09-01',
+    endDate: '2024-12-31',
+    current: false,
+    description: [
+      'Backend development in insurance technology',
+      'Worked on microservices architecture',
+    ],
+    technologies: ['Java', 'Spring Boot', 'Microservices', 'Docker'],
+    type: 'internship',
+  },
+  {
+    id: 3,
+    company: '360insights',
+    position: 'Software Engineering Intern',
+    location: 'Markham, Ontario, Canada',
+    startDate: '2024-05-01',
+    endDate: '2024-08-31',
+    current: false,
+    description: [
+      'Full-stack development for channel incentive platform',
+      'Built REST APIs and React components',
+    ],
+    technologies: ['Java', 'Spring Boot', 'React', 'PostgreSQL'],
+    type: 'internship',
+  },
+  {
+    id: 4,
+    company: 'McGill Computer Science Undergraduate Society',
+    position: 'VP External',
+    location: 'Montreal, Quebec, Canada',
+    startDate: '2023-05-01',
+    endDate: '2024-04-30',
+    current: false,
+    description: [
+      'Led external partnerships and industry relations',
+      'Organized career fairs and networking events',
+    ],
+    technologies: ['Leadership', 'Event Management', 'Partnership Development'],
+    type: 'work',
+  },
+  {
+    id: 5,
+    company: "McDonald's",
+    position: 'Crew Member',
+    location: 'Montreal, Quebec, Canada',
+    startDate: '2022-09-01',
+    endDate: '2023-04-30',
+    current: false,
+    description: [
+      'Customer service and food preparation',
+      'Worked in fast-paced environment',
+    ],
+    technologies: ['Customer Service', 'Teamwork', 'Time Management'],
+    type: 'work',
+  },
+  {
+    id: 6,
+    company: 'McGill Phonathon',
+    position: 'Fundraising Caller',
+    location: 'Montreal, Quebec, Canada',
+    startDate: '2022-01-01',
+    endDate: '2022-08-31',
+    current: false,
+    description: [
+      'Conducted fundraising calls for university alumni',
+      'Achieved high success rates in donor engagement',
+    ],
+    technologies: ['Communication', 'Sales', 'Database Management'],
+    type: 'work',
+  },
+];
 
 const renderWithTheme = (component: React.ReactElement) => {
   return render(
     <ThemeProvider theme={theme}>
       {component}
-    </ThemeProvider>
+    </ThemeProvider>,
   );
 };
 
 describe('WorkExperiencePage - Timeline Visualization', () => {
+  beforeEach(() => {
+    mockedUseExperiences.mockReturnValue({
+      data: mockExperiences,
+      loading: false,
+      error: null,
+      refetch: jest.fn(),
+    });
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   test('renders main heading and description', () => {
     renderWithTheme(<WorkExperiencePage />);
     expect(screen.getByRole('heading', { level: 1, name: /work experience/i })).toBeInTheDocument();
@@ -248,5 +363,43 @@ describe('WorkExperiencePage - Timeline Visualization', () => {
     // Should have all companies visible in timeline
     expect(screen.getAllByText('PointClickCare').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Intact').length).toBeGreaterThan(0);
+  });
+
+  test('displays loading state', () => {
+    mockedUseExperiences.mockReturnValue({
+      data: null,
+      loading: true,
+      error: null,
+      refetch: jest.fn(),
+    });
+
+    renderWithTheme(<WorkExperiencePage />);
+    expect(screen.getByText('Loading experiences...')).toBeInTheDocument();
+  });
+
+  test('displays error state', () => {
+    mockedUseExperiences.mockReturnValue({
+      data: null,
+      loading: false,
+      error: 'Failed to load experiences',
+      refetch: jest.fn(),
+    });
+
+    renderWithTheme(<WorkExperiencePage />);
+    expect(screen.getByText('Error loading experiences')).toBeInTheDocument();
+    expect(screen.getByText('Failed to load experiences')).toBeInTheDocument();
+  });
+
+  test('handles empty experiences list', () => {
+    mockedUseExperiences.mockReturnValue({
+      data: [],
+      loading: false,
+      error: null,
+      refetch: jest.fn(),
+    });
+
+    renderWithTheme(<WorkExperiencePage />);
+    expect(screen.getByRole('heading', { level: 1, name: /work experience/i })).toBeInTheDocument();
+    expect(screen.getByText(/my professional journey as a computer science and ai student/i)).toBeInTheDocument();
   });
 });

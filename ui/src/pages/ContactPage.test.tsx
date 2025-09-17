@@ -10,7 +10,7 @@ const renderWithTheme = (component: React.ReactElement) => {
   return render(
     <ThemeProvider theme={theme}>
       {component}
-    </ThemeProvider>
+    </ThemeProvider>,
   );
 };
 
@@ -137,9 +137,10 @@ describe('ContactPage', () => {
     // Wait for success and form reset
     await waitFor(() => {
       expect(nameField.value).toBe('');
-      expect(emailField.value).toBe('');
-      expect(subjectField.value).toBe('');
-      expect(messageField.value).toBe('');
     }, { timeout: 3000 });
+
+    expect(emailField.value).toBe('');
+    expect(subjectField.value).toBe('');
+    expect(messageField.value).toBe('');
   });
 });

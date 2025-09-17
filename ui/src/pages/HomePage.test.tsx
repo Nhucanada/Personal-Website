@@ -20,7 +20,7 @@ const renderWithProviders = (component: React.ReactElement) => {
       <ThemeProvider theme={theme}>
         {component}
       </ThemeProvider>
-    </BrowserRouter>
+    </BrowserRouter>,
   );
 };
 

@@ -13,7 +13,7 @@ const renderWithProviders = (component: React.ReactElement) => {
       <ThemeProvider theme={theme}>
         {component}
       </ThemeProvider>
-    </BrowserRouter>
+    </BrowserRouter>,
   );
 };
 
@@ -39,7 +39,6 @@ describe('Header Component', () => {
     renderWithProviders(<Header title={customTitle} />);
     expect(screen.getByTestId('header-title')).toHaveTextContent(customTitle);
   });
-
 
   test('displays desktop navigation on large screens', () => {
     renderWithProviders(<Header />);

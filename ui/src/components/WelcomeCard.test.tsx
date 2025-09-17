@@ -10,7 +10,7 @@ const renderWithTheme = (component: React.ReactElement) => {
   return render(
     <ThemeProvider theme={theme}>
       {component}
-    </ThemeProvider>
+    </ThemeProvider>,
   );
 };
 
@@ -20,7 +20,7 @@ describe('WelcomeCard Component', () => {
 
     expect(screen.getByTestId('welcome-title')).toHaveTextContent('Welcome to my Personal Website');
     expect(screen.getByTestId('welcome-subtitle')).toHaveTextContent(
-      'This is a modern website built with React and Material-UI'
+      'This is a modern website built with React and Material-UI',
     );
     expect(screen.getByTestId('welcome-button')).toHaveTextContent('Get Started');
   });
@@ -107,7 +107,7 @@ describe('WelcomeCard Component', () => {
 
   test('handles empty strings gracefully', () => {
     renderWithTheme(
-      <WelcomeCard title="" subtitle="" buttonText="" />
+      <WelcomeCard title="" subtitle="" buttonText="" />,
     );
 
     expect(screen.getByTestId('welcome-title')).toHaveTextContent('');

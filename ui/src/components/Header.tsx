@@ -14,7 +14,7 @@ import {
   ListItemIcon,
   ListItemText,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
@@ -23,7 +23,7 @@ import {
   Code as CodeIcon,
   School as SchoolIcon,
   ContactMail as ContactIcon,
-  Psychology as AIIcon
+  Psychology as AIIcon,
 } from '@mui/icons-material';
 
 interface NavigationItem {
@@ -37,7 +37,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({
-  title = 'Personal Website'
+  title = 'Personal Website',
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({
     { label: 'Experience', path: '/experience', icon: <WorkIcon /> },
     { label: 'Education', path: '/education', icon: <SchoolIcon /> },
     { label: 'AI Development', path: '/ai', icon: <AIIcon /> },
-    { label: 'Contact', path: '/contact', icon: <ContactIcon /> }
+    { label: 'Contact', path: '/contact', icon: <ContactIcon /> },
   ];
 
   const handleNavigation = (path: string) => {
@@ -81,7 +81,7 @@ const Header: React.FC<HeaderProps> = ({
             bgcolor: isActivePath(item.path) ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
             '&:hover': {
               bgcolor: 'rgba(255, 255, 255, 0.1)',
-            }
+            },
           }}
           data-testid={`nav-${item.label.toLowerCase()}`}
         >

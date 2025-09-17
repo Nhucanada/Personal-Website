@@ -1,0 +1,28 @@
+{
+  "name": "Nathan Hu",
+  "title": "Computer Science & AI Student",
+  "location": "Oakville, Ontario, Canada",
+  "bio": "I'm a Computer Science & AI student at McGill University with a passion for building innovative software solutions. My interests lie in backend, full stack development, DevOps, and machine learning.",
+  "description": "I'm skilled in multiple programming languages and technologies, including Java, Maven, Spring, React, TypeScript, Groovy and familiar with CI/CD pipelines and agile methodologies. My experience includes developing REST APIs, creating comprehensive unit tests, building CI/CD workflows, and working with cloud platforms like AWS S3.",
+  "languages": [
+    {
+      "language": "English",
+      "proficiency": "Native"
+    },
+    {
+      "language": "French",
+      "proficiency": "Native"
+    },
+    {
+      "language": "Mandarin",
+      "proficiency": "Full Professional"
+    }
+  ],
+  "contact": {
+    "email": "nhucanada0628@gmail.com",
+    "mcgillEmail": "nathan.hu@mail.mcgill.ca",
+    "linkedin": "https://www.linkedin.com/in/nhucanada/",
+    "github": "https://github.com/Nhucanada",
+    "location": "Oakville, Ontario, Canada"
+  }
+}

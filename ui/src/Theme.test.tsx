@@ -7,7 +7,7 @@ import {
   createTheme,
   CssBaseline,
   Box,
-  Typography
+  Typography,
 } from '@mui/material';
 
 // Import the theme directly from App.tsx

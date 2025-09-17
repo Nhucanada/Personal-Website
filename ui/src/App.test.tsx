@@ -6,7 +6,7 @@ import {
   ThemeProvider,
   createTheme,
   CssBaseline,
-  Box
+  Box,
 } from '@mui/material';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
@@ -135,7 +135,7 @@ const renderWithRouter = (initialEntries = ['/']) => {
   return render(
     <MemoryRouter initialEntries={initialEntries}>
       <TestApp />
-    </MemoryRouter>
+    </MemoryRouter>,
   );
 };
 

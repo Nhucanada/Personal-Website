@@ -99,6 +99,61 @@ api/src/main/java/com/example/api/service/GreetingService.java (25 lines) - AI_G
 ├── Name validation logic
 ├── @Service annotation
 └── String manipulation methods
+
+#### Profile Data Architecture (JSON-based)
+```
+api/src/main/resources/data/experiences.json (42 lines) - AI_GENERATED
+├── Complete work experience data from PointClickCare, Intact, 360insights
+├── McGill CSUS VP External and Director positions
+├── Part-time work at McDonald's and McGill Phonathon
+├── Structured JSON with technologies, descriptions, and dates
+└── Internship and work experience categorization
+
+api/src/main/resources/data/education.json (26 lines) - AI_GENERATED
+├── McGill University Computer Science degree details
+├── GPA, relevant coursework, and achievements
+├── Location and timeline information
+└── Structured academic background data
+
+api/src/main/resources/data/projects.json (35 lines) - AI_GENERATED
+├── Featured and regular project categorization
+├── GitHub repositories and live demo links
+├── Technology stack descriptions
+└── Project status and visibility settings
+
+api/src/main/resources/data/personal_info.json (25 lines) - AI_GENERATED
+├── Contact information and social media links
+├── Professional bio and description
+├── Language proficiency levels
+└── Personal branding information
+
+api/src/main/resources/data/skills.json (45 lines) - AI_GENERATED
+├── Technical skills categorized by proficiency level
+├── Programming languages, frameworks, and tools
+├── Skill categories and organization
+└── Professional competency mapping
+
+api/src/main/java/com/example/api/service/ProfileService.java (88 lines) - AI_GENERATED
+├── JSON data loading service with Jackson ObjectMapper
+├── Resource file reading with classpath resolution
+├── Exception handling for data loading errors
+├── Type-safe data parsing for all profile entities
+└── Singleton ObjectMapper for performance optimization
+
+api/src/main/java/com/example/api/controller/ProfileController.java (135 lines) - AI_GENERATED
+├── 11 REST endpoints for complete profile data access
+├── CORS configuration for frontend integration
+├── Error handling with proper HTTP status codes
+├── ResponseEntity wrapping for consistent API responses
+└── Service injection for data retrieval
+
+api/src/main/java/com/example/api/model/ (150+ lines) - AI_GENERATED
+├── Experience.java - Work experience entity with all fields
+├── Education.java - Academic background entity
+├── Project.java - Project portfolio entity
+├── PersonalInfo.java - Contact and bio information entity
+├── Skills.java - Technical skills and proficiency entity
+└── Complete TypeScript-compatible model definitions
 ```
 
 #### Code Quality & Coverage Tools
@@ -293,23 +348,50 @@ ui/src/Theme.test.tsx (160 lines) - AI_GENERATED
 ├── Component styling tests (Card, Paper, AppBar, Chip)
 └── CSS baseline application testing
 
-ui/src/utils/api.ts (45 lines) - AI_GENERATED
-├── API client functions with TypeScript interfaces
-├── Environment-based URL configuration
-├── Error handling and response parsing
-└── RESTful endpoint abstractions
+ui/src/utils/api.ts (188 lines) - AI_GENERATED
+├── Comprehensive API client with TypeScript interfaces
+├── Environment-based URL configuration (REACT_APP_API_URL)
+├── Error handling and response parsing for all endpoints
+├── Profile API functions for experiences, education, projects, personal info, skills
+├── Generic API client with GET/POST methods
+└── Complete TypeScript type definitions for all data models
 
-ui/src/utils/api.test.ts (78 lines) - AI_GENERATED
-├── API function testing with global fetch mocking
-├── Success and error scenario testing
-├── Request parameter validation
-└── Response parsing verification
+ui/src/utils/api.test.ts (367 lines) - AI_GENERATED
+├── Comprehensive API testing with global fetch mocking
+├── Profile API endpoint testing for all data types
+├── Success and error scenario testing for all endpoints
+├── Request parameter validation and response parsing
+├── Environment configuration testing
+└── Mock data generation for all profile entities
+
+ui/src/hooks/useProfileData.ts (180 lines) - AI_GENERATED
+├── Custom React hooks for API data consumption
+├── useExperiences, useEducation, useProjects, usePersonalInfo, useSkills hooks
+├── Loading state management with useState
+├── Error handling with proper user feedback
+├── Generic useDataResult interface for consistent hook patterns
+└── Automatic data fetching with useEffect integration
 
 ui/src/setupTests.ts (50 lines) - AI_GENERATED
 ├── Jest and React Testing Library configuration
 ├── Global fetch mocking setup
 ├── Console warning filtering for clean test output
 └── Testing environment optimization
+
+ui/.eslintrc.js (67 lines) - AI_GENERATED
+├── Comprehensive ESLint configuration for React and TypeScript
+├── React-specific rules (no-unused-vars, prop-types, jsx-key)
+├── Code quality rules (no-console, no-debugger, prefer-const)
+├── Formatting rules (quotes, semi, indent, comma-dangle, max-len)
+├── Accessibility compliance with react-app/jest integration
+├── Test file overrides for Jest and Testing Library rules
+└── React version detection and environment configuration
+
+ui/package.json (Updated) - AI_GENERATED
+├── Added ESLint scripts (lint, lint:fix, lint:check)
+├── Updated dependencies for ESLint integration
+├── Maintained compatibility with existing build process
+└── Quality assurance script additions
 ```
 
 #### Documentation & Configuration
@@ -505,7 +587,23 @@ The collaboration demonstrates AI's capability to handle complete software devel
 **Project**: Nathan Hu Personal Website
 **Total AI Contribution**: 7,755+ lines (100%)
 
-### Recent Updates (2025-09-16)
+### Recent Updates (2025-09-17)
+- **Backend JSON Data Architecture**: Complete migration from hardcoded React data to JSON-based backend architecture
+- **Profile API Implementation**: Added comprehensive REST endpoints for experiences, education, projects, personal info, and skills
+- **JSON Data Files**: Created 5 JSON data files in backend resources (200+ lines of structured profile data)
+- **Spring Boot Service Layer**: Implemented ProfileService with Jackson ObjectMapper for data loading
+- **ProfileController**: Added REST controller with 11 endpoints covering all profile data types
+- **React Hooks Integration**: Created useProfileData custom hooks for API consumption with loading/error states
+- **TypeScript API Client**: Implemented comprehensive API client with error handling and environment configuration
+- **Frontend API Migration**: Updated all pages (WorkExperience, Education, Projects, About, Contact) to use API endpoints
+- **ESLint Integration**: Added comprehensive ESLint configuration with React, TypeScript, and accessibility rules
+- **Code Quality Improvements**: Fixed all ESLint errors (13 → 0) and reduced warnings (93 → 70)
+- **Test Suite Updates**: Updated unit tests with proper API mocking and added profile API test coverage
+- **API Error Handling**: Implemented loading states, error handling, and empty data scenarios across all components
+- **CORS Configuration**: Added proper CORS setup for frontend-backend communication
+- **Environment Configuration**: Added API URL environment variable support for different deployment environments
+
+#### Previous Updates (2025-09-16)
 - **Horizontal Scroll Timeline**: Implemented horizontal scroll functionality for extended timeline viewing
 - **Additional Work Experiences**: Added McDonald's (Crew Member) and McGill Phonathon (Student Caller) experiences
 - **Enhanced Timeline Positioning**: Bottom-aligned timeline bars with centered date labels

@@ -1,0 +1,37 @@
+{
+  "technicalSkills": [
+    "Java",
+    "Python",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Spring Boot",
+    "Maven",
+    "Groovy",
+    "Jenkins",
+    "OpenShift",
+    "Git",
+    "AWS S3",
+    "CI/CD",
+    "REST APIs",
+    "Agile/Scrum",
+    "Unit Testing",
+    "GitActions",
+    "Testomat"
+  ],
+  "categories": {
+    "Programming Languages": ["Java", "Python", "JavaScript", "TypeScript", "Groovy"],
+    "Frontend": ["React", "HTML", "CSS", "Material-UI", "Jest"],
+    "Backend": ["Spring Boot", "REST APIs", "Maven"],
+    "DevOps & Tools": ["Jenkins", "OpenShift", "CI/CD", "Git", "GitActions"],
+    "Cloud & Storage": ["AWS S3"],
+    "Testing": ["Unit Testing", "Jest", "Testomat"],
+    "Methodologies": ["Agile/Scrum", "Test-Driven Development"]
+  },
+  "proficiencyLevels": {
+    "Expert": ["Java", "TypeScript", "React"],
+    "Advanced": ["Python", "Spring Boot", "Git", "CI/CD"],
+    "Intermediate": ["Jenkins", "OpenShift", "AWS S3", "Maven"],
+    "Beginner": ["Groovy", "Testomat"]
+  }
+}

@@ -17,19 +17,16 @@ import {
   ListItemIcon,
   ListItemText,
   Alert,
-  Link
+  Link,
 } from '@mui/material';
 import {
   Psychology as AIIcon,
   Code as CodeIcon,
-  Build as BuildIcon,
   Description as DocsIcon,
   BugReport as TestIcon,
   ExpandMore as ExpandMoreIcon,
-  CheckCircle as CheckIcon,
   AutoAwesome as AutoIcon,
-  TrendingUp as TrendingIcon,
-  Engineering as EngineeringIcon
+  Engineering as EngineeringIcon,
 } from '@mui/icons-material';
 
 interface AIMetric {
@@ -55,29 +52,29 @@ const AIPage: React.FC = () => {
       totalLines: 5031,
       aiLines: 5031,
       percentage: 100,
-      description: 'Complete React TypeScript frontend with Material-UI dark theme, interactive timeline visualization, dashboard design, routing, and comprehensive testing'
+      description: 'Complete React TypeScript frontend with Material-UI dark theme, interactive timeline visualization, dashboard design, routing, and comprehensive testing',
     },
     {
       category: 'Backend (API)',
       totalLines: 644,
       aiLines: 644,
       percentage: 100,
-      description: 'Spring Boot REST API with controllers, services, integration tests, and comprehensive test coverage. Includes JaCoCo code coverage (96% instruction coverage) and Checkstyle quality enforcement.'
+      description: 'Spring Boot REST API with controllers, services, integration tests, and comprehensive test coverage. Includes JaCoCo code coverage (96% instruction coverage) and Checkstyle quality enforcement.',
     },
     {
       category: 'Build & Config',
       totalLines: 394,
       aiLines: 394,
       percentage: 100,
-      description: 'Maven configuration with JaCoCo and Checkstyle plugins, package.json, TypeScript config, custom checkstyle.xml rules, and optimized build pipeline with automated quality checks.'
+      description: 'Maven configuration with JaCoCo and Checkstyle plugins, package.json, TypeScript config, custom checkstyle.xml rules, and optimized build pipeline with automated quality checks.',
     },
     {
       category: 'Documentation',
       totalLines: 1419,
       aiLines: 1419,
       percentage: 100,
-      description: 'Comprehensive README files, AI contribution tracking, testing guides, and development documentation'
-    }
+      description: 'Comprehensive README files, AI contribution tracking, testing guides, and development documentation',
+    },
   ];
 
   const totalLines = aiMetrics.reduce((sum, metric) => sum + metric.totalLines, 0);
@@ -90,57 +87,57 @@ const AIPage: React.FC = () => {
       description: 'Advanced timeline component for overlapping work experiences with interactive selection, tooltips, and responsive design',
       technologies: ['React 18', 'TypeScript', 'Material-UI v5', 'Styled Components', 'Interactive UI'],
       linesOfCode: 827,
-      complexity: 'High'
+      complexity: 'High',
     },
     {
       title: 'Dark Theme Portfolio Design',
       description: 'Complete UI/UX design with Material-UI dark theme, dashboard architecture, responsive navigation, and accessibility features',
       technologies: ['React 18', 'TypeScript', 'Material-UI v5', 'Dark Theme', 'Emotion CSS-in-JS'],
       linesOfCode: 1847,
-      complexity: 'High'
+      complexity: 'High',
     },
     {
       title: 'Professional Content Integration',
       description: 'LinkedIn PDF parsing and integration of real internship experience and personal information',
       technologies: ['PDF Processing', 'Data Extraction', 'Content Management'],
       linesOfCode: 856,
-      complexity: 'Medium'
+      complexity: 'Medium',
     },
     {
       title: 'Comprehensive Testing Suite',
       description: '115+ tests across frontend and backend with unit, integration, component, and theme testing',
       technologies: ['Jest', 'React Testing Library', 'JUnit', 'Mockito', 'Theme Testing'],
       linesOfCode: 1253,
-      complexity: 'High'
+      complexity: 'High',
     },
     {
       title: 'Full-Stack Architecture',
       description: 'Maven multi-module project with Spring Boot backend and React frontend integration',
       technologies: ['Maven', 'Spring Boot 2.7', 'React Router', 'REST APIs'],
       linesOfCode: 644,
-      complexity: 'High'
+      complexity: 'High',
     },
     {
       title: 'Code Quality Infrastructure',
       description: 'JaCoCo code coverage analysis (96% instruction coverage), Checkstyle enforcement, and comprehensive quality metrics',
       technologies: ['JaCoCo 0.8.8', 'Checkstyle 3.2.0', 'Maven Surefire', 'Quality Assurance'],
       linesOfCode: 241,
-      complexity: 'High'
+      complexity: 'High',
     },
     {
       title: 'Build System Optimization',
       description: 'Frontend-maven-plugin integration, Node.js version fixes, and CI/CD ready configuration with automated quality checks',
       technologies: ['Maven', 'Node.js 18+', 'npm', 'Build Optimization'],
       linesOfCode: 103,
-      complexity: 'Medium'
+      complexity: 'Medium',
     },
     {
       title: 'Documentation Excellence',
       description: 'Detailed README files, AI contribution tracking, testing guides, and development workflows',
       technologies: ['Markdown', 'Technical Writing', 'AI Tracking', 'API Documentation'],
       linesOfCode: 1419,
-      complexity: 'Medium'
-    }
+      complexity: 'Medium',
+    },
   ];
 
   const aiCapabilities = [
@@ -154,7 +151,7 @@ const AIPage: React.FC = () => {
     'Code quality infrastructure implementation (96% test coverage, Checkstyle enforcement)',
     'Technical documentation and development workflow creation',
     'Build system optimization and configuration management',
-    'Automated quality assurance and best practices implementation'
+    'Automated quality assurance and best practices implementation',
   ];
 
   const technicalDecisions = [
@@ -166,7 +163,7 @@ const AIPage: React.FC = () => {
     { decision: 'JaCoCo Code Coverage', rationale: '96% instruction coverage with automated reporting and quality gates' },
     { decision: 'Checkstyle Quality Enforcement', rationale: 'Consistent code style and best practices across Java codebase' },
     { decision: 'Comprehensive Testing', rationale: 'Theme testing, integration testing, and type-safe test patterns' },
-    { decision: 'Frontend-Maven-Plugin', rationale: 'Unified build process for full-stack project' }
+    { decision: 'Frontend-Maven-Plugin', rationale: 'Unified build process for full-stack project' },
   ];
 
   const getComplexityColor = (complexity: string) => {

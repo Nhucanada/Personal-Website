@@ -1,4 +1,4 @@
-import { apiClient, greetingApi, healthApi } from './api';
+import { apiClient, greetingApi, healthApi, profileApi } from './api';
 
 // Mock fetch globally
 global.fetch = jest.fn();
@@ -213,6 +213,118 @@ describe('API Utils', () => {
 
       expect(mockFetch).toHaveBeenCalledWith('http://localhost:8080/api/status');
       expect(result).toEqual({ data: mockResponse });
+    });
+  });
+
+  describe('profileApi', () => {
+    describe('getExperiences', () => {
+      test('should get experiences list', async () => {
+        const mockExperiences = [
+          {
+            id: 1,
+            company: 'PointClickCare',
+            position: 'SWE Intern',
+            location: 'Mississauga, Ontario, Canada',
+            startDate: '2025-05',
+            endDate: '2025-08',
+            current: false,
+            description: ['Full Stack Development'],
+            technologies: ['Java', 'Spring Boot'],
+            type: 'internship',
+          },
+        ];
+
+        mockFetch.mockResolvedValueOnce({
+          ok: true,
+          json: async () => mockExperiences,
+        } as Response);
+
+        const result = await profileApi.getExperiences();
+
+        expect(mockFetch).toHaveBeenCalledWith('http://localhost:8080/api/profile/experiences');
+        expect(result).toEqual({ data: mockExperiences });
+      });
+    });
+
+    describe('getProjects', () => {
+      test('should get projects list', async () => {
+        const mockProjects = [
+          {
+            id: 1,
+            title: 'Personal Website',
+            description: 'React-based portfolio website',
+            technologies: ['React', 'TypeScript'],
+            featured: true,
+          },
+        ];
+
+        mockFetch.mockResolvedValueOnce({
+          ok: true,
+          json: async () => mockProjects,
+        } as Response);
+
+        const result = await profileApi.getProjects();
+
+        expect(mockFetch).toHaveBeenCalledWith('http://localhost:8080/api/profile/projects');
+        expect(result).toEqual({ data: mockProjects });
+      });
+    });
+
+    describe('getPersonalInfo', () => {
+      test('should get personal information', async () => {
+        const mockInfo = {
+          name: 'Nathan Hu',
+          title: 'Computer Science and AI Student',
+          location: 'Montreal, Quebec, Canada',
+          bio: 'CS student at McGill University',
+          description: 'Passionate about software engineering',
+          languages: [{ language: 'English', proficiency: 'Native' }],
+          contact: {
+            email: 'nathan.hu@mail.mcgill.ca',
+            mcgillEmail: 'nathan.hu@mail.mcgill.ca',
+            linkedin: 'https://linkedin.com/in/nhucanada',
+            github: 'https://github.com/Nhucanada',
+            location: 'Montreal, Quebec, Canada',
+          },
+        };
+
+        mockFetch.mockResolvedValueOnce({
+          ok: true,
+          json: async () => mockInfo,
+        } as Response);
+
+        const result = await profileApi.getPersonalInfo();
+
+        expect(mockFetch).toHaveBeenCalledWith('http://localhost:8080/api/profile/info');
+        expect(result).toEqual({ data: mockInfo });
+      });
+    });
+
+    describe('getSkills', () => {
+      test('should get skills information', async () => {
+        const mockSkills = {
+          technicalSkills: ['Java', 'Spring Boot', 'React'],
+          categories: {
+            'Programming Languages': ['Java', 'Python', 'JavaScript'],
+            'Frameworks': ['Spring Boot', 'React'],
+          },
+          proficiencyLevels: {
+            Expert: ['Java'],
+            Advanced: ['Spring Boot'],
+            Intermediate: ['React'],
+          },
+        };
+
+        mockFetch.mockResolvedValueOnce({
+          ok: true,
+          json: async () => mockSkills,
+        } as Response);
+
+        const result = await profileApi.getSkills();
+
+        expect(mockFetch).toHaveBeenCalledWith('http://localhost:8080/api/profile/skills');
+        expect(result).toEqual({ data: mockSkills });
+      });
     });
   });
 
