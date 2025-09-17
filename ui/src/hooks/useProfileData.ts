@@ -27,11 +27,13 @@ export const useExperiences = (): UseDataResult<Experience[]> => {
       const response = await profileApi.getExperiences();
       if (response.error) {
         setError(response.error);
+        setData(null);
       } else {
         setData(response.data || []);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unknown error');
+      setData(null);
     } finally {
       setLoading(false);
     }
@@ -56,11 +58,13 @@ export const useEducation = (): UseDataResult<Education[]> => {
       const response = await profileApi.getEducation();
       if (response.error) {
         setError(response.error);
+        setData(null);
       } else {
         setData(response.data || []);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unknown error');
+      setData(null);
     } finally {
       setLoading(false);
     }
@@ -85,11 +89,13 @@ export const useProjects = (): UseDataResult<Project[]> => {
       const response = await profileApi.getProjects();
       if (response.error) {
         setError(response.error);
+        setData(null);
       } else {
         setData(response.data || []);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unknown error');
+      setData(null);
     } finally {
       setLoading(false);
     }
@@ -114,11 +120,13 @@ export const usePersonalInfo = (): UseDataResult<PersonalInfo> => {
       const response = await profileApi.getPersonalInfo();
       if (response.error) {
         setError(response.error);
+        setData(null);
       } else {
         setData(response.data || null);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unknown error');
+      setData(null);
     } finally {
       setLoading(false);
     }
@@ -143,11 +151,13 @@ export const useSkills = (): UseDataResult<Skills> => {
       const response = await profileApi.getSkills();
       if (response.error) {
         setError(response.error);
+        setData(null);
       } else {
         setData(response.data || null);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unknown error');
+      setData(null);
     } finally {
       setLoading(false);
     }
