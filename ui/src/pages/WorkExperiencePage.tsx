@@ -10,14 +10,19 @@ import {
   Grid,
   Tooltip,
   useTheme,
-  styled
+  styled,
+  Collapse,
+  IconButton,
+  Divider
 } from '@mui/material';
 import {
   Work as WorkIcon,
   School as SchoolIcon,
   Code as CodeIcon,
   Business as BusinessIcon,
-  CalendarToday as CalendarIcon
+  CalendarToday as CalendarIcon,
+  Close as CloseIcon,
+  ExpandMore as ExpandMoreIcon
 } from '@mui/icons-material';
 
 interface Experience {
@@ -47,16 +52,16 @@ interface TimelineBarProps {
   duration: number;
   track: number;
   totalMonths: number;
-  onClick: (experience: Experience) => void;
+  onClick: (experience: Experience | null) => void;
 }
 
 const TimelineContainer = styled(Box)(({ theme }) => ({
   position: 'relative',
-  minHeight: '300px',
+  minHeight: '400px',
   backgroundColor: theme.palette.background.default,
   borderRadius: theme.shape.borderRadius,
-  padding: theme.spacing(2),
-  marginBottom: theme.spacing(3),
+  padding: theme.spacing(3),
+  marginBottom: theme.spacing(2),
   overflow: 'auto'
 }));
 
@@ -64,31 +69,47 @@ const TimelineBar = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'experienceType' && prop !== 'isActive'
 })<{ experienceType: string; isActive: boolean }>(({ theme, experienceType, isActive }) => ({
   position: 'absolute',
-  height: '40px',
-  borderRadius: '20px',
+  height: '50px',
+  borderRadius: '25px',
   cursor: 'pointer',
   transition: 'all 0.3s ease',
-  border: `2px solid ${isActive ? theme.palette.primary.main : 'transparent'}`,
-  boxShadow: isActive ? theme.shadows[4] : theme.shadows[1],
+  border: `3px solid ${isActive ? theme.palette.primary.main : 'transparent'}`,
+  boxShadow: isActive ? theme.shadows[6] : theme.shadows[2],
   '&:hover': {
-    boxShadow: theme.shadows[3],
-    transform: 'translateY(-2px)'
+    boxShadow: theme.shadows[4],
+    transform: 'translateY(-3px)',
+    border: `2px solid ${theme.palette.primary.light}`
   },
   backgroundColor:
     experienceType === 'work'
       ? theme.palette.primary.main
       : experienceType === 'internship'
       ? theme.palette.secondary.main
-      : theme.palette.success.main
+      : theme.palette.success.main,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: theme.palette.primary.contrastText,
+  fontWeight: 'bold',
+  fontSize: '0.85rem'
 }));
 
 const TimelineAxis = styled(Box)(({ theme }) => ({
   position: 'absolute',
-  bottom: '20px',
-  left: '20px',
-  right: '20px',
-  height: '2px',
-  backgroundColor: theme.palette.divider
+  bottom: '30px',
+  left: '30px',
+  right: '30px',
+  height: '3px',
+  backgroundColor: theme.palette.divider,
+  borderRadius: '2px'
+}));
+
+const DrilldownPanel = styled(Paper)(({ theme }) => ({
+  marginTop: theme.spacing(2),
+  padding: theme.spacing(3),
+  borderRadius: theme.shape.borderRadius,
+  border: `2px solid ${theme.palette.primary.main}`,
+  backgroundColor: theme.palette.background.paper
 }));
 
 const experiences: Experience[] = [
@@ -300,11 +321,11 @@ const WorkExperiencePage: React.FC = () => {
         <TimelineBar
           experienceType={experience.type}
           isActive={selectedExperience?.id === experience.id}
-          onClick={() => onClick(experience)}
+          onClick={() => onClick(selectedExperience?.id === experience.id ? null : experience)}
           sx={{
             left: `${startPos}%`,
             width: `${duration}%`,
-            top: `${track * 60 + 20}px`
+            top: `${track * 70 + 30}px`
           }}
         >
           <Box
@@ -312,9 +333,9 @@ const WorkExperiencePage: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               height: '100%',
-              px: 1,
+              px: 1.5,
               color: 'white',
-              fontSize: '0.75rem',
+              fontSize: '0.8rem',
               fontWeight: 'bold',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
@@ -322,7 +343,7 @@ const WorkExperiencePage: React.FC = () => {
             }}
           >
             {getIcon(experience.type)}
-            <Box sx={{ ml: 0.5, overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            <Box sx={{ ml: 1, overflow: 'hidden', textOverflow: 'ellipsis' }}>
               {experience.company}
             </Box>
           </Box>
@@ -377,8 +398,8 @@ const WorkExperiencePage: React.FC = () => {
               </Typography>
             </Box>
 
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-              Interactive timeline showing overlapping work experiences. Click on any bar to view details.
+            <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+              Interactive horizontal timeline showcasing my professional journey. Click on any experience bar to view detailed information in the drilldown panel below.
             </Typography>
 
             {/* Legend */}
@@ -399,7 +420,7 @@ const WorkExperiencePage: React.FC = () => {
 
             <TimelineContainer
               sx={{
-                height: `${Math.max(timelineData.positionedExperiences.reduce((max, exp) => Math.max(max, exp.track), 0) * 60 + 120, 200)}px`
+                height: `${Math.max(timelineData.positionedExperiences.reduce((max, exp) => Math.max(max, exp.track), 0) * 70 + 150, 400)}px`
               }}
             >
               {/* Timeline bars */}
@@ -437,26 +458,34 @@ const WorkExperiencePage: React.FC = () => {
             </TimelineContainer>
           </Box>
 
-          {/* Selected Experience Details */}
-          {selectedExperience && (
-            <Box sx={{ mb: 4 }}>
-              <Typography variant="h5" component="h2" gutterBottom>
-                Selected Experience
-              </Typography>
-              <Card elevation={3} sx={{ border: `2px solid ${theme.palette.primary.main}` }}>
-                <CardContent>
-                  <Box sx={{ mb: 2 }}>
-                    <Typography variant="h6" component="h3">
-                      {selectedExperience.position}
-                    </Typography>
-                    <Typography variant="subtitle1" color="primary" fontWeight="bold">
+          {/* Enhanced Drilldown Panel */}
+          <Collapse in={!!selectedExperience} timeout={300}>
+            {selectedExperience && (
+              <DrilldownPanel elevation={3}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3 }}>
+                  <Box sx={{ flex: 1 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                      <Box
+                        sx={{
+                          color: selectedExperience.type === 'work' ? 'primary.main' :
+                                 selectedExperience.type === 'internship' ? 'secondary.main' : 'success.main',
+                          mr: 1
+                        }}
+                      >
+                        {getIcon(selectedExperience.type)}
+                      </Box>
+                      <Typography variant="h5" component="h2" fontWeight="bold">
+                        {selectedExperience.position}
+                      </Typography>
+                    </Box>
+                    <Typography variant="h6" color="primary" fontWeight="bold" sx={{ mb: 1 }}>
                       {selectedExperience.company}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
                       {selectedExperience.location} • {formatDate(selectedExperience.startDate)} - {formatDate(selectedExperience.endDate)}
                       {selectedExperience.current && (
                         <Chip
-                          label="Current"
+                          label="Current Position"
                           size="small"
                           color="success"
                           sx={{ ml: 1 }}
@@ -464,82 +493,52 @@ const WorkExperiencePage: React.FC = () => {
                       )}
                     </Typography>
                   </Box>
-
-                  <Box sx={{ mb: 2 }}>
-                    {selectedExperience.description.map((item, idx) => (
-                      <Typography key={idx} variant="body2" component="li" sx={{ mb: 0.5 }}>
-                        {item}
-                      </Typography>
-                    ))}
-                  </Box>
-
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                    {selectedExperience.technologies.map((tech, idx) => (
-                      <Chip
-                        key={idx}
-                        label={tech}
-                        size="small"
-                        variant="outlined"
-                        color="primary"
-                      />
-                    ))}
-                  </Box>
-                </CardContent>
-              </Card>
-            </Box>
-          )}
-
-          {/* All Experiences List */}
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="h5" component="h2" gutterBottom>
-              All Experiences
-            </Typography>
-            <Grid container spacing={2}>
-              {experiences.map((experience) => (
-                <Grid item xs={12} md={6} key={experience.id}>
-                  <Card
-                    elevation={1}
-                    sx={{
-                      cursor: 'pointer',
-                      border: selectedExperience?.id === experience.id ? `2px solid ${theme.palette.primary.main}` : '1px solid transparent',
-                      '&:hover': { elevation: 2 }
-                    }}
-                    onClick={() => setSelectedExperience(experience)}
+                  <IconButton
+                    onClick={() => setSelectedExperience(null)}
+                    sx={{ color: 'text.secondary' }}
                   >
-                    <CardContent>
-                      <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                        <Box
-                          sx={{
-                            color: experience.type === 'work' ? 'primary.main' :
-                                   experience.type === 'internship' ? 'secondary.main' : 'success.main'
-                          }}
-                        >
-                          {getIcon(experience.type)}
-                        </Box>
-                        <Typography variant="h6" component="h3" sx={{ ml: 1 }}>
-                          {experience.position}
+                    <CloseIcon />
+                  </IconButton>
+                </Box>
+
+                <Divider sx={{ mb: 3 }} />
+
+                <Grid container spacing={3}>
+                  <Grid item xs={12} md={8}>
+                    <Typography variant="h6" gutterBottom>
+                      Key Responsibilities & Achievements
+                    </Typography>
+                    <Box component="ul" sx={{ pl: 2, mb: 0 }}>
+                      {selectedExperience.description.map((item, idx) => (
+                        <Typography key={idx} variant="body1" component="li" sx={{ mb: 1, lineHeight: 1.6 }}>
+                          {item}
                         </Typography>
-                      </Box>
-                      <Typography variant="subtitle2" color="primary" fontWeight="bold">
-                        {experience.company}
-                      </Typography>
-                      <Typography variant="caption" color="text.secondary">
-                        {formatDate(experience.startDate)} - {formatDate(experience.endDate)}
-                        {experience.current && (
-                          <Chip
-                            label="Current"
-                            size="small"
-                            color="success"
-                            sx={{ ml: 1 }}
-                          />
-                        )}
-                      </Typography>
-                    </CardContent>
-                  </Card>
+                      ))}
+                    </Box>
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Typography variant="h6" gutterBottom>
+                      Technologies & Skills
+                    </Typography>
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                      {selectedExperience.technologies.map((tech, idx) => (
+                        <Chip
+                          key={idx}
+                          label={tech}
+                          size="medium"
+                          variant="outlined"
+                          color="primary"
+                          sx={{ fontWeight: 'bold' }}
+                        />
+                      ))}
+                    </Box>
+                  </Grid>
                 </Grid>
-              ))}
-            </Grid>
-          </Box>
+              </DrilldownPanel>
+            )}
+          </Collapse>
+
+          {/* Statistics Summary */}
 
           <Box sx={{ mt: 4 }}>
             <Grid container spacing={3}>
