@@ -226,8 +226,8 @@ describe('App Component', () => {
   test('router provides navigation context', () => {
     renderWithRouter();
 
-    // Navigation buttons should be present (desktop view) - no Home button, only home icon
-    expect(screen.getByTestId('home-icon-button')).toBeInTheDocument();
+    // Navigation buttons should be present (desktop view) - clickable title serves as home navigation
+    expect(screen.getByTestId('header-title')).toBeInTheDocument();
     expect(screen.getByTestId('nav-about')).toBeInTheDocument();
     expect(screen.getByTestId('nav-projects')).toBeInTheDocument();
     expect(screen.getByTestId('nav-experience')).toBeInTheDocument();

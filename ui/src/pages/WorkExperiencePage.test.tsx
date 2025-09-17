@@ -50,6 +50,8 @@ describe('WorkExperiencePage - Timeline Visualization', () => {
     expect(screen.getAllByText('Intact').length).toBeGreaterThan(0);
     expect(screen.getAllByText('360insights').length).toBeGreaterThan(0);
     expect(screen.getAllByText('McGill Computer Science Undergraduate Society').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('McDonald\'s').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('McGill Phonathon').length).toBeGreaterThan(0);
   });
 
   test('displays timeline legend with experience types', () => {
@@ -67,6 +69,8 @@ describe('WorkExperiencePage - Timeline Visualization', () => {
     expect(screen.getAllByText('360insights').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Intact').length).toBeGreaterThan(0);
     expect(screen.getAllByText('McGill Computer Science Undergraduate Society').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('McDonald\'s').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('McGill Phonathon').length).toBeGreaterThan(0);
   });
 
   test('displays experience statistics correctly', () => {
@@ -202,7 +206,7 @@ describe('WorkExperiencePage - Timeline Visualization', () => {
 
     // Check for other companies in timeline
     const pageContent = document.body.textContent || '';
-    expect(pageContent).toMatch(/PointClickCare|Intact|360insights|McGill/);
+    expect(pageContent).toMatch(/PointClickCare|Intact|360insights|McGill|McDonald's|Phonathon/);
   });
 
   test('timeline shows all companies correctly', () => {
@@ -214,6 +218,8 @@ describe('WorkExperiencePage - Timeline Visualization', () => {
     expect(pageContent).toMatch(/360insights/);
     expect(pageContent).toMatch(/Intact/);
     expect(pageContent).toMatch(/McGill Computer Science Undergraduate Society/);
+    expect(pageContent).toMatch(/McDonald's/);
+    expect(pageContent).toMatch(/McGill Phonathon/);
   });
 
   test('timeline container has proper styling and structure', () => {

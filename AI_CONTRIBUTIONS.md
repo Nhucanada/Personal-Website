@@ -20,8 +20,8 @@ This document tracks the contributions made by Claude Code (Anthropic's AI assis
 ## Contribution Summary
 
 ### Overall Statistics
-- **Total Project Lines**: 7,913 lines
-- **AI Generated Lines**: 7,913 lines (100%)
+- **Total Project Lines**: 7,755+ lines
+- **AI Generated Lines**: 7,755+ lines (100%)
 - **Human Written Lines**: 0 lines (0%)
 - **AI Contribution Percentage**: 100%
 
@@ -206,21 +206,26 @@ ui/src/pages/ProjectsPage.tsx (204 lines) - AI_GENERATED
 ├── Card-based responsive layout
 └── GitHub profile integration
 
-ui/src/pages/WorkExperiencePage.tsx (583 lines) - AI_GENERATED
-├── Interactive timeline visualization for overlapping experiences
-├── Horizontal timeline with automatic track allocation
+ui/src/pages/WorkExperiencePage.tsx (658 lines) - AI_GENERATED
+├── Interactive timeline visualization with horizontal scrolling
+├── Enhanced timeline with consecutive experience gap fixes
+├── Smart organization grouping (McGill CSUS, 360insights on same tracks)
+├── Horizontal scroll functionality with TimelineScrollContainer
+├── Additional work experiences: McDonald's and McGill Phonathon
+├── Bottom-aligned timeline positioning with centered dates
 ├── Click-to-select functionality with detailed experience view
 ├── Real internship data from LinkedIn profile with concurrent positions
 ├── Experience categorization (internship, work, freelance)
 ├── Smart overlap management for simultaneous roles
 ├── Styled components with hover tooltips and animations
 ├── Statistics cards with key metrics
-└── Comprehensive testing suite (244 lines)
+└── Comprehensive testing suite (251 lines)
 
-ui/src/pages/WorkExperiencePage.test.tsx (244 lines) - AI_GENERATED
-├── 19 comprehensive test cases for timeline functionality
+ui/src/pages/WorkExperiencePage.test.tsx (251 lines) - AI_GENERATED
+├── 19+ comprehensive test cases for timeline functionality
+├── Updated tests for new companies (McDonald's, McGill Phonathon)
 ├── Interactive selection and navigation testing
-├── Timeline visualization validation
+├── Timeline visualization validation with horizontal scroll
 ├── Material-UI component integration testing
 └── Responsive design and accessibility testing
 
@@ -498,19 +503,22 @@ The collaboration demonstrates AI's capability to handle complete software devel
 **Last Updated**: 2025-09-16
 **AI Assistant**: Claude Code (Anthropic)
 **Project**: Nathan Hu Personal Website
-**Total AI Contribution**: 7,913 lines (100%)
+**Total AI Contribution**: 7,755+ lines (100%)
 
 ### Recent Updates (2025-09-16)
-- **Enhanced Timeline with Smart Grouping**: Improved horizontal timeline with organization grouping and consecutive experience handling
+- **Horizontal Scroll Timeline**: Implemented horizontal scroll functionality for extended timeline viewing
+- **Additional Work Experiences**: Added McDonald's (Crew Member) and McGill Phonathon (Student Caller) experiences
+- **Enhanced Timeline Positioning**: Bottom-aligned timeline bars with centered date labels
+- **Consecutive Experience Gap Fixes**: Completely eliminated gaps between back-to-back experiences (360insights → Intact → PointClickCare)
 - **Same Organization Grouping**: Experiences from the same company (McGill CSUS, 360insights) now display on the same timeline track
-- **Consecutive Experience Fix**: Eliminated gaps between back-to-back experiences (360insights → Intact → PointClickCare)
+- **Timeline Container Improvements**: Updated TimelineScrollContainer with minWidth 1200px for forced horizontal scrolling
+- **Enhanced Testing**: Updated all timeline tests to include new companies and horizontal scroll functionality
 - **Timeline Drilldown**: Implemented horizontal timeline with collapsible drilldown panels
 - **Navigation Cleanup**: Removed duplicate home icon, keeping only clickable title for home navigation
 - **Improved Timeline UX**: Larger timeline bars (50px), company names on bars, smooth Material-UI animations
 - **Timeline Interaction**: Click-to-expand/collapse experience details with close button and dividers
 - **Dark Theme Implementation**: Complete Material-UI dark theme with custom colors
-- **Enhanced Testing**: Updated timeline tests, added Theme.test.tsx for comprehensive dark theme testing
 - **Code Quality Tools**: Implemented JaCoCo (96% coverage) and Checkstyle enforcement
-- **Updated Line Counts**: Accurate count of 7,913 total lines with enhanced timeline functionality
+- **Updated Line Counts**: Updated to reflect new line counts (WorkExperiencePage: 658 lines, tests: 251 lines)
 - **Quality Metrics**: Achieved 96% instruction coverage, 95% branch coverage on backend
 - **Build Integration**: Automated quality checks and coverage reporting in Maven lifecycle

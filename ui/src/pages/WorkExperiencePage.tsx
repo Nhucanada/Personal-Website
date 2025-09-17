@@ -57,12 +57,21 @@ interface TimelineBarProps {
 
 const TimelineContainer = styled(Box)(({ theme }) => ({
   position: 'relative',
-  minHeight: '400px',
+  minHeight: '300px',
   backgroundColor: theme.palette.background.default,
   borderRadius: theme.shape.borderRadius,
   padding: theme.spacing(3),
   marginBottom: theme.spacing(2),
-  overflow: 'auto'
+  overflowX: 'auto',
+  overflowY: 'hidden',
+  minWidth: '800px', // Minimum width to ensure horizontal scroll
+  width: '100%'
+}));
+
+const TimelineScrollContainer = styled(Box)(() => ({
+  position: 'relative',
+  minWidth: '1200px', // Force horizontal scroll for longer timeline
+  height: '100%'
 }));
 
 const TimelineBar = styled(Box, {
@@ -96,9 +105,9 @@ const TimelineBar = styled(Box, {
 
 const TimelineAxis = styled(Box)(({ theme }) => ({
   position: 'absolute',
-  bottom: '30px',
-  left: '30px',
-  right: '30px',
+  bottom: '40px',
+  left: '0px',
+  right: '0px',
   height: '3px',
   backgroundColor: theme.palette.divider,
   borderRadius: '2px'
@@ -214,6 +223,40 @@ const experiences: Experience[] = [
       ],
       technologies: ['Communication', 'Event Planning', 'Student Leadership'],
       type: 'work'
+    },
+    {
+      id: 7,
+      company: 'McDonald\'s',
+      position: 'Crew Member',
+      location: 'Montreal, Quebec, Canada',
+      startDate: '2023-06',
+      endDate: '2024-04',
+      current: false,
+      description: [
+        'Provided excellent customer service in fast-paced environment',
+        'Managed cash register and payment processing',
+        'Maintained food safety and cleanliness standards',
+        'Collaborated with team members to ensure efficient operations'
+      ],
+      technologies: ['Customer Service', 'Point of Sale', 'Food Safety', 'Teamwork'],
+      type: 'work'
+    },
+    {
+      id: 8,
+      company: 'McGill Phonathon',
+      position: 'Student Caller',
+      location: 'Montreal, Quebec, Canada',
+      startDate: '2023-09',
+      endDate: '2024-05',
+      current: false,
+      description: [
+        'Conducted fundraising calls to McGill alumni and supporters',
+        'Built relationships with donors and shared university updates',
+        'Achieved fundraising targets through effective communication',
+        'Represented McGill University professionally to the community'
+      ],
+      technologies: ['Fundraising', 'Communication', 'Relationship Building', 'Public Speaking'],
+      type: 'work'
     }
   ];
 
@@ -287,11 +330,12 @@ const WorkExperiencePage: React.FC = () => {
         while (track < tracks.length) {
           const trackInfo = tracks[track];
 
-          // Check for true overlap (not just consecutive)
-          const hasGap = startPos >= trackInfo.end || endPos <= trackInfo.start;
-          const isConsecutive = Math.abs(trackInfo.end - startPos) < 0.5; // Small tolerance for consecutive
+          // Check for true overlap - consecutive experiences should not overlap
+          // Allow experiences that start exactly when another ends (or within 1 month tolerance)
+          const hasNoOverlap = startPos >= trackInfo.end || endPos <= trackInfo.start;
+          const isConsecutiveOrClose = Math.abs(trackInfo.end - startPos) <= 1.0; // 1% tolerance for consecutive/close experiences
 
-          if (hasGap || isConsecutive) {
+          if (hasNoOverlap || isConsecutiveOrClose) {
             break;
           }
           track++;
@@ -354,7 +398,7 @@ const WorkExperiencePage: React.FC = () => {
           sx={{
             left: `${startPos}%`,
             width: `${duration}%`,
-            top: `${track * 70 + 30}px`
+            bottom: `${track * 70 + 50}px` // Position relative to bottom to align with timeline axis
           }}
         >
           <Box
@@ -449,41 +493,44 @@ const WorkExperiencePage: React.FC = () => {
 
             <TimelineContainer
               sx={{
-                height: `${Math.max(timelineData.positionedExperiences.reduce((max, exp) => Math.max(max, exp.track), 0) * 70 + 150, 400)}px`
+                height: `${Math.max(timelineData.positionedExperiences.reduce((max, exp) => Math.max(max, exp.track), 0) * 70 + 150, 200)}px`
               }}
             >
-              {/* Timeline bars */}
-              {timelineData.positionedExperiences.map((exp) => (
-                <TimelineBarComponent
-                  key={exp.id}
-                  experience={exp}
-                  startPos={exp.startPos}
-                  duration={exp.duration}
-                  track={exp.track}
-                  totalMonths={timelineData.totalMonths}
-                  onClick={setSelectedExperience}
-                />
-              ))}
+              <TimelineScrollContainer>
+                {/* Timeline bars */}
+                {timelineData.positionedExperiences.map((exp) => (
+                  <TimelineBarComponent
+                    key={exp.id}
+                    experience={exp}
+                    startPos={exp.startPos}
+                    duration={exp.duration}
+                    track={exp.track}
+                    totalMonths={timelineData.totalMonths}
+                    onClick={setSelectedExperience}
+                  />
+                ))}
 
-              {/* Timeline axis */}
-              <TimelineAxis />
+                {/* Timeline axis */}
+                <TimelineAxis />
 
-              {/* Timeline labels */}
-              {generateTimelineLabels().map((label, index) => (
-                <Box
-                  key={index}
-                  sx={{
-                    position: 'absolute',
-                    bottom: '0px',
-                    left: `${label.position}%`,
-                    transform: 'translateX(-50%)',
-                    fontSize: '0.75rem',
-                    color: 'text.secondary'
-                  }}
-                >
-                  {label.label}
-                </Box>
-              ))}
+                {/* Timeline labels */}
+                {generateTimelineLabels().map((label, index) => (
+                  <Box
+                    key={index}
+                    sx={{
+                      position: 'absolute',
+                      bottom: '10px',
+                      left: `${label.position}%`,
+                      transform: 'translateX(-50%)',
+                      fontSize: '0.75rem',
+                      color: 'text.secondary',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    {label.label}
+                  </Box>
+                ))}
+              </TimelineScrollContainer>
             </TimelineContainer>
           </Box>
 
