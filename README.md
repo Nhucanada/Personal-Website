@@ -2,7 +2,7 @@
 
 NOTE: This website isn't currently deployed while I wait for somewhere to host my backend, so you'll have to run it locally 
 
-A full-stack personal portfolio website built with Maven, featuring a React TypeScript frontend with Material-UI and a Spring Boot backend API. This website showcases Nathan Hu's experience as a Computer Science & AI student at McGill University with internship experience at PointClickCare, Intact, and 360insights.
+A full-stack personal portfolio website built with Maven, featuring a React TypeScript frontend with Material-UI and a Spring Boot backend API. This website showcases my experience as a Computer Science & AI student at McGill University, alongside my internship experience at PointClickCare, Intact, and 360insights.
 
 ## Project Structure
 
@@ -122,7 +122,7 @@ The project is configured for easy deployment:
 - **Dashboard Homepage** - Widget-based dashboard showcasing all sections with AI development emphasis
 - **JSON-based Backend Architecture** - Profile data stored in JSON files with REST API endpoints
 - **Dark Theme Design** - Professional dark color scheme with Material-UI integration
-- **About Me** - Information about Nathan's background, skills, and interests (API-driven)
+- **About Me** - Information about 's background, skills, and interests (API-driven)
 - **Projects** - Showcase of personal and academic projects with GitHub links (API-driven)
 - **Smart Interactive Timeline** - Horizontal timeline with horizontal scrolling, intelligent organization grouping, consecutive experience handling, and drilldown panels (API-driven)
 - **Education** - Academic background at McGill University and certifications (API-driven)
