@@ -5,6 +5,7 @@ import com.example.api.model.Education;
 import com.example.api.model.Project;
 import com.example.api.model.PersonalInfo;
 import com.example.api.model.Skills;
+import com.example.api.model.PhotographyPhoto;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.io.ClassPathResource;
@@ -54,6 +55,16 @@ public class ProfileService {
     public List<Project> getProjects() throws IOException {
         InputStream inputStream = new ClassPathResource("data/projects.json").getInputStream();
         return objectMapper.readValue(inputStream, new TypeReference<List<Project>>() {});
+    }
+
+    /**
+     * Load all photography portfolio entries from JSON file.
+     * @return List of PhotographyPhoto objects
+     * @throws IOException if the file cannot be read
+     */
+    public List<PhotographyPhoto> getPhotographyPhotos() throws IOException {
+        InputStream inputStream = new ClassPathResource("data/photography-photos.json").getInputStream();
+        return objectMapper.readValue(inputStream, new TypeReference<List<PhotographyPhoto>>() {});
     }
 
     /**
@@ -128,5 +139,31 @@ public class ProfileService {
         return projects.stream()
                 .filter(Project::isFeatured)
                 .toList();
+    }
+
+    /**
+     * Get only featured photography photos.
+     * @return List of featured PhotographyPhoto objects
+     * @throws IOException if the file cannot be read
+     */
+    public List<PhotographyPhoto> getFeaturedPhotographyPhotos() throws IOException {
+        List<PhotographyPhoto> photos = getPhotographyPhotos();
+        return photos.stream()
+                .filter(PhotographyPhoto::isFeatured)
+                .toList();
+    }
+
+    /**
+     * Get photography photo by ID.
+     * @param id The photo ID
+     * @return PhotographyPhoto object or null if not found
+     * @throws IOException if the file cannot be read
+     */
+    public PhotographyPhoto getPhotographyPhotoById(int id) throws IOException {
+        List<PhotographyPhoto> photos = getPhotographyPhotos();
+        return photos.stream()
+                .filter(photo -> photo.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 }

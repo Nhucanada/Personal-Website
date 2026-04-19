@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+export const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
 export interface ApiResponse<T> {
   data?: T;
@@ -144,6 +144,17 @@ export interface Skills {
   proficiencyLevels: Record<string, string[]>;
 }
 
+export interface PhotographyPhoto {
+  id: number;
+  title: string;
+  location: string;
+  capturedOn: string;
+  description: string;
+  imagePath: string;
+  featured: boolean;
+  tags: string[];
+}
+
 // Profile API functions
 export const profileApi = {
   async getExperiences(): Promise<ApiResponse<Experience[]>> {
@@ -184,5 +195,13 @@ export const profileApi = {
 
   async getTechnicalSkillsList(): Promise<ApiResponse<string[]>> {
     return apiClient.get<string[]>('/api/profile/skills/list');
+  },
+
+  async getPhotos(): Promise<ApiResponse<PhotographyPhoto[]>> {
+    return apiClient.get<PhotographyPhoto[]>('/api/profile/photos');
+  },
+
+  async getFeaturedPhotos(): Promise<ApiResponse<PhotographyPhoto[]>> {
+    return apiClient.get<PhotographyPhoto[]>('/api/profile/photos/featured');
   },
 };

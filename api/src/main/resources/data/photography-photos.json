@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "Quiet Morning Platform",
+    "location": "Montreal",
+    "capturedOn": "Placeholder",
+    "description": "Soft grain and muted contrast inspired by early analog street captures.",
+    "imagePath": "/photos/placeholders/default-placeholder.jpg",
+    "featured": true,
+    "tags": ["street", "cinematic", "film-look"]
+  },
+  {
+    "id": 2,
+    "title": "Window Light Study",
+    "location": "Quebec",
+    "capturedOn": "Placeholder",
+    "description": "Editorial framing with center-weighted composition and negative space.",
+    "imagePath": "/photos/placeholders/default-placeholder.jpg",
+    "featured": true,
+    "tags": ["portrait", "editorial", "soft-light"]
+  },
+  {
+    "id": 3,
+    "title": "Evening Crosswalk",
+    "location": "Toronto",
+    "capturedOn": "Placeholder",
+    "description": "Dark olive shadows and warm highlights to emulate vintage film stocks.",
+    "imagePath": "/photos/placeholders/default-placeholder.jpg",
+    "featured": true,
+    "tags": ["urban", "moody", "analog"]
+  },
+  {
+    "id": 4,
+    "title": "Rain on Glass",
+    "location": "Oakville",
+    "capturedOn": "Placeholder",
+    "description": "A placeholder frame reserved for future photo essays and long-form series.",
+    "imagePath": "/photos/placeholders/default-placeholder.jpg",
+    "featured": false,
+    "tags": ["abstract", "texture", "atmospheric"]
+  }
+]

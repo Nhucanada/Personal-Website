@@ -278,6 +278,13 @@ The following environment variables can be used to configure the application:
 |----------|-------------|---------|
 | `SERVER_PORT` | Server port | `8080` |
 | `SPRING_PROFILES_ACTIVE` | Active Spring profile | `dev` |
+| `APP_CORS_ALLOWED_ORIGINS` | Comma-separated frontend origins allowed to call API | `http://localhost:3000` |
+
+Create an env file from the template before local development:
+
+```bash
+cp .env.example .env
+```
 
 ## Deployment
 

@@ -77,4 +77,5 @@ class IntegrationTestSuite {
         // The presence of this test ensures the application starts correctly
         assertTrue(true);
     }
+
 }

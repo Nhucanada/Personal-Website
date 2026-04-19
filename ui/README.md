@@ -392,6 +392,12 @@ REACT_APP_API_URL=https://your-api-domain.com
 REACT_APP_ENV=production
 ```
 
+For local development, copy the template:
+
+```bash
+cp .env.example .env.local
+```
+
 ## Maven Integration
 
 The UI module is integrated with Maven through the frontend-maven-plugin:

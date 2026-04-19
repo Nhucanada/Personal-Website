@@ -34,10 +34,14 @@ interface NavigationItem {
 
 interface HeaderProps {
   title?: string;
+  basePath?: string;
+  homePath?: string;
 }
 
 const Header: React.FC<HeaderProps> = ({
   title = 'Personal Website',
+  basePath = '',
+  homePath,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -45,13 +49,25 @@ const Header: React.FC<HeaderProps> = ({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
+  const buildPath = (path: string): string => {
+    if (!basePath) {
+      return path;
+    }
+
+    if (path === '/') {
+      return basePath;
+    }
+
+    return `${basePath}${path}`;
+  };
+
   const navigationItems: NavigationItem[] = [
-    { label: 'About', path: '/about', icon: <PersonIcon /> },
-    { label: 'Projects', path: '/projects', icon: <CodeIcon /> },
-    { label: 'Experience', path: '/experience', icon: <WorkIcon /> },
-    { label: 'Education', path: '/education', icon: <SchoolIcon /> },
-    { label: 'AI Development', path: '/ai', icon: <AIIcon /> },
-    { label: 'Contact', path: '/contact', icon: <ContactIcon /> },
+    { label: 'About', path: buildPath('/about'), icon: <PersonIcon /> },
+    { label: 'Projects', path: buildPath('/projects'), icon: <CodeIcon /> },
+    { label: 'Experience', path: buildPath('/experience'), icon: <WorkIcon /> },
+    { label: 'Education', path: buildPath('/education'), icon: <SchoolIcon /> },
+    { label: 'AI Development', path: buildPath('/ai'), icon: <AIIcon /> },
+    { label: 'Contact', path: buildPath('/contact'), icon: <ContactIcon /> },
   ];
 
   const handleNavigation = (path: string) => {
@@ -127,7 +143,7 @@ const Header: React.FC<HeaderProps> = ({
             variant="h6"
             component="div"
             sx={{ flexGrow: 1, cursor: 'pointer' }}
-            onClick={() => handleNavigation('/')}
+            onClick={() => handleNavigation(homePath || buildPath('/'))}
             data-testid="header-title"
           >
             {title}

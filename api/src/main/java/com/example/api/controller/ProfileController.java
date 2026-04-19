@@ -5,6 +5,7 @@ import com.example.api.model.Education;
 import com.example.api.model.Project;
 import com.example.api.model.PersonalInfo;
 import com.example.api.model.Skills;
+import com.example.api.model.PhotographyPhoto;
 import com.example.api.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,6 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/profile")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class ProfileController {
 
     @Autowired
@@ -174,6 +174,52 @@ public class ProfileController {
         try {
             Skills skills = profileService.getSkills();
             return ResponseEntity.ok(skills.getTechnicalSkills());
+        } catch (IOException e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    /**
+     * Get all photography portfolio photos.
+     * @return List of photography photos
+     */
+    @GetMapping("/photos")
+    public ResponseEntity<List<PhotographyPhoto>> getPhotos() {
+        try {
+            List<PhotographyPhoto> photos = profileService.getPhotographyPhotos();
+            return ResponseEntity.ok(photos);
+        } catch (IOException e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    /**
+     * Get featured photography portfolio photos.
+     * @return List of featured photography photos
+     */
+    @GetMapping("/photos/featured")
+    public ResponseEntity<List<PhotographyPhoto>> getFeaturedPhotos() {
+        try {
+            List<PhotographyPhoto> photos = profileService.getFeaturedPhotographyPhotos();
+            return ResponseEntity.ok(photos);
+        } catch (IOException e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    /**
+     * Get photography photo by ID.
+     * @param id Photography photo ID
+     * @return Photography photo object or 404 if not found
+     */
+    @GetMapping("/photos/{id}")
+    public ResponseEntity<PhotographyPhoto> getPhotoById(@PathVariable int id) {
+        try {
+            PhotographyPhoto photo = profileService.getPhotographyPhotoById(id);
+            if (photo != null) {
+                return ResponseEntity.ok(photo);
+            }
+            return ResponseEntity.notFound().build();
         } catch (IOException e) {
             return ResponseEntity.internalServerError().build();
         }

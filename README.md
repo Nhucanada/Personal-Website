@@ -69,6 +69,24 @@ npm install
 npm start
 ```
 
+### Environment Configuration (separate frontend/backend deployments)
+
+- Frontend API base URL is controlled by `REACT_APP_API_URL`
+- Backend allowed frontend origins are controlled by `APP_CORS_ALLOWED_ORIGINS`
+- Backend port is controlled by `SERVER_PORT`
+
+Create local env files from examples:
+
+```bash
+cp ui/.env.example ui/.env.local
+cp api/.env.example api/.env
+```
+
+Production example:
+
+- Frontend: `REACT_APP_API_URL=https://api.yourdomain.com`
+- Backend: `APP_CORS_ALLOWED_ORIGINS=https://www.yourdomain.com,https://yourdomain.com`
+
 ### Option 2: Run Services Separately
 
 See individual README files in each module:
