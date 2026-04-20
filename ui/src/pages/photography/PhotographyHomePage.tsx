@@ -1,23 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { API_BASE_URL, profileApi, PhotographyPhoto } from '../../utils/api';
+import { workPhotos } from '../../data/photography';
 import '../../styles/photography.css';
 
-const heroBackground = `url("${API_BASE_URL}/photos/placeholders/gold-0011.jpg")`;
+const heroBackground = 'url("/photos/gold-0011.jpg")';
 
 const PhotographyHomePage: React.FC = () => {
-  const [featuredPhotos, setFeaturedPhotos] = useState<PhotographyPhoto[]>([]);
-
-  useEffect(() => {
-    const fetchFeatured = async () => {
-      const response = await profileApi.getFeaturedPhotos();
-      if (response.data) {
-        setFeaturedPhotos(response.data.slice(0, 3));
-      }
-    };
-
-    void fetchFeatured();
-  }, []);
+  const featuredPhotos = workPhotos.slice(0, 3);
 
   return (
     <div className="photo-site">
@@ -33,7 +22,7 @@ const PhotographyHomePage: React.FC = () => {
             <article className="photo-card" key={photo.id}>
               <img
                 className="photo-thumb"
-                src={`${API_BASE_URL}${photo.imagePath}`}
+                src={photo.src}
                 alt={photo.title}
                 loading="lazy"
               />
