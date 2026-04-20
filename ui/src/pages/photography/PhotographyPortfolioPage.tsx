@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import { API_BASE_URL, profileApi, PhotographyPhoto } from '../../utils/api';
 import '../../styles/photography.css';
 
+const mixedPlaceholders = [
+  '/photos/placeholders/default-placeholder.jpg',
+  '/photos/placeholders/about-profile.jpg',
+  '/photos/placeholders/gold-0011.jpg',
+];
+
 const PhotographyPortfolioPage: React.FC = () => {
   const [photos, setPhotos] = useState<PhotographyPhoto[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -50,7 +56,7 @@ const PhotographyPortfolioPage: React.FC = () => {
             {Array.from({ length: 6 }).map((_, index) => (
               <img
                 className="photo-thumb-grid-only"
-                src={`${API_BASE_URL}/photos/placeholders/default-placeholder.jpg`}
+                src={`${API_BASE_URL}${mixedPlaceholders[index % mixedPlaceholders.length]}`}
                 alt="placeholder"
                 loading="lazy"
                 key={`placeholder-${index + 1}`}

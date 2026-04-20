@@ -5,6 +5,11 @@ import { API_BASE_URL, profileApi, PhotographyPhoto } from '../../utils/api';
 import '../../styles/photography.css';
 
 const allowedCategories = ['studio', 'portraits', 'sports'];
+const mixedPlaceholders = [
+  '/photos/placeholders/default-placeholder.jpg',
+  '/photos/placeholders/about-profile.jpg',
+  '/photos/placeholders/gold-0011.jpg',
+];
 
 const PhotographyWorkCategoryPage: React.FC = () => {
   const { category } = useParams();
@@ -33,7 +38,7 @@ const PhotographyWorkCategoryPage: React.FC = () => {
     ? photos
     : Array.from({ length: 6 }).map((_, index) => ({
       id: index + 1,
-      imagePath: '/photos/placeholders/default-placeholder.jpg',
+      imagePath: mixedPlaceholders[index % mixedPlaceholders.length],
       title: 'placeholder',
     }));
 

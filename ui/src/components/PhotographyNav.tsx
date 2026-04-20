@@ -17,7 +17,7 @@ const PhotographyNav: React.FC = () => {
   return (
     <nav className="photo-nav">
       <Link to="/" aria-label="Go back to site selector" className="photo-nav-brand">
-        Nathan Hu.
+        Nathan Hu
       </Link>
       <div className="photo-nav-links">
         <Link

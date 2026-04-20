@@ -9,21 +9,13 @@ import {
   ThemeProvider,
   createTheme,
   CssBaseline,
-  Box,
 } from '@mui/material';
-import Header from './components/Header';
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import ProjectsPage from './pages/ProjectsPage';
-import WorkExperiencePage from './pages/WorkExperiencePage';
-import EducationPage from './pages/EducationPage';
-import ContactPage from './pages/ContactPage';
-import AIPage from './pages/AIPage';
 import SiteSelectorPage from './pages/SiteSelectorPage';
 import PhotographyAboutPage from './pages/photography/PhotographyAboutPage';
 import PhotographyPortfolioPage from './pages/photography/PhotographyPortfolioPage';
 import PhotographyWorkCategoryPage from './pages/photography/PhotographyWorkCategoryPage';
 import PhotographyContactPage from './pages/photography/PhotographyContactPage';
+import SoftwarePlaceholderPage from './pages/software/SoftwarePlaceholderPage';
 import PhotographyNav from './components/PhotographyNav';
 
 const theme = createTheme({
@@ -116,20 +108,10 @@ const theme = createTheme({
 
 function App() {
   const softwareLayout = (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Header basePath="/software" title="Nathan Hu." homePath="/" />
-      <Box component="main" sx={{ flexGrow: 1 }}>
-        <Routes>
-          <Route index element={<HomePage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="projects" element={<ProjectsPage />} />
-          <Route path="experience" element={<WorkExperiencePage />} />
-          <Route path="education" element={<EducationPage />} />
-          <Route path="ai" element={<AIPage />} />
-          <Route path="contact" element={<ContactPage />} />
-        </Routes>
-      </Box>
-    </Box>
+    <Routes>
+      <Route index element={<SoftwarePlaceholderPage />} />
+      <Route path="*" element={<SoftwarePlaceholderPage />} />
+    </Routes>
   );
 
   const photographyLayout = (

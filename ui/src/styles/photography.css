@@ -242,10 +242,8 @@
 }
 
 .photo-grid-three {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2.2rem;
-  align-items: start;
+  column-count: 3;
+  column-gap: 2.2rem;
 }
 
 .photo-work-categories {
@@ -293,6 +291,23 @@
   text-underline-offset: 0.2em;
 }
 
+.software-placeholder-layout {
+  min-height: 100vh;
+  padding-top: 6rem;
+}
+
+.software-resume-frame {
+  margin-top: 1.6rem;
+  border: 1px solid var(--film-olive-soft);
+  background: #fff;
+}
+
+.software-resume-embed {
+  width: 100%;
+  min-height: 75vh;
+  border: none;
+}
+
 .photo-card {
   background: #ffffff;
   border: 1px solid rgba(217, 208, 191, 0.2);
@@ -303,7 +318,7 @@
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  filter: saturate(0.78) contrast(0.9);
+  filter: none;
 }
 
 .photo-thumb-grid-only {
@@ -311,7 +326,10 @@
   height: auto;
   object-fit: contain;
   display: block;
-  filter: grayscale(1) contrast(0.98);
+  filter: none;
+  margin: 0 0 2.2rem;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
 }
 
 .photo-meta {
@@ -460,7 +478,17 @@
     gap: 0.9rem;
   }
 
+  .photo-grid-three {
+    column-count: 2;
+  }
+
   .photo-about-image {
     max-height: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .photo-grid-three {
+    column-count: 1;
   }
 }

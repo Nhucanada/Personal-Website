@@ -15,7 +15,7 @@
     "location": "Quebec",
     "capturedOn": "Placeholder",
     "description": "Editorial framing with center-weighted composition and negative space.",
-    "imagePath": "/photos/placeholders/default-placeholder.jpg",
+    "imagePath": "/photos/placeholders/about-profile.jpg",
     "featured": true,
     "tags": ["portrait", "editorial", "soft-light"]
   },
@@ -25,7 +25,7 @@
     "location": "Toronto",
     "capturedOn": "Placeholder",
     "description": "Dark olive shadows and warm highlights to emulate vintage film stocks.",
-    "imagePath": "/photos/placeholders/default-placeholder.jpg",
+    "imagePath": "/photos/placeholders/gold-0011.jpg",
     "featured": true,
     "tags": ["urban", "moody", "analog"]
   },
@@ -35,7 +35,7 @@
     "location": "Oakville",
     "capturedOn": "Placeholder",
     "description": "A placeholder frame reserved for future photo essays and long-form series.",
-    "imagePath": "/photos/placeholders/default-placeholder.jpg",
+    "imagePath": "/photos/placeholders/about-profile.jpg",
     "featured": false,
     "tags": ["abstract", "texture", "atmospheric"]
   }

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { API_BASE_URL, profileApi, PhotographyPhoto } from '../../utils/api';
 import '../../styles/photography.css';
 
-const heroBackground = `url("${API_BASE_URL}/photos/placeholders/default-placeholder.jpg")`;
+const heroBackground = `url("${API_BASE_URL}/photos/placeholders/gold-0011.jpg")`;
 
 const PhotographyHomePage: React.FC = () => {
   const [featuredPhotos, setFeaturedPhotos] = useState<PhotographyPhoto[]>([]);
