@@ -24,7 +24,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.1rem 2rem;
+  padding: 0.75rem 1.25rem;
   background: linear-gradient(to bottom, rgba(246, 244, 239, 0.95), rgba(246, 244, 239, 0.74));
   font-family: var(--film-font-serif);
   letter-spacing: 0.2em;
@@ -105,9 +105,134 @@
 }
 
 .photo-body {
-  max-width: 1000px;
+  width: min(75vw, 1400px);
+  max-width: none;
   margin: 0 auto;
-  padding: 5rem 1.5rem;
+  padding: 4.25rem 0 2rem;
+}
+
+.photo-about-layout {
+  width: min(75vw, 1400px);
+  max-width: none;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.2rem;
+  align-items: center;
+  padding-top: 5.5rem;
+}
+
+.photo-about-image-column {
+  width: 100%;
+}
+
+.photo-about-image {
+  width: 100%;
+  height: auto;
+  max-height: 78vh;
+  object-fit: contain;
+  display: block;
+}
+
+.photo-about-text-column {
+  width: 100%;
+}
+
+.photo-about-description {
+  font-size: 1.12rem;
+  line-height: 1.65;
+  color: var(--film-cream-soft);
+  max-width: 32rem;
+}
+
+.photo-contact-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.2rem;
+  align-items: center;
+  padding-top: 5.5rem;
+}
+
+.photo-contact-form-column {
+  width: 100%;
+}
+
+.photo-contact-form {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.photo-input-group {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.photo-input-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--film-taupe);
+}
+
+.photo-name-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.photo-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--film-olive-soft);
+  background: transparent;
+  color: var(--film-cream);
+  font-family: var(--film-font-serif);
+  font-size: 1rem;
+  padding: 0.72rem 0;
+  border-radius: 0;
+}
+
+.photo-input:focus {
+  outline: none;
+  border-bottom-color: var(--film-cream);
+}
+
+.photo-textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.photo-submit {
+  justify-self: start;
+  border: 1px solid var(--film-cream);
+  background: transparent;
+  color: var(--film-cream);
+  font-family: var(--film-font-serif);
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+}
+
+.photo-submit:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.photo-contact-links-column {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.photo-social-link {
+  color: var(--film-cream);
+  text-decoration: none;
+}
+
+.photo-social-link:hover,
+.photo-social-link:focus {
+  opacity: 0.7;
 }
 
 .photo-grid {
@@ -119,7 +244,53 @@
 .photo-grid-three {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.4rem;
+  gap: 2.2rem;
+  align-items: start;
+}
+
+.photo-work-categories {
+  display: flex;
+  justify-content: center;
+  gap: 1.6rem;
+  margin: 0 0 1.4rem;
+}
+
+.photo-work-categories a {
+  position: relative;
+  color: var(--film-cream);
+  text-decoration: none;
+}
+
+.photo-work-categories a:not(:last-child)::after {
+  content: "|";
+  position: absolute;
+  right: -0.95rem;
+  color: var(--film-taupe);
+}
+
+.photo-work-categories a:hover,
+.photo-work-categories a:focus {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.photo-work-back-row {
+  margin: 0 0 1.4rem;
+}
+
+.photo-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--film-cream);
+  text-decoration: none;
+  text-transform: lowercase;
+}
+
+.photo-back-link:hover,
+.photo-back-link:focus {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 .photo-card {
@@ -137,8 +308,8 @@
 
 .photo-thumb-grid-only {
   width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   display: block;
   filter: grayscale(1) contrast(0.98);
 }
@@ -262,4 +433,34 @@
 .selector-link-text-only:active {
   text-decoration: underline;
   text-underline-offset: 0.2em;
+}
+
+@media (max-width: 900px) {
+  .photo-body,
+  .photo-about-layout {
+    width: 92vw;
+  }
+
+  .photo-about-layout {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+    min-height: auto;
+    padding-top: 5rem;
+  }
+
+  .photo-contact-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    min-height: auto;
+    padding-top: 5rem;
+  }
+
+  .photo-name-row {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
+  .photo-about-image {
+    max-height: none;
+  }
 }

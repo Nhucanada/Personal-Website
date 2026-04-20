@@ -33,12 +33,6 @@ const PhotographyNav: React.FC = () => {
           About
         </Link>
         <Link
-          className={isPathActive(location.pathname, '/photography/portfolio') ? 'active' : ''}
-          to="/photography/portfolio"
-        >
-          Portfolio
-        </Link>
-        <Link
           className={isPathActive(location.pathname, '/photography/contact') ? 'active' : ''}
           to="/photography/contact"
         >

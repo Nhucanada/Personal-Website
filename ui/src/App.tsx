@@ -22,6 +22,7 @@ import AIPage from './pages/AIPage';
 import SiteSelectorPage from './pages/SiteSelectorPage';
 import PhotographyAboutPage from './pages/photography/PhotographyAboutPage';
 import PhotographyPortfolioPage from './pages/photography/PhotographyPortfolioPage';
+import PhotographyWorkCategoryPage from './pages/photography/PhotographyWorkCategoryPage';
 import PhotographyContactPage from './pages/photography/PhotographyContactPage';
 import PhotographyNav from './components/PhotographyNav';
 
@@ -137,6 +138,7 @@ function App() {
       <Routes>
         <Route index element={<Navigate to="work" replace />} />
         <Route path="work" element={<PhotographyPortfolioPage />} />
+        <Route path="work/:category" element={<PhotographyWorkCategoryPage />} />
         <Route path="portfolio" element={<Navigate to="/photography/work" replace />} />
         <Route path="about" element={<PhotographyAboutPage />} />
         <Route path="contact" element={<PhotographyContactPage />} />

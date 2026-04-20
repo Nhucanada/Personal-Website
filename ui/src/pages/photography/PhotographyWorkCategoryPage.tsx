@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { API_BASE_URL, profileApi, PhotographyPhoto } from '../../utils/api';
 import '../../styles/photography.css';
 
-const PhotographyPortfolioPage: React.FC = () => {
+const allowedCategories = ['studio', 'portraits', 'sports'];
+
+const PhotographyWorkCategoryPage: React.FC = () => {
+  const { category } = useParams();
   const [photos, setPhotos] = useState<PhotographyPhoto[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -24,17 +28,27 @@ const PhotographyPortfolioPage: React.FC = () => {
     void fetchPhotos();
   }, []);
 
+  const isKnownCategory = category && allowedCategories.includes(category.toLowerCase());
+  const images = !error
+    ? photos
+    : Array.from({ length: 6 }).map((_, index) => ({
+      id: index + 1,
+      imagePath: '/photos/placeholders/default-placeholder.jpg',
+      title: 'placeholder',
+    }));
+
   return (
     <div className="photo-site">
       <section className="photo-body">
-        <div className="photo-work-categories">
-          <Link to="/photography/work/studio">Studio</Link>
-          <Link to="/photography/work/portraits">Portraits</Link>
-          <Link to="/photography/work/sports">Sports</Link>
+        <div className="photo-work-back-row">
+          <Link to="/photography/work" className="photo-back-link">
+            <ArrowBackIcon fontSize="small" />
+            back
+          </Link>
         </div>
-        {!error && (
+        {isKnownCategory && (
           <div className="photo-grid-three">
-            {photos.map((photo) => (
+            {images.map((photo) => (
               <img
                 className="photo-thumb-grid-only"
                 src={`${API_BASE_URL}${photo.imagePath}`}
@@ -45,22 +59,9 @@ const PhotographyPortfolioPage: React.FC = () => {
             ))}
           </div>
         )}
-        {error && (
-          <div className="photo-grid-three">
-            {Array.from({ length: 6 }).map((_, index) => (
-              <img
-                className="photo-thumb-grid-only"
-                src={`${API_BASE_URL}/photos/placeholders/default-placeholder.jpg`}
-                alt="placeholder"
-                loading="lazy"
-                key={`placeholder-${index + 1}`}
-              />
-            ))}
-          </div>
-        )}
       </section>
     </div>
   );
 };
 
-export default PhotographyPortfolioPage;
+export default PhotographyWorkCategoryPage;
