@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import AboutPage from './AboutPage';
@@ -159,11 +159,8 @@ describe('AboutPage', () => {
     });
 
     renderWithTheme(<AboutPage />);
-
-    await waitFor(() => {
-      expect(screen.getByText(/My Story/i)).toBeInTheDocument();
-      expect(screen.getByText(/Nathan Hu, currently pursuing Computer Science and AI/i)).toBeInTheDocument();
-    });
+    expect(await screen.findByText(/My Story/i)).toBeInTheDocument();
+    expect(screen.getByText(/Nathan Hu, currently pursuing Computer Science and AI/i)).toBeInTheDocument();
   });
 
   test('renders technical skills section when data loads successfully', async () => {
@@ -181,15 +178,11 @@ describe('AboutPage', () => {
     });
 
     renderWithTheme(<AboutPage />);
-
-    await waitFor(() => {
-      expect(screen.getByText(/Technical Skills/i)).toBeInTheDocument();
-      // Check for some expected skills
-      expect(screen.getByText('Java')).toBeInTheDocument();
-      expect(screen.getByText('React')).toBeInTheDocument();
-      expect(screen.getByText('TypeScript')).toBeInTheDocument();
-      expect(screen.getByText('Jenkins')).toBeInTheDocument();
-    });
+    expect(await screen.findByText(/Technical Skills/i)).toBeInTheDocument();
+    expect(screen.getByText('Java')).toBeInTheDocument();
+    expect(screen.getByText('React')).toBeInTheDocument();
+    expect(screen.getByText('TypeScript')).toBeInTheDocument();
+    expect(screen.getByText('Jenkins')).toBeInTheDocument();
   });
 
   test('displays areas of interest when data loads successfully', async () => {
@@ -207,11 +200,8 @@ describe('AboutPage', () => {
     });
 
     renderWithTheme(<AboutPage />);
-
-    await waitFor(() => {
-      expect(screen.getByText('Backend Development')).toBeInTheDocument();
-      expect(screen.getByText('Machine Learning')).toBeInTheDocument();
-    });
+    expect(await screen.findByText('Backend Development')).toBeInTheDocument();
+    expect(screen.getByText('Machine Learning')).toBeInTheDocument();
   });
 
   test('shows philosophy section when data loads successfully', async () => {
@@ -229,11 +219,8 @@ describe('AboutPage', () => {
     });
 
     renderWithTheme(<AboutPage />);
-
-    await waitFor(() => {
-      expect(screen.getByText(/Philosophy/i)).toBeInTheDocument();
-      expect(screen.getByText(/always eager to learn new things and build impactful projects/i)).toBeInTheDocument();
-    });
+    expect(await screen.findByText(/Philosophy/i)).toBeInTheDocument();
+    expect(screen.getByText(/always eager to learn new things and build impactful projects/i)).toBeInTheDocument();
   });
 
   test('has proper grid layout when data loads successfully', async () => {
@@ -251,11 +238,9 @@ describe('AboutPage', () => {
     });
 
     renderWithTheme(<AboutPage />);
-
-    await waitFor(() => {
-      const gridElements = document.querySelectorAll('.MuiGrid-root');
-      expect(gridElements.length).toBeGreaterThan(0);
-    });
+    await screen.findByText(/My Story/i);
+    const gridElements = document.querySelectorAll('.MuiGrid-root');
+    expect(gridElements.length).toBeGreaterThan(0);
   });
 
   test('skills are rendered as chips when data loads successfully', async () => {
@@ -273,11 +258,9 @@ describe('AboutPage', () => {
     });
 
     renderWithTheme(<AboutPage />);
-
-    await waitFor(() => {
-      const chips = document.querySelectorAll('.MuiChip-root');
-      expect(chips.length).toBeGreaterThan(0);
-    });
+    await screen.findByText(/Technical Skills/i);
+    const chips = document.querySelectorAll('.MuiChip-root');
+    expect(chips.length).toBeGreaterThan(0);
   });
 
   test('handles null data properly', async () => {
