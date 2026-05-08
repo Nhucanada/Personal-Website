@@ -259,6 +259,36 @@
   text-decoration: none;
 }
 
+.photo-work-categories span {
+  color: var(--film-cream);
+}
+
+.photo-project-link {
+  display: flex;
+  flex-direction: column;
+  color: var(--film-cream);
+  text-decoration: none;
+}
+
+.photo-project-card {
+  margin: 0 0 2.2rem;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+}
+
+.photo-project-cover {
+  margin-bottom: 0;
+}
+
+.photo-project-label {
+  margin-top: 0.55rem;
+  margin-bottom: 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+}
+
 .photo-work-categories a:not(:last-child)::after {
   content: "|";
   position: absolute;

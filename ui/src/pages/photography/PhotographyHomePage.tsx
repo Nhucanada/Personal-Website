@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { workPhotos } from '../../data/photography';
+import { portfolioPhotos } from '../../data/photography';
 import '../../styles/photography.css';
 
 const heroBackground = 'url("/photos/gold-0011.jpg")';
 
 const PhotographyHomePage: React.FC = () => {
-  const featuredPhotos = workPhotos.slice(0, 3);
+  const featuredPhotos = portfolioPhotos.slice(0, 3);
 
   return (
     <div className="photo-site">
@@ -19,7 +19,7 @@ const PhotographyHomePage: React.FC = () => {
       <section className="photo-body">
         <div className="photo-grid">
           {featuredPhotos.map((photo) => (
-            <article className="photo-card" key={photo.id}>
+            <article className="photo-card" key={photo.src}>
               <img
                 className="photo-thumb"
                 src={photo.src}

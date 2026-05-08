@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { workPhotos } from '../../data/photography';
+import { portfolioPhotos, workCategories } from '../../data/photography';
 import '../../styles/photography.css';
 
 const PhotographyPortfolioPage: React.FC = () => {
@@ -8,18 +8,21 @@ const PhotographyPortfolioPage: React.FC = () => {
     <div className="photo-site">
       <section className="photo-body">
         <div className="photo-work-categories">
-          <Link to="/photo/work/studio">Studio</Link>
-          <Link to="/photo/work/portraits">Portraits</Link>
-          <Link to="/photo/work/sports">Sports</Link>
+          <Link to="/photo/work/projects">Projects</Link>
+          {workCategories.map((category) => (
+            <Link key={category.slug} to={`/photo/work/${category.slug}`}>
+              {category.label}
+            </Link>
+          ))}
         </div>
         <div className="photo-grid-three">
-          {workPhotos.map((photo) => (
+          {portfolioPhotos.map((photo) => (
             <img
               className="photo-thumb-grid-only"
               src={photo.src}
               alt={photo.title}
               loading="lazy"
-              key={photo.id}
+              key={photo.src}
             />
           ))}
         </div>

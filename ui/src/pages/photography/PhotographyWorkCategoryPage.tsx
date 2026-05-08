@@ -1,16 +1,14 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { WorkCategory, workCategoryOrder, workPhotos } from '../../data/photography';
+import { getWorkCategoryBySlug } from '../../data/photography';
 import '../../styles/photography.css';
 
 const PhotographyWorkCategoryPage: React.FC = () => {
   const { category } = useParams();
   const normalizedCategory = (category || '').toLowerCase();
-  const isKnownCategory = workCategoryOrder.includes(normalizedCategory as WorkCategory);
-  const categoryPhotos = isKnownCategory
-    ? workPhotos.filter((photo) => photo.category === normalizedCategory)
-    : [];
+  const matchedCategory = getWorkCategoryBySlug(normalizedCategory);
+  const categoryPhotos = matchedCategory?.photos || [];
 
   return (
     <div className="photo-site">
@@ -21,7 +19,7 @@ const PhotographyWorkCategoryPage: React.FC = () => {
             back
           </Link>
         </div>
-        {isKnownCategory && (
+        {matchedCategory && (
           <div className="photo-grid-three">
             {categoryPhotos.map((photo) => (
               <img
@@ -29,7 +27,7 @@ const PhotographyWorkCategoryPage: React.FC = () => {
                 src={photo.src}
                 alt={photo.title}
                 loading="lazy"
-                key={photo.id}
+                key={photo.src}
               />
             ))}
           </div>
