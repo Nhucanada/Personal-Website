@@ -22,13 +22,13 @@ const UnderConstructionPage: React.FC = () => (
         }}
       >
         <Typography variant="h3" component="h1" gutterBottom>
-          Site Under Construction
+          Oopsies! I'm not done yet!
         </Typography>
         <Typography variant="h6" color="text.secondary" sx={{ mb: 2 }}>
-          We&apos;re actively updating this website.
+          I'm either not finished something on this site, or in the process of editing/fixing something
         </Typography>
         <Typography variant="body1" color="text.secondary">
-          Please check back soon for the latest version.
+          Please check back soon, I don't wanna lose ya!
         </Typography>
       </Paper>
     </Box>
