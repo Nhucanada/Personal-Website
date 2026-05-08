@@ -11,6 +11,7 @@ import {
   CssBaseline,
 } from '@mui/material';
 import SiteSelectorPage from './pages/SiteSelectorPage';
+import UnderConstructionPage from './pages/UnderConstructionPage';
 import PhotographyAboutPage from './pages/photography/PhotographyAboutPage';
 import PhotographyPortfolioPage from './pages/photography/PhotographyPortfolioPage';
 import PhotographyWorkCategoryPage from './pages/photography/PhotographyWorkCategoryPage';
@@ -107,6 +108,10 @@ const theme = createTheme({
 });
 
 function App() {
+  const showUnderConstruction =
+    process.env.NODE_ENV === 'production'
+    && process.env.REACT_APP_SITE_UNDER_CONSTRUCTION === 'true';
+
   const softwareLayout = (
     <Routes>
       <Route index element={<SoftwarePlaceholderPage />} />
@@ -133,7 +138,7 @@ function App() {
       <CssBaseline />
       <Router>
         <Routes>
-          <Route path="/" element={<SiteSelectorPage />} />
+          <Route path="/" element={showUnderConstruction ? <UnderConstructionPage /> : <SiteSelectorPage />} />
           <Route path="/software/*" element={softwareLayout} />
           <Route path="/photography/*" element={photographyLayout} />
 
