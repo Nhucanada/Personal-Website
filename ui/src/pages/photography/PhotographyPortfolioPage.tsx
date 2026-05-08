@@ -8,9 +8,9 @@ const PhotographyPortfolioPage: React.FC = () => {
     <div className="photo-site">
       <section className="photo-body">
         <div className="photo-work-categories">
-          <Link to="/photography/work/studio">Studio</Link>
-          <Link to="/photography/work/portraits">Portraits</Link>
-          <Link to="/photography/work/sports">Sports</Link>
+          <Link to="/photo/work/studio">Studio</Link>
+          <Link to="/photo/work/portraits">Portraits</Link>
+          <Link to="/photo/work/sports">Sports</Link>
         </div>
         <div className="photo-grid-three">
           {workPhotos.map((photo) => (

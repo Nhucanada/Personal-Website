@@ -3,9 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 import '../styles/photography.css';
 
 const isPathActive = (pathname: string, candidate: string): boolean => {
-  if (candidate === '/photography/work') {
-    return pathname.startsWith('/photography/work')
-      || pathname.startsWith('/photography/portfolio');
+  if (candidate === '/photo/work') {
+    return pathname.startsWith('/photo/work')
+      || pathname.startsWith('/photo/portfolio');
   }
 
   return pathname.startsWith(candidate);
@@ -21,20 +21,20 @@ const PhotographyNav: React.FC = () => {
       </Link>
       <div className="photo-nav-links">
         <Link
-          className={isPathActive(location.pathname, '/photography/work') ? 'active' : ''}
-          to="/photography/work"
+          className={isPathActive(location.pathname, '/photo/work') ? 'active' : ''}
+          to="/photo/work"
         >
           Work
         </Link>
         <Link
-          className={isPathActive(location.pathname, '/photography/about') ? 'active' : ''}
-          to="/photography/about"
+          className={isPathActive(location.pathname, '/photo/about') ? 'active' : ''}
+          to="/photo/about"
         >
           About
         </Link>
         <Link
-          className={isPathActive(location.pathname, '/photography/contact') ? 'active' : ''}
-          to="/photography/contact"
+          className={isPathActive(location.pathname, '/photo/contact') ? 'active' : ''}
+          to="/photo/contact"
         >
           Contact
         </Link>

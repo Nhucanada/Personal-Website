@@ -16,7 +16,7 @@ const PhotographyWorkCategoryPage: React.FC = () => {
     <div className="photo-site">
       <section className="photo-body">
         <div className="photo-work-back-row">
-          <Link to="/photography/work" className="photo-back-link">
+          <Link to="/photo/work" className="photo-back-link">
             <ArrowBackIcon fontSize="small" />
             back
           </Link>

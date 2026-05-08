@@ -12,8 +12,8 @@ const SiteSelectorPage: React.FC = () => {
           Nathan Hu
         </Link>
         <div className="photo-nav-links">
-          <Link to="/software">Software</Link>
-          <Link to="/photography">Photography</Link>
+          <Link to="/dev">Software</Link>
+          <Link to="/photo">Photography</Link>
         </div>
       </nav>
       <section className="selector-image-wrap">

@@ -126,7 +126,7 @@ function App() {
         <Route index element={<Navigate to="work" replace />} />
         <Route path="work" element={<PhotographyPortfolioPage />} />
         <Route path="work/:category" element={<PhotographyWorkCategoryPage />} />
-        <Route path="portfolio" element={<Navigate to="/photography/work" replace />} />
+        <Route path="portfolio" element={<Navigate to="/photo/work" replace />} />
         <Route path="about" element={<PhotographyAboutPage />} />
         <Route path="contact" element={<PhotographyContactPage />} />
       </Routes>
@@ -139,16 +139,16 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={showUnderConstruction ? <UnderConstructionPage /> : <SiteSelectorPage />} />
-          <Route path="/software/*" element={softwareLayout} />
-          <Route path="/photography/*" element={photographyLayout} />
+          <Route path="/dev/*" element={softwareLayout} />
+          <Route path="/photo/*" element={photographyLayout} />
 
           {/* Backward-compatible redirects for old software URLs */}
-          <Route path="/about" element={<Navigate to="/software/about" replace />} />
-          <Route path="/projects" element={<Navigate to="/software/projects" replace />} />
-          <Route path="/experience" element={<Navigate to="/software/experience" replace />} />
-          <Route path="/education" element={<Navigate to="/software/education" replace />} />
-          <Route path="/ai" element={<Navigate to="/software/ai" replace />} />
-          <Route path="/contact" element={<Navigate to="/software/contact" replace />} />
+          <Route path="/about" element={<Navigate to="/dev/about" replace />} />
+          <Route path="/projects" element={<Navigate to="/dev/projects" replace />} />
+          <Route path="/experience" element={<Navigate to="/dev/experience" replace />} />
+          <Route path="/education" element={<Navigate to="/dev/education" replace />} />
+          <Route path="/ai" element={<Navigate to="/dev/ai" replace />} />
+          <Route path="/contact" element={<Navigate to="/dev/contact" replace />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

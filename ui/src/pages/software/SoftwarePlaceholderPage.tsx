@@ -10,7 +10,7 @@ const SoftwarePlaceholderPage: React.FC = () => {
           Nathan Hu
         </Link>
         <div className="photo-nav-links">
-          <Link className="active" to="/software">Software</Link>
+          <Link className="active" to="/dev">Software</Link>
         </div>
       </nav>
 
