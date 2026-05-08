@@ -32,7 +32,7 @@ const PhotographyHomePage: React.FC = () => {
             </article>
           ))}
         </div>
-        <Link className="selector-link" to="/photo/portfolio">Portfolio</Link>
+        <Link className="selector-link" to="/photo">Portfolio</Link>
       </section>
     </div>
   );

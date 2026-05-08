@@ -123,10 +123,10 @@ function App() {
     <>
       <PhotographyNav />
       <Routes>
-        <Route index element={<Navigate to="work" replace />} />
-        <Route path="work" element={<PhotographyPortfolioPage />} />
+        <Route index element={<PhotographyPortfolioPage />} />
+        <Route path="work" element={<Navigate to="/photo" replace />} />
         <Route path="work/:category" element={<PhotographyWorkCategoryPage />} />
-        <Route path="portfolio" element={<Navigate to="/photo/work" replace />} />
+        <Route path="portfolio" element={<Navigate to="/photo" replace />} />
         <Route path="about" element={<PhotographyAboutPage />} />
         <Route path="contact" element={<PhotographyContactPage />} />
       </Routes>
