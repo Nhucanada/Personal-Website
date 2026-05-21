@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { photoProjects } from '../../data/photography';
+import { getOptimizedPhotoSrc } from '../../utils/photoOptimization';
 import '../../styles/photography.css';
 
 const PhotographyProjectsPage: React.FC = () => {
@@ -13,7 +14,7 @@ const PhotographyProjectsPage: React.FC = () => {
               <Link className="photo-project-link" to={`/photo/work/projects/${project.slug}`}>
                 <img
                   className="photo-project-cover"
-                  src={project.coverSrc}
+                  src={getOptimizedPhotoSrc(project.coverSrc)}
                   alt={`${project.label} cover`}
                   loading="lazy"
                 />

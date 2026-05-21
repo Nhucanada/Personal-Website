@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { getWorkCategoryBySlug } from '../../data/photography';
+import { getOptimizedPhotoSrc } from '../../utils/photoOptimization';
 import '../../styles/photography.css';
 
 const PhotographyWorkCategoryPage: React.FC = () => {
@@ -38,7 +39,7 @@ const PhotographyWorkCategoryPage: React.FC = () => {
               >
                 <img
                   className="photo-thumb-grid-only"
-                  src={photo.src}
+                  src={getOptimizedPhotoSrc(photo.src)}
                   alt={photo.title}
                   loading="lazy"
                 />

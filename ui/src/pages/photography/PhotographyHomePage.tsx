@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { portfolioPhotos } from '../../data/photography';
+import { getOptimizedPhotoSrc } from '../../utils/photoOptimization';
 import '../../styles/photography.css';
 
-const heroBackground = 'url("/photos/gold-0011.jpg")';
+const heroBackground = `url("${getOptimizedPhotoSrc('/photos/gold-0011.jpg')}")`;
 
 const PhotographyHomePage: React.FC = () => {
   const featuredPhotos = portfolioPhotos.slice(0, 3);
@@ -22,7 +23,7 @@ const PhotographyHomePage: React.FC = () => {
             <article className="photo-card" key={photo.src}>
               <img
                 className="photo-thumb"
-                src={photo.src}
+                src={getOptimizedPhotoSrc(photo.src)}
                 alt={photo.title}
                 loading="lazy"
               />

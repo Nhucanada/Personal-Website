@@ -1,4 +1,5 @@
 import React from 'react';
+import { getOptimizedPhotoSrc } from '../../utils/photoOptimization';
 import '../../styles/photography.css';
 
 const PhotographyAboutPage: React.FC = () => {
@@ -8,7 +9,7 @@ const PhotographyAboutPage: React.FC = () => {
         <div className="photo-about-image-column">
           <img
             className="photo-about-image"
-            src="/photos/about-profile.jpg"
+            src={getOptimizedPhotoSrc('/photos/about-profile.jpg')}
             alt="Nathan Hu portrait"
           />
         </div>

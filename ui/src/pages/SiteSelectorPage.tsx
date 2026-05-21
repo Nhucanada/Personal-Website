@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getOptimizedPhotoSrc } from '../utils/photoOptimization';
 import '../styles/photography.css';
 
 const SiteSelectorPage: React.FC = () => {
-  const siteSelectorBackground = '/photos/selector-background.jpg';
+  const siteSelectorBackground = getOptimizedPhotoSrc('/photos/selector-background.jpg');
 
   return (
     <div className="photo-site site-selector-page">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { portfolioPhotos, workCategories } from '../../data/photography';
+import { getOptimizedPhotoSrc } from '../../utils/photoOptimization';
 import '../../styles/photography.css';
 
 const PhotographyPortfolioPage: React.FC = () => {
@@ -34,7 +35,7 @@ const PhotographyPortfolioPage: React.FC = () => {
             >
               <img
                 className="photo-thumb-grid-only"
-                src={photo.src}
+                src={getOptimizedPhotoSrc(photo.src)}
                 alt={photo.title}
                 loading="lazy"
               />

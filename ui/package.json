@@ -26,7 +26,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
     "lint:fix": "eslint src --ext .ts,.tsx,.js,.jsx --fix",
-    "lint:check": "eslint src --ext .ts,.tsx,.js,.jsx --max-warnings 0"
+    "lint:check": "eslint src --ext .ts,.tsx,.js,.jsx --max-warnings 0",
+    "photos:optimize": "node scripts/optimize-photos.js"
   },
   "browserslist": {
     "production": [
@@ -46,7 +47,8 @@
     "@testing-library/user-event": "^13.5.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-react-hooks": "^5.2.0"
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "sharp": "^0.34.5"
   },
   "engines": {
     "node": ">=18.14.0",
