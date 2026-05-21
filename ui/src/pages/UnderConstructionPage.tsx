@@ -1,39 +1,30 @@
 import React from 'react';
-import { Box, Container, Paper, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { getOptimizedPhotoSrc } from '../utils/photoOptimization';
+import '../styles/photography.css';
 
-const UnderConstructionPage: React.FC = () => (
-  <Container maxWidth="md">
-    <Box
-      sx={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        py: 6,
-      }}
-    >
-      <Paper
-        elevation={3}
-        sx={{
-          width: '100%',
-          p: { xs: 3, sm: 5 },
-          textAlign: 'center',
-          border: '1px solid #d8d4cc',
-        }}
-      >
-        <Typography variant="h3" component="h1" gutterBottom>
-          Oopsies! I&apos;m not done yet!
-        </Typography>
-        <Typography variant="h6" color="text.secondary" sx={{ mb: 2 }}>
-          I&apos;m either not finished something on this site, or in the process of
-          editing/fixing something.
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          Please check back soon, I don&apos;t wanna lose ya!
-        </Typography>
-      </Paper>
-    </Box>
-  </Container>
-);
+const UnderConstructionPage: React.FC = () => {
+  const siteSelectorBackground = getOptimizedPhotoSrc('/photos/selector-background.jpg');
+
+  return (
+    <div className="photo-site site-selector-page">
+      <nav className="photo-nav selector-nav">
+        <Link to="/" aria-label="Home" className="photo-nav-brand">
+          Nathan Hu
+        </Link>
+        <div className="photo-nav-links">
+          <span className="selector-link-text-only">Under Construction</span>
+        </div>
+      </nav>
+      <section className="selector-image-wrap">
+        <img
+          className="selector-image"
+          src={siteSelectorBackground}
+          alt="Site under construction background"
+        />
+      </section>
+    </div>
+  );
+};
 
 export default UnderConstructionPage;
