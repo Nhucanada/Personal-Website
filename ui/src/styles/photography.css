@@ -266,6 +266,7 @@
 .photo-project-link {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   color: var(--film-cream);
   text-decoration: none;
 }
@@ -277,7 +278,12 @@
 }
 
 .photo-project-cover {
-  margin-bottom: 0;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  filter: none;
+  margin: 0;
 }
 
 .photo-project-label {
@@ -360,6 +366,44 @@
   margin: 0 0 2.2rem;
   break-inside: avoid;
   -webkit-column-break-inside: avoid;
+}
+
+.photo-grid-item-link {
+  display: block;
+  margin: 0 0 2.2rem;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+}
+
+.photo-grid-item-link .photo-thumb-grid-only {
+  margin: 0;
+  break-inside: auto;
+  -webkit-column-break-inside: auto;
+}
+
+.photo-image-view-page {
+  background: var(--film-charcoal);
+}
+
+.photo-image-view-container {
+  min-height: 100vh;
+  width: min(75vw, 1400px);
+  max-width: none;
+  margin: 0 auto;
+  padding: 4.25rem 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.photo-image-view-full {
+  max-width: 100%;
+  max-height: calc(100vh - 12rem);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  align-self: center;
 }
 
 .photo-meta {

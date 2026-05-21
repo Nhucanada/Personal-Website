@@ -1,11 +1,20 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { getWorkCategoryBySlug } from '../../data/photography';
 import '../../styles/photography.css';
 
 const PhotographyWorkCategoryPage: React.FC = () => {
   const { category } = useParams();
+  const location = useLocation();
+  const buildImageViewPath = (src: string, title: string): string => {
+    const query = new URLSearchParams({
+      src,
+      title,
+      returnTo: location.pathname,
+    });
+    return `/photo/image?${query.toString()}`;
+  };
   const normalizedCategory = (category || '').toLowerCase();
   const matchedCategory = getWorkCategoryBySlug(normalizedCategory);
   const categoryPhotos = matchedCategory?.photos || [];
@@ -22,13 +31,18 @@ const PhotographyWorkCategoryPage: React.FC = () => {
         {matchedCategory && (
           <div className="photo-grid-three">
             {categoryPhotos.map((photo) => (
-              <img
-                className="photo-thumb-grid-only"
-                src={photo.src}
-                alt={photo.title}
-                loading="lazy"
+              <Link
+                className="photo-grid-item-link"
                 key={photo.src}
-              />
+                to={buildImageViewPath(photo.src, photo.title)}
+              >
+                <img
+                  className="photo-thumb-grid-only"
+                  src={photo.src}
+                  alt={photo.title}
+                  loading="lazy"
+                />
+              </Link>
             ))}
           </div>
         )}

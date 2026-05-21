@@ -12,7 +12,7 @@ const PhotographyProjectsPage: React.FC = () => {
             <article className="photo-project-card" key={project.slug}>
               <Link className="photo-project-link" to={`/photo/work/projects/${project.slug}`}>
                 <img
-                  className="photo-thumb-grid-only photo-project-cover"
+                  className="photo-project-cover"
                   src={project.coverSrc}
                   alt={`${project.label} cover`}
                   loading="lazy"

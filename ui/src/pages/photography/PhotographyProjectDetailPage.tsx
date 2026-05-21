@@ -1,11 +1,20 @@
 import React from 'react';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { getPhotoProjectBySlug } from '../../data/photography';
 import '../../styles/photography.css';
 
 const PhotographyProjectDetailPage: React.FC = () => {
   const { projectSlug } = useParams();
+  const location = useLocation();
+  const buildImageViewPath = (src: string, title: string): string => {
+    const query = new URLSearchParams({
+      src,
+      title,
+      returnTo: location.pathname,
+    });
+    return `/photo/image?${query.toString()}`;
+  };
   const normalizedProjectSlug = (projectSlug || '').toLowerCase();
   const project = getPhotoProjectBySlug(normalizedProjectSlug);
 
@@ -27,13 +36,18 @@ const PhotographyProjectDetailPage: React.FC = () => {
         </div>
         <div className="photo-grid-three">
           {project.photos.map((photo) => (
-            <img
-              className="photo-thumb-grid-only"
-              src={photo.src}
-              alt={photo.title}
-              loading="lazy"
+            <Link
+              className="photo-grid-item-link"
               key={photo.src}
-            />
+              to={buildImageViewPath(photo.src, photo.title)}
+            >
+              <img
+                className="photo-thumb-grid-only"
+                src={photo.src}
+                alt={photo.title}
+                loading="lazy"
+              />
+            </Link>
           ))}
         </div>
       </section>

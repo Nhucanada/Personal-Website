@@ -18,6 +18,7 @@ import PhotographyWorkCategoryPage from './pages/photography/PhotographyWorkCate
 import PhotographyContactPage from './pages/photography/PhotographyContactPage';
 import PhotographyProjectsPage from './pages/photography/PhotographyProjectsPage';
 import PhotographyProjectDetailPage from './pages/photography/PhotographyProjectDetailPage';
+import PhotographyImageViewPage from './pages/photography/PhotographyImageViewPage';
 import SoftwarePlaceholderPage from './pages/software/SoftwarePlaceholderPage';
 import PhotographyNav from './components/PhotographyNav';
 
@@ -131,6 +132,7 @@ function App() {
         <Route path="work/projects/:projectSlug" element={<PhotographyProjectDetailPage />} />
         <Route path="work/:category" element={<PhotographyWorkCategoryPage />} />
         <Route path="portfolio" element={<Navigate to="/photo" replace />} />
+        <Route path="image" element={<PhotographyImageViewPage />} />
         <Route path="about" element={<PhotographyAboutPage />} />
         <Route path="contact" element={<PhotographyContactPage />} />
       </Routes>

@@ -17,9 +17,11 @@ export interface PhotoProject {
 }
 
 export const portfolioPhotos: PhotoAsset[] = [
+  { title: '006026640016', src: '/photos/Portfolio/006026640016.jpg' },
+  { title: 'AA023', src: '/photos/Portfolio/AA023.jpg' },
+  { title: 'FUJI3565', src: '/photos/Portfolio/FUJI3565.jpg' },
+  { title: 'McGill-17', src: '/photos/Portfolio/McGill-17.jpg' },
   { title: 'R1-02085-012A', src: '/photos/Portfolio/R1-02085-012A.jpg' },
-  { title: 'R1-02135-0009-11-8', src: '/photos/Portfolio/R1-02135-0009-11-8.jpg' },
-  { title: 'R1-02136-0008-10', src: '/photos/Portfolio/R1-02136-0008-10.jpg' },
   { title: 'R1-02136-0009-Edit-11', src: '/photos/Portfolio/R1-02136-0009-Edit-11.jpg' },
   { title: 'R1-02139-0008-2', src: '/photos/Portfolio/R1-02139-0008-2.jpg' },
   { title: 'selector-background', src: '/photos/Portfolio/selector-background.jpg' },
