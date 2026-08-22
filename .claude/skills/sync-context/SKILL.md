@@ -18,6 +18,9 @@ Trigger this whenever a change touches any of:
 - The photography data model (`ui/src/data/photography.ts`).
 - Backend endpoints, models, or data files (`api/src/...`).
 - Module structure, build, or environment configuration.
+- **Learning something worth persisting** — a non-obvious constraint, gotcha, or decision (record
+  it in the relevant context page), or a repeatable multi-step procedure (capture it as a skill
+  under `.claude/skills/<name>/SKILL.md` and link it from CLAUDE.md's "Skills" list).
 
 ## Steps
 

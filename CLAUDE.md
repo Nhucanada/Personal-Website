@@ -83,9 +83,32 @@ Load the page for the area you're touching:
   (or work on a `staging`-tracking branch and push to `staging`).
 - Never force-push `staging` or `main` unless explicitly asked.
 
-## Maintenance rule
+## Maintenance rule — keep this context alive
 
-This file and `.claude/context/` are the source of truth for agents. Whenever routing, the
-image pipeline, the photography data model, or module structure changes, update the affected
-context page in the same change. Stale context is worse than none — the previous handoff docs
-drifted badly from reality and were removed for this reason.
+This file, `.claude/context/`, and `.claude/skills/` are the source of truth for agents. They
+are not write-once docs: **treat maintaining them as part of every task, not an afterthought.**
+Stale context is worse than none — the previous handoff docs drifted badly from reality and were
+removed for this reason.
+
+Every task that changes the project must leave the context at least as accurate as it found it:
+
+- **Update in the same change, never "later."** If you change routing, the theme, the image
+  pipeline, the photography data model, backend endpoints/models, build, env config, or module
+  structure, update the affected `.claude/context/` page and this file's summaries in the same
+  commit. Follow the `sync-context` skill.
+- **Grow the docs as you learn.** When you discover a non-obvious constraint, gotcha, decision,
+  or recurring workflow, write it down in the relevant context page (or `CLAUDE.md` if it's
+  high-level). If it doesn't fit an existing page, add a new one under `.claude/context/` and
+  link it from the "Context pages" list above.
+- **Capture repeatable procedures as skills.** If a task involves a multi-step procedure you
+  (or a future agent) would repeat — a build/release step, a data-sync routine, a generator —
+  add or update a skill under `.claude/skills/<name>/SKILL.md` and reference it from the
+  "Skills" list above. Prefer improving an existing skill over duplicating it.
+- **Prune what's no longer true.** When you delete or replace code, remove the corresponding
+  claims here immediately. Never leave a reference to something that no longer exists.
+- **Verify before you write.** Only record facts you've confirmed against the code (exact paths,
+  route strings, script constants). Don't copy forward numbers or names you didn't check.
+- **Keep `CLAUDE.md` lean.** Push detail into context pages and skills; keep this file a concise
+  map that points to them.
+
+The bar: another agent should be able to pick up cold, read `CLAUDE.md`, and trust it.
