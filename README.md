@@ -143,18 +143,47 @@ The project is configured for easy deployment:
 - **Image optimization pipeline** - Build-time WebP generation via `sharp`, with a runtime
   helper that serves optimized gallery images while the viewer and selector use originals.
 - **Software section** (`/dev`) - Currently a work-in-progress placeholder embedding a resume.
-- **Spring Boot API** - JSON-backed profile/photography endpoints under `/api` (used by tooling
-  and legacy pages; the live gallery reads static data in `ui/src/data/photography.ts`).
+- **Spring Boot API** - JSON-backed profile/photography endpoints under `/api` (self-contained
+  and tested; the live gallery currently reads static data in `ui/src/data/photography.ts`).
 - **Responsive, class-based layouts** - Photography styles in `ui/src/styles/photography.css`.
 - **Code quality** - ESLint on the frontend; JaCoCo/Checkstyle and JUnit tests on the backend.
 
-## Working on this project with an AI agent
+## Agentic development: a self-maintaining feedback loop
 
-Agent context lives in [`CLAUDE.md`](./CLAUDE.md), with detailed reference pages in
-`.claude/context/` and task skills in `.claude/skills/`. Read `CLAUDE.md` first — it documents
-the live site shape (selector + photography + software placeholder), which legacy pages are no
-longer routed, the build/test commands, and the image pipeline. Keep those files in sync with
-the code (see the `sync-context` skill).
+This repo is built to be worked on by AI coding agents (Claude) without the usual context rot.
+Instead of one-off handoff notes that drift out of date, it keeps a living knowledge base that
+agents are required to read *and* keep current as part of every task.
+
+```
+.claude/
+├── context/            # Verified reference pages, loaded on demand
+│   ├── architecture.md  #   modules, stack, build, deploy
+│   ├── frontend.md      #   routing, pages, theme, photography IA
+│   ├── backend.md       #   Spring Boot endpoints, models, tests
+│   └── image-pipeline.md#   photo optimizer + runtime source mapping
+└── skills/             # Repeatable procedures agents invoke
+    ├── optimize-photos/ #   add/replace photos and resync data
+    └── sync-context/    #   keep the docs honest after any change
+CLAUDE.md               # Concise entry point that maps to the above
+```
+
+### How the loop works
+
+1. **Read first.** [`CLAUDE.md`](./CLAUDE.md) is the entry point. An agent starting cold reads
+   it, then loads only the `.claude/context/` page for the area it's touching.
+2. **Do the work,** guided by the relevant skill for repeatable procedures (e.g. the
+   `optimize-photos` skill for photo changes).
+3. **Update the docs in the same change.** Whenever routing, the theme, the image pipeline, the
+   data model, the API, or the build changes, the agent updates the affected context page and
+   `CLAUDE.md` in the same commit — pruning anything no longer true and capturing new gotchas or
+   procedures as context pages/skills. This is codified as an explicit duty in `CLAUDE.md` and
+   enforced by the `sync-context` skill.
+4. **Ship to `staging`.** All changes are pushed to the `staging` branch and promoted to `main`
+   separately.
+
+The result is a codebase whose documentation gets *more* accurate with each contribution rather
+than less. (The previous ad-hoc `AI_CONTRIBUTIONS.md` / `AI_CONTEXT_HANDOFF.md` notes had drifted
+badly from reality and were replaced by this loop.)
 
 ## Contact
 
