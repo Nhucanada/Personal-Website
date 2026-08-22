@@ -76,6 +76,13 @@ Load the page for the area you're touching:
 - `.claude/skills/sync-context/SKILL.md` — keep CLAUDE.md and context pages trustworthy after
   routing, data, or pipeline changes.
 
+## Git workflow
+
+- **Push all changes to the `staging` branch only.** Do not push directly to `main` — `main` is
+  promoted from `staging` separately. When committing work, push with `git push origin HEAD:staging`
+  (or work on a `staging`-tracking branch and push to `staging`).
+- Never force-push `staging` or `main` unless explicitly asked.
+
 ## Maintenance rule
 
 This file and `.claude/context/` are the source of truth for agents. Whenever routing, the
