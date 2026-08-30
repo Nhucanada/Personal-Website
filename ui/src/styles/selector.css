@@ -1,0 +1,306 @@
+/*
+ * selector.css — Split-screen selector with original homepage layout
+ *
+ * Each half replicates the original site layout:
+ *   Left  (photography layer, clipped): warm #f6f4ef bg, serif nav, centered <img>
+ *   Right (software layer, full width): dark #0d0f14 bg, Inter nav, centered placeholder
+ *
+ * The photography layer (z-index 2) uses clip-path: inset() to show only the
+ * portion left of the divider. Software layer (z-index 1) fills the right half.
+ *
+ * Each layer has its own full-width nav; the clip-path makes the combined nav
+ * appear as a split bar — photography style on the left, software on the right.
+ *
+ * Mobile / touch (hover: none): static 50/50 <Link> split.
+ */
+
+/* ── Root ─────────────────────────────────────────────────────────────── */
+
+.sel-root {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ── Shared layer base ───────────────────────────────────────────────── */
+
+.sel-layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* ── Software layer (back — right half) ─────────────────────────────── */
+
+.sel-layer--sw {
+  z-index: 1;
+  background-color: #0d0f14;
+  background-image: radial-gradient(
+    circle,
+    rgba(100, 212, 232, 0.08) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+}
+
+/* Software nav — dark, full width (right portion always visible) */
+
+/* ── Nav position override ───────────────────────────────────────────── */
+/*
+ * The selector uses the real .photo-nav and .sw-nav classes so fonts,
+ * sizes, and colours always match the actual section pages exactly.
+ * The only thing that differs is positioning: real navs are position:fixed
+ * (z-index 10) but inside a selector layer they must be position:absolute
+ * so they scroll with the layer. backdrop-filter is suppressed because it
+ * isn't meaningful against the layer's solid background.
+ */
+.sel-layer .photo-nav,
+.sel-layer .sw-nav {
+  position: absolute;
+  z-index: 5;
+}
+
+.sel-layer .sw-nav {
+  backdrop-filter: none;
+}
+
+/*
+ * Software body — full-width, placeholder centered at viewport center.
+ * padding-top: 6rem mirrors original .selector-image-wrap spacing.
+ */
+.sel-body--sw {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem 2rem;
+}
+
+/* Placeholder uses .sw-home-placeholder / .sw-home-ph-* from software.css directly. */
+
+/* ── Photography layer (front — clipped to left of divider) ──────────── */
+
+.sel-layer--photo {
+  z-index: 2;
+  background-color: #f6f4ef;
+  /*
+   * clip-path updated every rAF frame: inset(0 [100-divX]% 0 0)
+   * Shows only the leftmost divX% of this layer.
+   * will-change: clip-path promotes to its own compositor tile.
+   */
+  clip-path: inset(0 50% 0 0);
+  will-change: clip-path;
+  transform: translateZ(0);
+}
+
+/*
+ * Photography nav — uses the real .photo-nav class; only position is
+ * overridden via .sel-layer .photo-nav above.
+ */
+
+/*
+ * Photography body — full-width, image centered at viewport center.
+ * padding-top: 6rem mirrors original .selector-image-wrap (padding: 6rem 2rem 2rem).
+ */
+.sel-body--photo {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem 2rem;
+}
+
+/* Photography image — exact original .selector-image sizing */
+.sel-photo-image {
+  width: min(72vw, 980px);
+  max-height: 78vh;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+/* ── Dim overlay (inactive side) ────────────────────────────────────── */
+
+.sel-dim-overlay {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 6;
+  will-change: opacity;
+}
+
+/* ── Section labels (fade in on the dominant/active side) ────────────── */
+
+.sel-side-label {
+  position: absolute;
+  top: 50%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 7;
+  line-height: 1;
+  user-select: none;
+  will-change: opacity;
+}
+
+.sel-side-label--sw {
+  /*
+   * left % is driven by the rAF loop (x / 2) to stay centred in the dim strip.
+   * transform centres the element on that computed point.
+   */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/*
+ * left % is driven by the rAF loop ((x + 100) / 2) to stay centred in the
+ * uncovered SW strip.
+ */
+.sel-side-label--photo {
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  font-family: "Minion Pro", Garamond, "Adobe Garamond Pro", "Times New Roman", serif;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.75);
+  text-transform: lowercase;
+}
+
+/* ── UI chrome ───────────────────────────────────────────────────────── */
+
+.sel-ui {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.sel-root[data-transitioning="true"] {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ── Mobile / touch fallback ─────────────────────────────────────────── */
+
+@media (hover: none) {
+  .sel-layer--sw,
+  .sel-layer--photo,
+  .sel-ui {
+    display: none;
+  }
+  .sel-touch {
+    display: flex !important;
+  }
+}
+
+.sel-touch {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+}
+
+.sel-touch-half {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.sel-touch-half--photo {
+  background-color: #f6f4ef;
+  /* background-image set via inline style (CRA can't resolve url() in CSS) */
+  background-size: cover;
+  background-position: center;
+}
+
+.sel-touch-half--photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(246, 244, 239, 0.45);
+}
+
+.sel-touch-half--sw {
+  background-color: #0d0f14;
+  background-image: radial-gradient(
+    circle,
+    rgba(100, 212, 232, 0.08) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+}
+
+.sel-touch-label {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  pointer-events: none;
+}
+
+.sel-touch-eyebrow {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-bottom: 0.45rem;
+}
+
+.sel-touch-heading {
+  display: block;
+  font-size: clamp(1.8rem, 7vw, 2.8rem);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.sel-touch-half--photo .sel-touch-eyebrow {
+  color: rgba(31, 31, 31, 0.5);
+  font-family: "Minion Pro", Garamond, serif;
+}
+.sel-touch-half--photo .sel-touch-heading {
+  color: #1f1f1f;
+  font-family: "Minion Pro", Garamond, serif;
+}
+.sel-touch-half--sw .sel-touch-eyebrow {
+  color: rgba(100, 212, 232, 0.5);
+  font-family: "JetBrains Mono", monospace;
+}
+.sel-touch-half--sw .sel-touch-heading {
+  color: #64d4e8;
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.sel-touch-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 21;
+  pointer-events: none;
+}

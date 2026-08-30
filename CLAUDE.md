@@ -16,18 +16,27 @@ deployed publicly — run it locally.
 
 ## Live site shape (important — read before assuming)
 
-The live experience is a **light-themed** site with a landing selector that branches into two
-sections:
+The live experience is a **light-themed** site with a split-screen landing selector that
+branches into two sections:
 
 - `/` → `SiteSelectorPage` (or `UnderConstructionPage` when the construction flag is on).
-- `/photo/*` → the **photography portfolio** (the fully built-out section).
-- `/dev/*` → `SoftwarePlaceholderPage` (a work-in-progress stub that embeds a resume PDF).
+  The selector shows both homepages as a seamless split screen — no divider line. The inactive
+  side dims to black and shows a section-name label centred in that strip. Split is inverted
+  (mouse left → more photography; mouse right → more software) and capped so neither side is
+  less than 1/3 of the viewport. The selector navs use the real `.photo-nav` / `.sw-nav`
+  classes to stay in sync with the section pages. Clicking either side navigates to that section.
+- `/photo/*` → the **photography portfolio**. Index (`/photo`) is `PhotographyHomePage` —
+  the original homepage design (warm bg, centered `selector-background.jpg`). Portfolio grid
+  is at `/photo/work`. Fully built-out section.
+- `/dev/*` → the **software portfolio** — dark-mode, modern-geometric section. Index (`/dev`)
+  is `SoftwareHomePage` which shows a visual placeholder (matching the selector's right side)
+  on the first screen and the bio/CTA hero on scroll. Five pages: Home, About, Projects,
+  Experience, Contact. Static data in `ui/src/data/software.ts`.
 
 The old software dashboard pages (`HomePage`, `AboutPage`, `ProjectsPage`,
 `WorkExperiencePage`, `EducationPage`, `ContactPage`, `AIPage`), their `Header`/`WelcomeCard`
 components, the `useProfileData` hooks, the `utils/api` client, and all their tests were
-**removed** — the live UI no longer depends on the backend at runtime. If you need a software
-section, build it fresh under `/dev`.
+**removed** — the live UI no longer depends on the backend at runtime.
 
 ## Commands
 
@@ -54,8 +63,9 @@ Separate frontend/backend deployments are driven by env vars:
 ## Conventions
 
 - TypeScript everywhere in `ui/src`; keep ESLint clean (`lint:check` allows zero warnings).
-- Photography display images go through the optimizer; the full-screen viewer and the home
-  selector background intentionally use originals. See `.claude/context/image-pipeline.md`.
+- Photography display images go through the optimizer; the full-screen viewer, the selector
+  background, and `PhotographyHomePage` intentionally use the original (non-optimized)
+  `/photos/selector-background.jpg`. See `.claude/context/image-pipeline.md`.
 - Photo collections are static data in `ui/src/data/photography.ts`. When photo files change,
   rerun `photos:optimize` and resync that data file. Use the `optimize-photos` skill.
 - Netlify SPA fallback lives in `ui/public/_redirects` (`/* /index.html 200`).

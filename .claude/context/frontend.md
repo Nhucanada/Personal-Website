@@ -20,16 +20,27 @@ Top-level routes in `App.tsx`:
 
 - `/` → `UnderConstructionPage` if `NODE_ENV === 'production'` **and**
   `REACT_APP_SITE_UNDER_CONSTRUCTION === 'true'`, otherwise `SiteSelectorPage`.
-- `/dev/*` → `SoftwarePlaceholderPage` (index and wildcard both render the placeholder).
+- `/dev/*` → software layout (`SoftwareNav` + nested routes below).
 - `/photo/*` → photography layout (`PhotographyNav` + nested routes below).
 - Legacy redirects: `/about`, `/projects`, `/experience`, `/education`, `/ai`, `/contact`
   → `/dev/...` equivalents.
 - `*` → redirect to `/`.
 
+Software nested routes (under `/dev`):
+
+- index → `SoftwareHomePage`
+- `about` → `SoftwareAboutPage`
+- `projects` → `SoftwareProjectsPage`
+- `work` → `SoftwareExperiencePage` ← dedicated work/experience page
+- `experience` → redirect to `/dev/work` (backwards compat)
+- `contact` → `SoftwareContactPage`
+- `resume` → redirect to `/dev`
+- `*` → redirect to `/dev`
+
 Photography nested routes (under `/photo`):
 
-- index → `PhotographyPortfolioPage`
-- `work` → redirect to `/photo`
+- index → `PhotographyHomePage` ← landing page for the section
+- `work` → `PhotographyPortfolioPage` ← portfolio grid (was redirect to `/photo`)
 - `work/projects` → `PhotographyProjectsPage`
 - `work/projects/:projectSlug` → `PhotographyProjectDetailPage`
 - `work/:category` → `PhotographyWorkCategoryPage`
@@ -42,26 +53,47 @@ Photography nested routes (under `/photo`):
 
 All of `ui/src` is live; the old dashboard pages/components/hooks/API client were removed.
 
-- `pages/SiteSelectorPage.tsx` — landing selector; uses full-res `/photos/selector-background.jpg`.
+- `pages/SiteSelectorPage.tsx` — split-screen mouse-driven landing selector. Two full-viewport
+  layers stacked: photography (front, clipped with `clip-path: inset()`) over software (back,
+  always full-width). Movement is **inverted** (mouse left → more photography; mouse right →
+  more software). Each layer uses the **real** nav components' CSS classes (`photo-nav`,
+  `sw-nav`) — only `position: fixed` is overridden to `absolute` in `selector.css`. Divider
+  line removed; instead the inactive side dims via a black overlay driven by the rAF loop and
+  a section-name label fades in centred in the dim strip. Split movement is capped at
+  `MIN_X=33 / MAX_X=67` so the dim side is always ≥ 1/3 of the viewport. Click left →
+  `/photo`; click right → `/dev`. Touch/hover:none: static 50/50 `<Link>` split. Styles in
+  `ui/src/styles/selector.css`.
 - `pages/UnderConstructionPage.tsx` — mirrors selector layout; also full-res selector image.
-- `pages/software/SoftwarePlaceholderPage.tsx` — WIP stub; embeds
-  `/documents/Nathan_Hu___Resume_January_2026__CAN.pdf`.
-- `pages/photography/PhotographyPortfolioPage.tsx` — `/photo` grid (portfolio folder images).
+- `pages/photography/PhotographyHomePage.tsx` — `/photo` index. Replicates original homepage:
+  warm `#f6f4ef` background, `selector-background.jpg` centered via `.selector-image-wrap` /
+  `.selector-image` classes from `photography.css`. `PhotographyNav` is rendered by App.tsx.
+- `pages/photography/PhotographyPortfolioPage.tsx` — `/photo/work` portfolio grid.
 - `pages/photography/PhotographyWorkCategoryPage.tsx` — `/photo/work/:category`, CSS-columns masonry.
 - `pages/photography/PhotographyProjectsPage.tsx` — project covers.
 - `pages/photography/PhotographyProjectDetailPage.tsx` — a project's image set.
 - `pages/photography/PhotographyImageViewPage.tsx` — full-screen viewer at `/photo/image`.
 - `pages/photography/PhotographyAboutPage.tsx`, `PhotographyContactPage.tsx`.
-- `components/PhotographyNav.tsx` — brand `Nathan Hu` (→ `/`), links Work/About/Contact.
+- `pages/software/SoftwareHomePage.tsx` — `/dev` index. Two stacked sections: first screen
+  (`.sw-home-visual`) mirrors the selector right side — dark `#0d0f14` dot-grid bg, centered
+  placeholder box (`min(72vw, 980px)`, same sizing as photography selector image); second screen
+  (`.sw-hero`) has the existing bio text and CTA buttons (scrollable).
+- `pages/software/SoftwareAboutPage.tsx` — bio + skills two-column layout.
+- `pages/software/SoftwareProjectsPage.tsx` — filterable project card grid from static data.
+- `pages/software/SoftwareExperiencePage.tsx` — timeline-style experience cards from static data.
+- `pages/software/SoftwareContactPage.tsx` — dark contact form + social links (GitHub/LinkedIn/Email).
+- `components/PhotographyNav.tsx` — brand `Nathan Hu` (→ `/`), links Work (→ `/photo/work`) /
+  About / Contact. `isPathActive` for Work checks `pathname.startsWith('/photo/work')`.
+- `components/SoftwareNav.tsx` — brand `Nathan Hu` (→ `/`), links Work/Projects/About/Contact + Résumé button.
 
 There are currently no frontend test files (the old dashboard test suite was removed with the
 pages it covered). `ui/src/setupTests.ts` remains as CRA scaffolding for future tests.
 
 ## Photography information architecture
 
-- `/photo` shows the portfolio grid from `portfolioPhotos`.
-- Category row: `Projects` + folder categories from data (`Polaroids`, `Portraits`, `Studio`).
-- Category pages use a masonry-like CSS-columns layout; back button returns to `/photo`.
+- `/photo` → `PhotographyHomePage` (landing; shows `selector-background.jpg`).
+- `/photo/work` → `PhotographyPortfolioPage` (portfolio grid from `portfolioPhotos`).
+- Category row on portfolio: `Projects` + folder categories from data (`Polaroids`, `Portraits`, `Studio`).
+- Category pages use a masonry-like CSS-columns layout; back button returns to `/photo/work`.
 - Clicking any image opens `/photo/image` with query params `src` (original full-res),
   `title`, and `returnTo`. The viewer locks body scroll while mounted and always shows the
   original (non-optimized) image.
@@ -69,8 +101,17 @@ pages it covered). `ui/src/setupTests.ts` remains as CRA scaffolding for future 
 ## Styling
 
 - Photography styles live in `ui/src/styles/photography.css` (classes like `photo-site`,
-  `photo-nav`, `photo-body`, `software-placeholder-layout`, `software-resume-frame`).
-- The selector/software/photography pages share these class-based styles rather than MUI `sx`.
+  `photo-nav`, `photo-body`, `selector-image-wrap`, `selector-image`). The selector homepage
+  classes (`.selector-image-wrap`, `.selector-image`) are reused by `PhotographyHomePage`.
+- Selector styles live in `ui/src/styles/selector.css` (classes prefixed `sel-`). Imported
+  only by `SiteSelectorPage.tsx`. Contains the two-layer split stack, per-layer navs, divider
+  bar, mobile touch fallback, and nav link styles for both sections.
+- Software styles live in `ui/src/styles/software.css` (classes prefixed `sw-`). This file
+  defines its own dark CSS custom properties (`--sw-bg`, `--sw-accent`, `--sw-font-mono`, etc.)
+  and is completely independent of `photography.css`. Added in this session: `.sw-home-visual`,
+  `.sw-home-placeholder`, `.sw-home-ph-eyebrow`, `.sw-home-ph-name`, `.sw-home-ph-sub` for the
+  homepage visual section. The software section does not use MUI `sx`.
+- The selector/photography pages share class-based styles from `photography.css` rather than MUI `sx`.
 
 ## Data source
 
@@ -84,3 +125,47 @@ Static photo data: `ui/src/data/photography.ts`, exporting:
 Image `src` values are `/photos/...` paths resolved at runtime through the optimizer helper
 (see `image-pipeline.md`). When photo files are added/removed/renamed, update this file and
 rerun the optimizer.
+
+Static software data: `ui/src/data/software.ts`, exporting:
+
+- `projects: SoftwareProject[]` — id, title, description, tech, github?, url?, featured
+- `experiences: WorkExperience[]` — id, company, role, location, dates, bullets, tech?, type
+- `skillGroups: SkillGroup[]` — category, items[]
+
+All three are static arrays; no API call is made. Update them directly when content changes.
+
+## Software section theme
+
+The software section (`/dev/*`) is dark-mode and uses `ui/src/styles/software.css` exclusively.
+Key variables: `--sw-bg: #0d0f14`, `--sw-accent: #64d4e8` (teal), `--sw-surface: #161b24`.
+Fonts loaded via Google Fonts in `ui/public/index.html`: Inter (body) and JetBrains Mono
+(eyebrow labels, monospace chips, dates). The global MUI theme remains light and is used only
+by the photography section.
+
+## Selector implementation notes
+
+The `SiteSelectorPage` animation is driven by a `requestAnimationFrame` loop with no external
+dependencies. Key gotchas:
+
+- **Inverted mouse**: `targetX = 100 - mouseXPercent`. Moving left → split moves right →
+  more photography visible. Do not "fix" this — it is intentional per design.
+- **Nav classes — never duplicate**: the selector uses the real `.photo-nav` / `.sw-nav`
+  CSS classes imported from `photography.css` and `software.css`. The only override in
+  `selector.css` is `position: absolute; z-index: 5` (replacing the real `position: fixed;
+  z-index: 10`). If you add or change nav styles, edit the source CSS files only — they
+  automatically apply to both the section pages and the selector.
+- **Dim overlay + labels**: a `sel-dim-overlay` div (z-index 6) and a `sel-side-label` div
+  (z-index 7) live inside each layer. The rAF loop drives their `opacity` and the label's
+  `left` position every frame to keep it centred in the dim strip.
+- **Split cap**: `targetX` is clamped to `[MIN_X=33, MAX_X=67]` during hover so the dim side
+  is always ≥ 1/3 of the viewport. The cap is removed during click transitions (0 / 100).
+- **clip-path and pointer events**: `clip-path: inset()` on the photography layer clips
+  hit-testing in modern browsers — the hidden right portion does not intercept clicks, so the
+  software nav behind it is clickable. Do not add `pointer-events: none` to the photo layer.
+- **Nav stopPropagation**: both in-layer navs call `e.stopPropagation()` on click so nav link
+  navigation doesn't also fire the container's split-click handler.
+- **CSS url() in CRA**: never put `url("/photos/...")` in `.css` files — CRA webpack tries to
+  resolve it at build time and fails. Set `backgroundImage` via inline React style instead.
+- **software placeholder**: `.sel-sw-placeholder` and `.sw-home-placeholder` both use
+  `min(72vw, 980px)` width — same as `.selector-image` — so the two homepages feel symmetric.
+  Replace these with `<img>` elements once a real software background image exists.

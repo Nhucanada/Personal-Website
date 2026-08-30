@@ -13,13 +13,19 @@ import {
 import SiteSelectorPage from './pages/SiteSelectorPage';
 import UnderConstructionPage from './pages/UnderConstructionPage';
 import PhotographyAboutPage from './pages/photography/PhotographyAboutPage';
+import PhotographyHomePage from './pages/photography/PhotographyHomePage';
 import PhotographyPortfolioPage from './pages/photography/PhotographyPortfolioPage';
 import PhotographyWorkCategoryPage from './pages/photography/PhotographyWorkCategoryPage';
 import PhotographyContactPage from './pages/photography/PhotographyContactPage';
 import PhotographyProjectsPage from './pages/photography/PhotographyProjectsPage';
 import PhotographyProjectDetailPage from './pages/photography/PhotographyProjectDetailPage';
 import PhotographyImageViewPage from './pages/photography/PhotographyImageViewPage';
-import SoftwarePlaceholderPage from './pages/software/SoftwarePlaceholderPage';
+import SoftwareHomePage from './pages/software/SoftwareHomePage';
+import SoftwareAboutPage from './pages/software/SoftwareAboutPage';
+import SoftwareProjectsPage from './pages/software/SoftwareProjectsPage';
+import SoftwareExperiencePage from './pages/software/SoftwareExperiencePage';
+import SoftwareContactPage from './pages/software/SoftwareContactPage';
+import SoftwareNav from './components/SoftwareNav';
 import PhotographyNav from './components/PhotographyNav';
 
 const theme = createTheme({
@@ -116,18 +122,27 @@ function App() {
     && process.env.REACT_APP_SITE_UNDER_CONSTRUCTION === 'true';
 
   const softwareLayout = (
-    <Routes>
-      <Route index element={<SoftwarePlaceholderPage />} />
-      <Route path="*" element={<SoftwarePlaceholderPage />} />
-    </Routes>
+    <>
+      <SoftwareNav />
+      <Routes>
+        <Route index element={<SoftwareHomePage />} />
+        <Route path="about" element={<SoftwareAboutPage />} />
+        <Route path="projects" element={<SoftwareProjectsPage />} />
+        <Route path="work" element={<SoftwareExperiencePage />} />
+        <Route path="experience" element={<Navigate to="/dev/work" replace />} />
+        <Route path="contact" element={<SoftwareContactPage />} />
+        <Route path="resume" element={<Navigate to="/dev" replace />} />
+        <Route path="*" element={<Navigate to="/dev" replace />} />
+      </Routes>
+    </>
   );
 
   const photographyLayout = (
     <>
       <PhotographyNav />
       <Routes>
-        <Route index element={<PhotographyPortfolioPage />} />
-        <Route path="work" element={<Navigate to="/photo" replace />} />
+        <Route index element={<PhotographyHomePage />} />
+        <Route path="work" element={<PhotographyPortfolioPage />} />
         <Route path="work/projects" element={<PhotographyProjectsPage />} />
         <Route path="work/projects/:projectSlug" element={<PhotographyProjectDetailPage />} />
         <Route path="work/:category" element={<PhotographyWorkCategoryPage />} />
