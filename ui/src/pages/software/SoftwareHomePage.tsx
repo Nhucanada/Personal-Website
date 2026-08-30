@@ -57,7 +57,7 @@ const SoftwareHomePage: React.FC = () => (
           </Link>
           <a
             className="sw-btn-ghost"
-            href="/documents/Nathan_Hu___Resume_January_2026__CAN.pdf"
+            href="/documents/Nathan_Hu_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
           >

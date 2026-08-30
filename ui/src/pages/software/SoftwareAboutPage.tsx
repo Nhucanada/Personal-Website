@@ -41,7 +41,7 @@ const SoftwareAboutPage: React.FC = () => {
                 <span className="sw-about-detail-label">Résumé</span>
                 <span className="sw-about-detail-value">
                   <a
-                    href="/documents/Nathan_Hu___Resume_January_2026__CAN.pdf"
+                    href="/documents/Nathan_Hu_Resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ color: 'var(--sw-accent)', textDecoration: 'none' }}
