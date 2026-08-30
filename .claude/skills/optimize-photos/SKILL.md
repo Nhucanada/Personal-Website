@@ -12,9 +12,16 @@ needs to change. Context: `.claude/context/image-pipeline.md` and `.claude/conte
 
 1. **Place the source files** under `ui/public/photos/<Folder>/`. Folders map to collections:
    - `Portfolio/` → `portfolioPhotos` (the `/photo` grid).
-   - `Polaroids/`, `Portraits/`, `Studio/` → `workCategories` entries.
-   - `Projects/<Project Name>/` → a `photoProjects` entry (`cover.jpg` is the cover).
+   - `Polaroids/` → `workCategories` entries.
+   - `Portraits/` (root) → `portraitPhotos` (hub grid on `/photo/work/portraits`).
+   - `Portraits/Location/`, `Portraits/Studio/` → `portraitSubcategories` entries.
+   - `Series/` (root) → `seriesPhotos` (hub grid on `/photo/work/series`).
+   - `Series/Street/`, `Series/Motorsport/`, `Series/Landscape/` → `seriesSubcategories` entries.
+   - `Projects/<Collection Name>/` → a `photoCollections` entry (`cover.jpg` is the cover).
+   - `Commissioned/<Collection Name>/` → a `photoCommissioned` entry (first alphabetical file is cover if no `cover.jpg`).
    Keep originals full-resolution; the viewer serves these directly.
+   HEIC/HEIF files are automatically converted to JPG by the optimizer (via `sips`), replacing
+   the original in-place before WebP generation.
 
 2. **Regenerate optimized derivatives:**
    ```bash
@@ -28,16 +35,21 @@ needs to change. Context: `.claude/context/image-pipeline.md` and `.claude/conte
      `/photos/<Folder>/<file>` path (NOT the optimized path — the UI maps to optimized at
      runtime via `getOptimizedPhotoSrc`).
    - For a new category, add a `WorkCategory` (`slug`, `label`, `photos`).
-   - For a new project, add a `PhotoProject` (`slug`, `label`, `coverSrc`, `photos`).
+   - For a new portrait subcategory, add a `WorkCategory` to `portraitSubcategories`.
+   - For root-level portraits on the hub page, add `PhotoAsset` entries to `portraitPhotos`.
+   - For a new series subcategory, add a `WorkCategory` to `seriesSubcategories`.
+   - For root-level series on the hub page, add `PhotoAsset` entries to `seriesPhotos`.
+   - For a new collection, add a `PhotoProject` to `photoCollections` (`slug`, `label`, `coverSrc`, `photos`).
+   - For a new commissioned collection, add a `PhotoProject` to `photoCommissioned` (same interface).
    - Titles are display labels; slugs are URL segments (kebab-case, matched by
-     `getWorkCategoryBySlug` / `getPhotoProjectBySlug`).
+     `getWorkCategoryBySlug` / `getPhotoCollectionBySlug`).
 
 4. **Verify:**
    ```bash
    npm --prefix ui run lint:check
    npm --prefix ui run build
    ```
-   Spot-check routes: `/photo`, `/photo/work/<category>`, `/photo/work/projects/<slug>`.
+   Spot-check routes: `/photo`, `/photo/work/<category>`, `/photo/work/collections/<slug>`, `/photo/work/commissioned/<slug>`, `/photo/work/portraits/<subcategory>`, `/photo/work/series/<subcategory>`.
 
 ## Notes
 

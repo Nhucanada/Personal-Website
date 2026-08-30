@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
   Navigate,
+  useParams,
 } from 'react-router-dom';
 import {
   ThemeProvider,
@@ -17,8 +18,14 @@ import PhotographyHomePage from './pages/photography/PhotographyHomePage';
 import PhotographyPortfolioPage from './pages/photography/PhotographyPortfolioPage';
 import PhotographyWorkCategoryPage from './pages/photography/PhotographyWorkCategoryPage';
 import PhotographyContactPage from './pages/photography/PhotographyContactPage';
-import PhotographyProjectsPage from './pages/photography/PhotographyProjectsPage';
-import PhotographyProjectDetailPage from './pages/photography/PhotographyProjectDetailPage';
+import PhotographyCollectionsPage from './pages/photography/PhotographyCollectionsPage';
+import PhotographyCollectionDetailPage from './pages/photography/PhotographyCollectionDetailPage';
+import PhotographyCommissionedPage from './pages/photography/PhotographyCommissionedPage';
+import PhotographyCommissionedDetailPage from './pages/photography/PhotographyCommissionedDetailPage';
+import PhotographyPortraitsPage from './pages/photography/PhotographyPortraitsPage';
+import PhotographyPortraitsSubcategoryPage from './pages/photography/PhotographyPortraitsSubcategoryPage';
+import PhotographySeriesPage from './pages/photography/PhotographySeriesPage';
+import PhotographySeriesSubcategoryPage from './pages/photography/PhotographySeriesSubcategoryPage';
 import PhotographyImageViewPage from './pages/photography/PhotographyImageViewPage';
 import SoftwareHomePage from './pages/software/SoftwareHomePage';
 import SoftwareAboutPage from './pages/software/SoftwareAboutPage';
@@ -116,6 +123,16 @@ const theme = createTheme({
   },
 });
 
+function ProjectSlugRedirect() {
+  const { projectSlug } = useParams();
+  return <Navigate to={`/photo/work/collections/${projectSlug ?? ''}`} replace />;
+}
+
+function CampaignSlugRedirect() {
+  const { campaignSlug } = useParams();
+  return <Navigate to={`/photo/work/collections/${campaignSlug ?? ''}`} replace />;
+}
+
 function App() {
   const showUnderConstruction =
     process.env.NODE_ENV === 'production'
@@ -143,8 +160,18 @@ function App() {
       <Routes>
         <Route index element={<PhotographyHomePage />} />
         <Route path="work" element={<PhotographyPortfolioPage />} />
-        <Route path="work/projects" element={<PhotographyProjectsPage />} />
-        <Route path="work/projects/:projectSlug" element={<PhotographyProjectDetailPage />} />
+        <Route path="work/collections" element={<PhotographyCollectionsPage />} />
+        <Route path="work/collections/:collectionSlug" element={<PhotographyCollectionDetailPage />} />
+        <Route path="work/campaigns" element={<Navigate to="/photo/work/collections" replace />} />
+        <Route path="work/campaigns/:campaignSlug" element={<CampaignSlugRedirect />} />
+        <Route path="work/projects" element={<Navigate to="/photo/work/collections" replace />} />
+        <Route path="work/projects/:projectSlug" element={<ProjectSlugRedirect />} />
+        <Route path="work/commissioned" element={<PhotographyCommissionedPage />} />
+        <Route path="work/commissioned/:collectionSlug" element={<PhotographyCommissionedDetailPage />} />
+        <Route path="work/portraits" element={<PhotographyPortraitsPage />} />
+        <Route path="work/portraits/:subcategory" element={<PhotographyPortraitsSubcategoryPage />} />
+        <Route path="work/series" element={<PhotographySeriesPage />} />
+        <Route path="work/series/:subcategory" element={<PhotographySeriesSubcategoryPage />} />
         <Route path="work/:category" element={<PhotographyWorkCategoryPage />} />
         <Route path="portfolio" element={<Navigate to="/photo" replace />} />
         <Route path="image" element={<PhotographyImageViewPage />} />

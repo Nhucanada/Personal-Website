@@ -8,7 +8,9 @@ maps original paths to optimized ones.
 - Script: `ui/scripts/optimize-photos.js` (uses `sharp`).
 - Command: `npm --prefix ui run photos:optimize`.
 - Input: recursively scans `ui/public/photos`, skipping the `optimized/` subfolder.
-- Supported inputs: `.jpg`, `.jpeg`, `.png`, `.webp`.
+- Supported inputs: `.jpg`, `.jpeg`, `.png`, `.webp`. HEIC/HEIF files (`.heic`, `.heif`) are
+  automatically pre-converted to `.jpg` in-place using macOS `sips` before optimization — the
+  original HEIC is deleted and replaced by the converted JPG.
 - Output: `ui/public/photos/optimized/<same-relative-path>.webp`. The output folder is wiped
   and regenerated on each run.
 - Conversion: WebP `quality: 80`, `effort: 6`; `image.rotate()` honors EXIF orientation.
@@ -30,7 +32,9 @@ top of the script and rerun.
 Optimized (display) images:
 
 - Photography gallery pages: `PhotographyPortfolioPage`, `PhotographyWorkCategoryPage`,
-  `PhotographyProjectsPage`, `PhotographyProjectDetailPage`, `PhotographyAboutPage`.
+  `PhotographyCollectionsPage`, `PhotographyCollectionDetailPage`, `PhotographyCommissionedPage`,
+  `PhotographyCommissionedDetailPage`, `PhotographyPortraitsPage`, `PhotographyPortraitsSubcategoryPage`,
+  `PhotographySeriesPage`, `PhotographySeriesSubcategoryPage`, `PhotographyAboutPage`.
 
 Originals (intentional full-res):
 

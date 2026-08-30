@@ -1,12 +1,25 @@
 const fs = require('fs/promises');
 const path = require('path');
+const { execFile } = require('child_process');
+const { promisify } = require('util');
 const sharp = require('sharp');
+
+const execFileAsync = promisify(execFile);
 
 const PHOTOS_ROOT = path.resolve(__dirname, '../public/photos');
 const OUTPUT_ROOT = path.join(PHOTOS_ROOT, 'optimized');
 const SUPPORTED_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp']);
+const HEIC_EXTENSIONS = new Set(['.heic', '.heif']);
 const LANDSCAPE_SHORT_EDGE = 900;
 const PORTRAIT_SHORT_EDGE = 1000;
+
+const convertHeicToJpeg = async (heicPath) => {
+  const jpegPath = heicPath.replace(/\.[^.]+$/, '.jpg');
+  await execFileAsync('sips', ['-s', 'format', 'jpeg', heicPath, '--out', jpegPath]);
+  await fs.unlink(heicPath);
+  console.log(`[heic→jpg] ${path.relative(PHOTOS_ROOT, heicPath)} -> ${path.relative(PHOTOS_ROOT, jpegPath)}`);
+  return jpegPath;
+};
 
 const getAllPhotoFiles = async (directoryPath) => {
   const entries = await fs.readdir(directoryPath, { withFileTypes: true });
@@ -26,7 +39,10 @@ const getAllPhotoFiles = async (directoryPath) => {
     }
 
     const extension = path.extname(entry.name).toLowerCase();
-    if (SUPPORTED_EXTENSIONS.has(extension)) {
+    if (HEIC_EXTENSIONS.has(extension)) {
+      const converted = await convertHeicToJpeg(absolutePath);
+      files.push(converted);
+    } else if (SUPPORTED_EXTENSIONS.has(extension)) {
       files.push(absolutePath);
     }
   }

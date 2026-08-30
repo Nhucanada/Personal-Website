@@ -477,6 +477,11 @@
   padding: 6rem 2rem 2rem;
 }
 
+.selector-image-link {
+  display: contents;
+  cursor: pointer;
+}
+
 .selector-image {
   width: min(72vw, 980px);
   max-height: 78vh;

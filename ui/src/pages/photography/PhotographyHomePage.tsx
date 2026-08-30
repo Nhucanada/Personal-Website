@@ -11,16 +11,19 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../../styles/photography.css';
 
 const PhotographyHomePage: React.FC = () => (
   <div className="photo-site site-selector-page">
     <section className="selector-image-wrap">
-      <img
-        className="selector-image"
-        src="/photos/selector-background.jpg"
-        alt="Photography portfolio"
-      />
+      <Link to="/photo/work" className="selector-image-link">
+        <img
+          className="selector-image"
+          src="/photos/selector-background.jpg"
+          alt="Photography portfolio"
+        />
+      </Link>
     </section>
   </div>
 );

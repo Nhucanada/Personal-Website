@@ -4,6 +4,11 @@ import { portfolioPhotos, workCategories } from '../../data/photography';
 import { getOptimizedPhotoSrc } from '../../utils/photoOptimization';
 import '../../styles/photography.css';
 
+const workCategoryPaths: Record<string, string> = {
+  portraits: '/photo/work/portraits',
+  series: '/photo/work/series',
+};
+
 const PhotographyPortfolioPage: React.FC = () => {
   const location = useLocation();
   const buildImageViewPath = (src: string, title: string): string => {
@@ -19,9 +24,13 @@ const PhotographyPortfolioPage: React.FC = () => {
     <div className="photo-site">
       <section className="photo-body">
         <div className="photo-work-categories">
-          <Link to="/photo/work/projects">Projects</Link>
+          <Link to="/photo/work/collections">Collections</Link>
+          <Link to="/photo/work/commissioned">Commissioned</Link>
           {workCategories.map((category) => (
-            <Link key={category.slug} to={`/photo/work/${category.slug}`}>
+            <Link
+              key={category.slug}
+              to={workCategoryPaths[category.slug] ?? `/photo/work/${category.slug}`}
+            >
               {category.label}
             </Link>
           ))}

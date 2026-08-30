@@ -244,7 +244,7 @@ const SoftwareThreeScene: React.FC<Props> = ({ interactive = true }) => {
       renderer.dispose();
       if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement);
     };
-  }, []);
+  }, [interactive]);
 
   return <div ref={mountRef} className="sw-three-scene" />;
 };
