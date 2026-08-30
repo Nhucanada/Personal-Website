@@ -43,9 +43,11 @@ Optimized (display) images:
 Originals (intentional full-res):
 
 - `SiteSelectorPage` and `UnderConstructionPage` selector background.
-- `PhotographyHomePage` selector image (`selector-background.jpg`).
 
-Viewer (`/photo/image`) loads the viewer-tier JPEG via `getViewerPhotoSrc` (max height 1500px), not the original.
+Viewer-tier JPEG (max height 1500px):
+
+- `PhotographyImageViewPage` via `getViewerPhotoSrc`.
+- `PhotographyHomePage` selector image via `getViewerPhotoSrc('/photos/selector-background.jpg')`.
 
 ## When photos change
 

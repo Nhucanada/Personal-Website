@@ -12,6 +12,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getViewerPhotoSrc } from '../../utils/photoOptimization';
 import '../../styles/photography.css';
 
 const PhotographyHomePage: React.FC = () => (
@@ -20,7 +21,7 @@ const PhotographyHomePage: React.FC = () => (
       <Link to="/photo/work" className="selector-image-link">
         <img
           className="selector-image"
-          src="/photos/selector-background.jpg"
+          src={getViewerPhotoSrc('/photos/selector-background.jpg')}
           alt="Photography portfolio"
         />
       </Link>
