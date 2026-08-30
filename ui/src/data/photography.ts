@@ -40,8 +40,8 @@ export const workCategories: WorkCategory[] = [
     ],
   },
   {
-    slug: 'portraits',
-    label: 'Portraits',
+    slug: 'people',
+    label: 'People',
     photos: [],
   },
   {
@@ -55,13 +55,13 @@ export const getWorkCategoryBySlug = (slug: string): WorkCategory | undefined =>
   return workCategories.find((category) => category.slug === slug);
 };
 
-export const portraitPhotos: PhotoAsset[] = [
+export const peoplePhotos: PhotoAsset[] = [
   { title: 'R1-02085-025A-Edit', src: '/photos/Portraits/R1-02085-025A-Edit.jpg' },
   { title: 'R1-02135-0004-Edit-4-3', src: '/photos/Portraits/R1-02135-0004-Edit-4-3.jpg' },
   { title: 'R1-02136-0009-Edit-11', src: '/photos/Portraits/R1-02136-0009-Edit-11.jpg' },
 ];
 
-export const portraitSubcategories: WorkCategory[] = [
+export const peopleSubcategories: WorkCategory[] = [
   {
     slug: 'location',
     label: 'Location',
@@ -91,8 +91,8 @@ export const portraitSubcategories: WorkCategory[] = [
   },
 ];
 
-export const getPortraitSubcategoryBySlug = (slug: string): WorkCategory | undefined => {
-  return portraitSubcategories.find((sub) => sub.slug === slug);
+export const getPeopleSubcategoryBySlug = (slug: string): WorkCategory | undefined => {
+  return peopleSubcategories.find((sub) => sub.slug === slug);
 };
 
 export const seriesPhotos: PhotoAsset[] = [

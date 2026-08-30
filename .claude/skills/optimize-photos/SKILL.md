@@ -1,6 +1,6 @@
 ---
 name: optimize-photos
-description: Add, replace, or remove photography images and keep the optimized WebP assets and the static data file in sync. Use whenever files under ui/public/photos change or a photo collection needs updating.
+description: Add, replace, or remove photography images and keep the optimized JPEG assets and the static data file in sync. Use whenever files under ui/public/photos change or a photo collection needs updating.
 ---
 
 # Optimize & sync photography
@@ -13,15 +13,15 @@ needs to change. Context: `.claude/context/image-pipeline.md` and `.claude/conte
 1. **Place the source files** under `ui/public/photos/<Folder>/`. Folders map to collections:
    - `Portfolio/` → `portfolioPhotos` (the `/photo` grid).
    - `Polaroids/` → `workCategories` entries.
-   - `Portraits/` (root) → `portraitPhotos` (hub grid on `/photo/work/portraits`).
-   - `Portraits/Location/`, `Portraits/Studio/` → `portraitSubcategories` entries.
+   - `Portraits/` (root) → `peoplePhotos` (hub grid on `/photo/work/people`).
+   - `Portraits/Location/`, `Portraits/Studio/` → `peopleSubcategories` entries.
    - `Series/` (root) → `seriesPhotos` (hub grid on `/photo/work/series`).
    - `Series/Street/`, `Series/Motorsport/`, `Series/Landscape/` → `seriesSubcategories` entries.
    - `Projects/<Collection Name>/` → a `photoCollections` entry (`cover.jpg` is the cover).
    - `Commissioned/<Collection Name>/` → a `photoCommissioned` entry (first alphabetical file is cover if no `cover.jpg`).
    Keep originals full-resolution; the viewer serves these directly.
    HEIC/HEIF files are automatically converted to JPG by the optimizer (via `sips`), replacing
-   the original in-place before WebP generation.
+   the original in-place before JPEG optimization.
 
 2. **Regenerate optimized derivatives:**
    ```bash
@@ -35,8 +35,8 @@ needs to change. Context: `.claude/context/image-pipeline.md` and `.claude/conte
      `/photos/<Folder>/<file>` path (NOT the optimized path — the UI maps to optimized at
      runtime via `getOptimizedPhotoSrc`).
    - For a new category, add a `WorkCategory` (`slug`, `label`, `photos`).
-   - For a new portrait subcategory, add a `WorkCategory` to `portraitSubcategories`.
-   - For root-level portraits on the hub page, add `PhotoAsset` entries to `portraitPhotos`.
+   - For a new people subcategory, add a `WorkCategory` to `peopleSubcategories`.
+   - For root-level people photos on the hub page, add `PhotoAsset` entries to `peoplePhotos`.
    - For a new series subcategory, add a `WorkCategory` to `seriesSubcategories`.
    - For root-level series on the hub page, add `PhotoAsset` entries to `seriesPhotos`.
    - For a new collection, add a `PhotoProject` to `photoCollections` (`slug`, `label`, `coverSrc`, `photos`).
@@ -49,7 +49,7 @@ needs to change. Context: `.claude/context/image-pipeline.md` and `.claude/conte
    npm --prefix ui run lint:check
    npm --prefix ui run build
    ```
-   Spot-check routes: `/photo`, `/photo/work/<category>`, `/photo/work/collections/<slug>`, `/photo/work/commissioned/<slug>`, `/photo/work/portraits/<subcategory>`, `/photo/work/series/<subcategory>`.
+   Spot-check routes: `/photo`, `/photo/work/<category>`, `/photo/work/collections/<slug>`, `/photo/work/commissioned/<slug>`, `/photo/work/people/<subcategory>`, `/photo/work/series/<subcategory>`.
 
 ## Notes
 

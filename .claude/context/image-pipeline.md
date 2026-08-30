@@ -1,6 +1,6 @@
 # Image performance pipeline
 
-Two parts: a build-time optimizer that generates WebP derivatives, and a runtime helper that
+Two parts: a build-time optimizer that generates JPEG derivatives, and a runtime helper that
 maps original paths to optimized ones.
 
 ## Build-time optimizer
@@ -11,20 +11,24 @@ maps original paths to optimized ones.
 - Supported inputs: `.jpg`, `.jpeg`, `.png`, `.webp`. HEIC/HEIF files (`.heic`, `.heif`) are
   automatically pre-converted to `.jpg` in-place using macOS `sips` before optimization — the
   original HEIC is deleted and replaced by the converted JPG.
-- Output: `ui/public/photos/optimized/<same-relative-path>.webp`. The output folder is wiped
+- Output: `ui/public/photos/optimized/<same-relative-path>.jpg`. The output folder is wiped
   and regenerated on each run.
-- Conversion: WebP `quality: 80`, `effort: 6`; `image.rotate()` honors EXIF orientation.
+- Conversion: JPEG via mozjpeg; `image.rotate()` honors EXIF orientation. All outputs are
+  converted to sRGB (`.toColorspace('srgb')`) and tagged with an embedded sRGB ICC profile
+  (`.withMetadata({ icc: 'srgb' })`). Grid and viewer tiers both use JPEG `quality: 95`.
 - Resize (fit `inside`, `withoutEnlargement: true` — never upscales, preserves aspect ratio):
-  - Landscape (`width >= height`): short edge (height) target `900`.
-  - Portrait: short edge (width) target `1000`.
+  - Grid (`optimized/`): max width `900` (height scales proportionally).
+  - Viewer (`optimized/viewer/`): max height `1500` (width scales proportionally).
 
-To sharpen large-display rendering, raise `LANDSCAPE_SHORT_EDGE` / `PORTRAIT_SHORT_EDGE` at the
+To sharpen large-display rendering, raise `GRID_MAX_WIDTH` / `VIEWER_MAX_HEIGHT` at the
 top of the script and rerun.
 
 ## Runtime source mapping
 
-- Helper: `ui/src/utils/photoOptimization.ts` → `getOptimizedPhotoSrc(src)`.
-- Behavior: for a `/photos/...` path it returns `/photos/optimized/<path-without-ext>.webp`;
+- Helper: `ui/src/utils/photoOptimization.ts`
+  - `getOptimizedPhotoSrc(src)` → grid JPEG under `/photos/optimized/...`
+  - `getViewerPhotoSrc(src)` → viewer JPEG under `/photos/optimized/viewer/...` (max height 1500px)
+- Behavior: for a `/photos/...` path it returns `/photos/optimized/<path-without-ext>.jpg`;
   any non-`/photos/` path is returned unchanged.
 
 ## Where optimized vs original images are used
@@ -33,14 +37,15 @@ Optimized (display) images:
 
 - Photography gallery pages: `PhotographyPortfolioPage`, `PhotographyWorkCategoryPage`,
   `PhotographyCollectionsPage`, `PhotographyCollectionDetailPage`, `PhotographyCommissionedPage`,
-  `PhotographyCommissionedDetailPage`, `PhotographyPortraitsPage`, `PhotographyPortraitsSubcategoryPage`,
+  `PhotographyCommissionedDetailPage`, `PhotographyPeoplePage`, `PhotographyPeopleSubcategoryPage`,
   `PhotographySeriesPage`, `PhotographySeriesSubcategoryPage`, `PhotographyAboutPage`.
 
 Originals (intentional full-res):
 
 - `SiteSelectorPage` and `UnderConstructionPage` selector background.
-- The full-screen viewer `PhotographyImageViewPage` (`/photo/image`) always loads the original
-  from the `src` query param.
+- `PhotographyHomePage` selector image (`selector-background.jpg`).
+
+Viewer (`/photo/image`) loads the viewer-tier JPEG via `getViewerPhotoSrc` (max height 1500px), not the original.
 
 ## When photos change
 

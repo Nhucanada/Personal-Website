@@ -10,8 +10,8 @@ const PHOTOS_ROOT = path.resolve(__dirname, '../public/photos');
 const OUTPUT_ROOT = path.join(PHOTOS_ROOT, 'optimized');
 const SUPPORTED_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp']);
 const HEIC_EXTENSIONS = new Set(['.heic', '.heif']);
-const LANDSCAPE_SHORT_EDGE = 900;
-const PORTRAIT_SHORT_EDGE = 1000;
+const GRID_MAX_WIDTH = 900;
+const VIEWER_MAX_HEIGHT = 1500;
 
 const convertHeicToJpeg = async (heicPath) => {
   const jpegPath = heicPath.replace(/\.[^.]+$/, '.jpg');
@@ -50,36 +50,50 @@ const getAllPhotoFiles = async (directoryPath) => {
   return files;
 };
 
-const getResizeOptions = (width, height) => {
-  const isLandscape = width >= height;
-  const shortEdgeTarget = isLandscape ? LANDSCAPE_SHORT_EDGE : PORTRAIT_SHORT_EDGE;
+const getGridResizeOptions = () => ({
+  width: GRID_MAX_WIDTH,
+  fit: 'inside',
+  withoutEnlargement: true,
+});
 
-  return isLandscape
-    ? { height: shortEdgeTarget, fit: 'inside', withoutEnlargement: true }
-    : { width: shortEdgeTarget, fit: 'inside', withoutEnlargement: true };
+const writeOptimizedJpeg = async (image, outputPath, resizeOptions, quality) => {
+  await fs.mkdir(path.dirname(outputPath), { recursive: true });
+  await image
+    .clone()
+    .resize(resizeOptions)
+    .withMetadata({ icc: 'srgb' })
+    .jpeg({ quality, mozjpeg: true })
+    .toFile(outputPath);
 };
 
 const optimizePhoto = async (sourcePath) => {
   const relativePath = path.relative(PHOTOS_ROOT, sourcePath);
-  const outputRelativePath = relativePath.replace(/\.[^.]+$/, '.webp');
-  const outputPath = path.join(OUTPUT_ROOT, outputRelativePath);
+  const outputRelativePath = relativePath.replace(/\.[^.]+$/i, '.jpg');
+  const gridOutputPath = path.join(OUTPUT_ROOT, outputRelativePath);
+  const viewerOutputPath = path.join(OUTPUT_ROOT, 'viewer', outputRelativePath);
 
-  const image = sharp(sourcePath).rotate();
+  const image = sharp(sourcePath).rotate().toColorspace('srgb');
   const metadata = await image.metadata();
 
   if (!metadata.width || !metadata.height) {
     throw new Error(`Unable to read dimensions for ${relativePath}`);
   }
 
-  const resizeOptions = getResizeOptions(metadata.width, metadata.height);
+  const resizeOptions = getGridResizeOptions();
 
-  await fs.mkdir(path.dirname(outputPath), { recursive: true });
-  await image
-    .resize(resizeOptions)
-    .webp({ quality: 80, effort: 6 })
-    .toFile(outputPath);
+  await writeOptimizedJpeg(image, gridOutputPath, resizeOptions, 95);
+  await writeOptimizedJpeg(
+    image,
+    viewerOutputPath,
+    { height: VIEWER_MAX_HEIGHT, fit: 'inside', withoutEnlargement: true },
+    95,
+  );
 
-  return { source: relativePath, output: path.relative(PHOTOS_ROOT, outputPath) };
+  return {
+    source: relativePath,
+    output: path.relative(PHOTOS_ROOT, gridOutputPath),
+    viewerOutput: path.relative(PHOTOS_ROOT, viewerOutputPath),
+  };
 };
 
 const run = async () => {
@@ -94,9 +108,10 @@ const run = async () => {
   let optimizedCount = 0;
 
   for (const photoFile of photoFiles) {
-    const { source, output } = await optimizePhoto(photoFile);
+    const { source, output, viewerOutput } = await optimizePhoto(photoFile);
     optimizedCount += 1;
     console.log(`[optimized] ${source} -> ${output}`);
+    console.log(`[viewer] ${source} -> ${viewerOutput}`);
   }
 
   console.log(`Done. Optimized ${optimizedCount} photo(s).`);

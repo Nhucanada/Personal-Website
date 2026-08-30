@@ -22,8 +22,8 @@ import PhotographyCollectionsPage from './pages/photography/PhotographyCollectio
 import PhotographyCollectionDetailPage from './pages/photography/PhotographyCollectionDetailPage';
 import PhotographyCommissionedPage from './pages/photography/PhotographyCommissionedPage';
 import PhotographyCommissionedDetailPage from './pages/photography/PhotographyCommissionedDetailPage';
-import PhotographyPortraitsPage from './pages/photography/PhotographyPortraitsPage';
-import PhotographyPortraitsSubcategoryPage from './pages/photography/PhotographyPortraitsSubcategoryPage';
+import PhotographyPeoplePage from './pages/photography/PhotographyPeoplePage';
+import PhotographyPeopleSubcategoryPage from './pages/photography/PhotographyPeopleSubcategoryPage';
 import PhotographySeriesPage from './pages/photography/PhotographySeriesPage';
 import PhotographySeriesSubcategoryPage from './pages/photography/PhotographySeriesSubcategoryPage';
 import PhotographyImageViewPage from './pages/photography/PhotographyImageViewPage';
@@ -133,6 +133,11 @@ function CampaignSlugRedirect() {
   return <Navigate to={`/photo/work/collections/${campaignSlug ?? ''}`} replace />;
 }
 
+function PortraitSubcategoryRedirect() {
+  const { subcategory } = useParams();
+  return <Navigate to={`/photo/work/people/${subcategory ?? ''}`} replace />;
+}
+
 function App() {
   const showUnderConstruction =
     process.env.NODE_ENV === 'production'
@@ -168,8 +173,10 @@ function App() {
         <Route path="work/projects/:projectSlug" element={<ProjectSlugRedirect />} />
         <Route path="work/commissioned" element={<PhotographyCommissionedPage />} />
         <Route path="work/commissioned/:collectionSlug" element={<PhotographyCommissionedDetailPage />} />
-        <Route path="work/portraits" element={<PhotographyPortraitsPage />} />
-        <Route path="work/portraits/:subcategory" element={<PhotographyPortraitsSubcategoryPage />} />
+        <Route path="work/people" element={<PhotographyPeoplePage />} />
+        <Route path="work/people/:subcategory" element={<PhotographyPeopleSubcategoryPage />} />
+        <Route path="work/portraits" element={<Navigate to="/photo/work/people" replace />} />
+        <Route path="work/portraits/:subcategory" element={<PortraitSubcategoryRedirect />} />
         <Route path="work/series" element={<PhotographySeriesPage />} />
         <Route path="work/series/:subcategory" element={<PhotographySeriesSubcategoryPage />} />
         <Route path="work/:category" element={<PhotographyWorkCategoryPage />} />

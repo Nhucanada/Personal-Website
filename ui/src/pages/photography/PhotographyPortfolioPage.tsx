@@ -5,7 +5,7 @@ import { getOptimizedPhotoSrc } from '../../utils/photoOptimization';
 import '../../styles/photography.css';
 
 const workCategoryPaths: Record<string, string> = {
-  portraits: '/photo/work/portraits',
+  people: '/photo/work/people',
   series: '/photo/work/series',
 };
 

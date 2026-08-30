@@ -262,7 +262,7 @@ const SiteSelectorPage: React.FC = () => {
           <div className="photo-nav-links">
             <Link to="/photo">Home</Link>
             <Link to="/photo/work">Work</Link>
-            <Link to="/photo/about">About</Link>
+            <Link to="/photo/about">Nathan Who?</Link>
             <Link to="/photo/contact">Contact</Link>
           </div>
         </nav>

@@ -33,11 +33,9 @@ const PhotographyAboutPage: React.FC = () => {
             was one of 5 winners of the PPU Photo Exhibition.
           </p>
           <p className="photo-about-description">
-            Nathan is the VP Tech and Darkroom of MUPSS, providing cameras and
-            maintaining a low cost darkroom for students. He is also the co-president of
-            PPU, providing low cost professional photo services for student
-            organizations. He is also a moderator of the analog community Toronto Analog
-            Friends.
+            At McGill, Nathan is the VP Tech and Darkroom of MUPSS, as well as the
+            Co-President of PPU. He is also a moderator of the analog community Toronto
+            Analog Friends.
           </p>
           <p className="photo-about-description">
             Nathan currently focuses on portraiture and street photography, with the

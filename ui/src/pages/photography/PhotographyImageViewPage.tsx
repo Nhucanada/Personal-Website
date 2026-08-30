@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Navigate, useSearchParams } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { getViewerPhotoSrc } from '../../utils/photoOptimization';
 import '../../styles/photography.css';
 
 const PhotographyImageViewPage: React.FC = () => {
@@ -8,6 +9,7 @@ const PhotographyImageViewPage: React.FC = () => {
   const src = searchParams.get('src');
   const title = searchParams.get('title') || 'Photo';
   const returnTo = searchParams.get('returnTo') || '/photo';
+  const viewerSrc = src ? getViewerPhotoSrc(src) : null;
 
   React.useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -31,7 +33,7 @@ const PhotographyImageViewPage: React.FC = () => {
             back
           </Link>
         </div>
-        <img className="photo-image-view-full" src={src} alt={title} />
+        <img className="photo-image-view-full" src={viewerSrc ?? undefined} alt={title} />
       </section>
     </div>
   );

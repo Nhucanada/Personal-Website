@@ -49,8 +49,10 @@ Photography nested routes (under `/photo`):
 - `work/projects/:projectSlug` → redirect to `/photo/work/collections/:projectSlug` (backwards compat)
 - `work/commissioned` → `PhotographyCommissionedPage`
 - `work/commissioned/:collectionSlug` → `PhotographyCommissionedDetailPage`
-- `work/portraits` → `PhotographyPortraitsPage`
-- `work/portraits/:subcategory` → `PhotographyPortraitsSubcategoryPage`
+- `work/people` → `PhotographyPeoplePage`
+- `work/people/:subcategory` → `PhotographyPeopleSubcategoryPage`
+- `work/portraits` → redirect to `/photo/work/people` (backwards compat)
+- `work/portraits/:subcategory` → redirect to `/photo/work/people/:subcategory` (backwards compat)
 - `work/series` → `PhotographySeriesPage`
 - `work/series/:subcategory` → `PhotographySeriesSubcategoryPage`
 - `work/:category` → `PhotographyWorkCategoryPage`
@@ -83,8 +85,8 @@ All of `ui/src` is live; the old dashboard pages/components/hooks/API client wer
 - `pages/photography/PhotographyCollectionDetailPage.tsx` — a collection's image set.
 - `pages/photography/PhotographyCommissionedPage.tsx` — commissioned collection covers at `/photo/work/commissioned`.
 - `pages/photography/PhotographyCommissionedDetailPage.tsx` — a commissioned collection's image set at `/photo/work/commissioned/:collectionSlug`.
-- `pages/photography/PhotographyPortraitsPage.tsx` — portraits hub at `/photo/work/portraits` with Location/Studio subcategory links.
-- `pages/photography/PhotographyPortraitsSubcategoryPage.tsx` — portrait subcategory grid at `/photo/work/portraits/:subcategory`.
+- `pages/photography/PhotographyPeoplePage.tsx` — people hub at `/photo/work/people` with Location/Studio subcategory links.
+- `pages/photography/PhotographyPeopleSubcategoryPage.tsx` — people subcategory grid at `/photo/work/people/:subcategory`.
 - `pages/photography/PhotographySeriesPage.tsx` — series hub at `/photo/work/series` with Street/Motorsport/Landscape subcategory links.
 - `pages/photography/PhotographySeriesSubcategoryPage.tsx` — series subcategory grid at `/photo/work/series/:subcategory`.
 - `pages/photography/PhotographyImageViewPage.tsx` — full-screen viewer at `/photo/image`.
@@ -97,8 +99,7 @@ All of `ui/src` is live; the old dashboard pages/components/hooks/API client wer
 - `pages/software/SoftwareProjectsPage.tsx` — filterable project card grid from static data.
 - `pages/software/SoftwareExperiencePage.tsx` — timeline-style experience cards from static data.
 - `pages/software/SoftwareContactPage.tsx` — dark contact form + social links (GitHub/LinkedIn/Email).
-- `components/PhotographyNav.tsx` — brand `Nathan Hu` (→ `/`), links Work (→ `/photo/work`) /
-  About / Contact. `isPathActive` for Work checks `pathname.startsWith('/photo/work')`.
+- `components/PhotographyNav.tsx` — brand `Nathan Hu` (→ `/`), links Home / Work / Nathan Who? / Contact.
 - `components/SoftwareNav.tsx` — brand `Nathan Hu` (→ `/`), links Work/Projects/About/Contact + Résumé button.
 
 There are currently no frontend test files (the old dashboard test suite was removed with the
@@ -108,15 +109,15 @@ pages it covered). `ui/src/setupTests.ts` remains as CRA scaffolding for future 
 
 - `/photo` → `PhotographyHomePage` (landing; shows `selector-background.jpg`).
 - `/photo/work` → `PhotographyPortfolioPage` (portfolio grid from `portfolioPhotos`).
-- Category row on portfolio: `Collections` + `Commissioned` + folder categories from data (`Polaroids`, `Portraits`, `Series`).
+- Category row on portfolio: `Collections` + `Commissioned` + folder categories from data (`Polaroids`, `People`, `Series`).
 - Category pages use a photo grid layout; back button returns to `/photo/work`.
-- Portraits (`/photo/work/portraits`) is a hub with subcategory links (`Location`, `Studio`) formatted like the work category row, plus a photo grid from `portraitPhotos` (root-level images in `Portraits/`). Subcategory pages at `/photo/work/portraits/:subcategory` show the photo grid; back returns to `/photo/work/portraits`. Source images live under `ui/public/photos/Portraits/`, `Portraits/Location/`, and `Portraits/Studio/`.
-- Series (`/photo/work/series`) mirrors Portraits: hub with subcategory links (`Street`, `Motorsport`, `Landscape`) plus a photo grid from `seriesPhotos` (root-level images in `Series/`). Subcategory pages at `/photo/work/series/:subcategory` show the photo grid; back returns to `/photo/work/series`. Source images live under `ui/public/photos/Series/`, `Series/Street/`, `Series/Motorsport/`, and `Series/Landscape/`.
+- People (`/photo/work/people`) is a hub with subcategory links (`Location`, `Studio`) formatted like the work category row, plus a photo grid from `peoplePhotos` (root-level images in `Portraits/`). Subcategory pages at `/photo/work/people/:subcategory` show the photo grid; back returns to `/photo/work/people`. Source images live under `ui/public/photos/Portraits/`, `Portraits/Location/`, and `Portraits/Studio/`.
+- Series (`/photo/work/series`) mirrors People: hub with subcategory links (`Street`, `Motorsport`, `Landscape`) plus a photo grid from `seriesPhotos` (root-level images in `Series/`). Subcategory pages at `/photo/work/series/:subcategory` show the photo grid; back returns to `/photo/work/series`. Source images live under `ui/public/photos/Series/`, `Series/Street/`, `Series/Motorsport/`, and `Series/Landscape/`.
 - Collections section (`/photo/work/collections`): cover grid → detail grid. Detail back returns to `/photo/work/collections`. Data in `photoCollections`; lookup via `getPhotoCollectionBySlug`. Source images live under `ui/public/photos/Projects/<Collection Name>/`.
 - Commissioned section (`/photo/work/commissioned`): cover grid → detail grid. Detail back returns to `/photo/work/commissioned`. Data in `photoCommissioned`; lookup via `getCommissionedBySlug`. Source images live under `ui/public/photos/Commissioned/<Collection Name>/`.
-- Clicking any image opens `/photo/image` with query params `src` (original full-res),
-  `title`, and `returnTo`. The viewer locks body scroll while mounted and always shows the
-  original (non-optimized) image.
+- Clicking any image opens `/photo/image` with query params `src` (original path for lookup),
+  `title`, and `returnTo`. The viewer loads the viewer-tier optimized JPEG (max height 1500px)
+  via `getViewerPhotoSrc` and locks body scroll while mounted.
 
 ## Styling
 
@@ -139,13 +140,13 @@ Static photo data: `ui/src/data/photography.ts`, exporting:
 
 - `portfolioPhotos: PhotoAsset[]`
 - `workCategories: WorkCategory[]` (slug, label, photos)
-- `portraitPhotos: PhotoAsset[]` (root-level portraits on the hub page)
-- `portraitSubcategories: WorkCategory[]` (slug, label, photos — Location, Studio)
+- `peoplePhotos: PhotoAsset[]` (root-level people photos on the hub page)
+- `peopleSubcategories: WorkCategory[]` (slug, label, photos — Location, Studio)
 - `seriesPhotos: PhotoAsset[]` (root-level series on the hub page)
 - `seriesSubcategories: WorkCategory[]` (slug, label, photos — Street, Motorsport, Landscape)
 - `photoCollections: PhotoProject[]` (slug, label, coverSrc, photos)
 - `photoCommissioned: PhotoProject[]` (same interface; slug, label, coverSrc, photos)
-- lookups `getWorkCategoryBySlug`, `getPortraitSubcategoryBySlug`, `getSeriesSubcategoryBySlug`, `getPhotoCollectionBySlug`, `getCommissionedBySlug`
+- lookups `getWorkCategoryBySlug`, `getPeopleSubcategoryBySlug`, `getSeriesSubcategoryBySlug`, `getPhotoCollectionBySlug`, `getCommissionedBySlug`
 
 Image `src` values are `/photos/...` paths resolved at runtime through the optimizer helper
 (see `image-pipeline.md`). When photo files are added/removed/renamed, update this file and
