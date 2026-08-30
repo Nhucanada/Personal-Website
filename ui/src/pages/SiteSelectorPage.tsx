@@ -17,6 +17,7 @@
 
 import React, { useCallback, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import SoftwareThreeScene from '../components/SoftwareThreeScene';
 import '../styles/photography.css';
 import '../styles/software.css';
 import '../styles/selector.css';
@@ -236,9 +237,7 @@ const SiteSelectorPage: React.FC = () => {
 
         <div className="sel-body--sw">
           <div className="sw-home-placeholder">
-            <span className="sw-home-ph-eyebrow">— software</span>
-            <h2 className="sw-home-ph-name">Nathan Hu</h2>
-            <p className="sw-home-ph-sub">Software Engineer · Computer Science &amp; AI</p>
+            <SoftwareThreeScene interactive={false} />
           </div>
         </div>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../styles/software.css';
 
@@ -11,9 +11,17 @@ const isActive = (pathname: string, candidate: string): boolean => {
 
 const SoftwareNav: React.FC = () => {
   const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <nav className="sw-nav">
+    <nav className={`sw-nav${scrolled ? ' sw-nav--scrolled' : ''}`}>
       <Link to="/" state={{ from: 'software' }} aria-label="Go back to site selector" className="sw-nav-brand">
         Nathan Hu
       </Link>

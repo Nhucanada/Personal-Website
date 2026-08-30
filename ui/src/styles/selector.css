@@ -80,7 +80,16 @@
   padding: 6rem 2rem 2rem;
 }
 
-/* Placeholder uses .sw-home-placeholder / .sw-home-ph-* from software.css directly. */
+/* Disable the grow/zoom hint when the placeholder is inside the selector */
+.sel-layer--sw .sw-home-placeholder {
+  cursor: default;
+}
+
+.sel-layer--sw .sw-home-placeholder:hover {
+  transform: none;
+  border-color: rgba(100, 212, 232, 0.14);
+  box-shadow: none;
+}
 
 /* ── Photography layer (front — clipped to left of divider) ──────────── */
 

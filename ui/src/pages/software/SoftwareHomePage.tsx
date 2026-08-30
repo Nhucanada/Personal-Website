@@ -14,60 +14,78 @@
  * The SoftwareNav (rendered by App.tsx) provides navigation.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import SoftwareThreeScene from '../../components/SoftwareThreeScene';
 import '../../styles/software.css';
 
-const SoftwareHomePage: React.FC = () => (
-  <div className="sw-site">
+const SoftwareHomePage: React.FC = () => {
+  const [expanded, setExpanded] = useState(false);
 
-    {/* ── Visual section — matches selector right side ──────────────── */}
-    <section className="sw-home-visual">
-      <div className="sw-home-placeholder">
-        <span className="sw-home-ph-eyebrow">— software</span>
-        <h1 className="sw-home-ph-name">Nathan Hu</h1>
-        <p className="sw-home-ph-sub">Software Engineer · Computer Science &amp; AI</p>
-      </div>
-    </section>
+  return (
+    <div className="sw-site">
 
-    {/* ── Detailed hero — scrollable below the visual ───────────────── */}
-    <section className="sw-hero">
-      <div className="sw-hero-content">
-        <p className="sw-eyebrow">Software Engineer · Computer Science &amp; AI @ McGill</p>
-        <p className="sw-hero-name" style={{ fontSize: 'clamp(3rem, 7vw, 6rem)', fontWeight: 600 }}>
-          Nathan Hu
-        </p>
-        <p className="sw-hero-title">
-          Building clean, reliable software from backend to frontend.
-        </p>
-        <p className="sw-hero-bio">
-          I&apos;m a Computer Science &amp; Artificial Intelligence student at McGill University
-          with internship experience at companies like PointClickCare, Intact, and 360insights.
-          I care about well-tested code, pragmatic tooling, and systems that hold up.
-        </p>
-        <div className="sw-hero-cta">
-          <Link className="sw-btn-primary" to="/dev/work">
-            View Experience
-          </Link>
-          <Link className="sw-btn-ghost" to="/dev/projects">
-            Projects
-          </Link>
-          <Link className="sw-btn-ghost" to="/dev/about">
-            About
-          </Link>
-          <a
-            className="sw-btn-ghost"
-            href="/documents/Nathan_Hu_Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Résumé ↗
-          </a>
+      {/* ── Visual section — matches selector right side ──────────────── */}
+      <section className="sw-home-visual">
+        <div
+          className={`sw-home-placeholder${expanded ? ' sw-expanded' : ''}`}
+          onClick={!expanded ? () => setExpanded(true) : undefined}
+          role={!expanded ? 'button' : undefined}
+          tabIndex={!expanded ? 0 : undefined}
+          onKeyDown={!expanded ? (e) => e.key === 'Enter' && setExpanded(true) : undefined}
+        >
+          <SoftwareThreeScene />
+          {expanded && (
+            <button
+              className="sw-scene-close-btn"
+              onClick={() => setExpanded(false)}
+              aria-label="Close fullscreen"
+            >
+              ✕
+            </button>
+          )}
         </div>
-      </div>
-    </section>
+      </section>
 
-  </div>
-);
+      {/* ── Detailed hero — scrollable below the visual ───────────────── */}
+      <section className="sw-hero">
+        <div className="sw-hero-content">
+          <p className="sw-eyebrow">Software Engineer · Computer Science &amp; AI @ McGill</p>
+          <p className="sw-hero-name" style={{ fontSize: 'clamp(3rem, 7vw, 6rem)', fontWeight: 600 }}>
+            Nathan Hu
+          </p>
+          <p className="sw-hero-title">
+            Building clean, reliable software from backend to frontend.
+          </p>
+          <p className="sw-hero-bio">
+            I&apos;m a Computer Science &amp; Artificial Intelligence student at McGill University
+            with internship experience at companies like PointClickCare, Intact, and 360insights.
+            I care about well-tested code, pragmatic tooling, and systems that hold up.
+          </p>
+          <div className="sw-hero-cta">
+            <Link className="sw-btn-primary" to="/dev/work">
+              View Experience
+            </Link>
+            <Link className="sw-btn-ghost" to="/dev/projects">
+              Projects
+            </Link>
+            <Link className="sw-btn-ghost" to="/dev/about">
+              About
+            </Link>
+            <a
+              className="sw-btn-ghost"
+              href="/documents/Nathan_Hu_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Résumé ↗
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  );
+};
 
 export default SoftwareHomePage;
