@@ -18,15 +18,19 @@ Entry: `index.html` → `src/index.tsx` → `src/App.tsx`. Global reset styles l
 
 ## Routing
 
-Top-level routes in `src/App.tsx`:
+Top-level routes in `src/App.tsx` (driven by production feature flags in `src/utils/featureFlags.ts`):
 
-- `/` → `UnderConstructionPage` if `import.meta.env.PROD` **and**
-  `import.meta.env.VITE_SITE_UNDER_CONSTRUCTION === 'true'`, otherwise `SiteSelectorPage`.
-- `/dev/*` → software layout (`SoftwareNav` + nested routes below).
-- `/photo/*` → photography layout (`PhotographyNav` + nested routes below).
+- `/` →
+  - `UnderConstructionPage` if in `PROD` and `VITE_SITE_UNDER_CONSTRUCTION=true` (or both section flags are `true`).
+  - Redirects to `/photo` if in `PROD` and `VITE_SWE_UNDER_CONSTRUCTION=true` (current `.env.production` default).
+  - Redirects to `/dev` if in `PROD` and `VITE_PHOTO_UNDER_CONSTRUCTION=true`.
+  - Otherwise `SiteSelectorPage`.
+- `/dev/*` → software layout (`SoftwareNav` + nested routes below), or redirects to `/photo` (or `/` if full site is under construction) when SWE is disabled in `PROD`.
+- `/photo/*` → photography layout (`PhotographyNav` + nested routes below), or redirects to `/dev` (or `/` if full site is under construction) when Photography is disabled in `PROD`.
 - Legacy redirects: `/about`, `/projects`, `/experience`, `/education`, `/ai`, `/contact`
-  → `/dev/...` equivalents.
+  → `/dev/...` equivalents (which chain-redirect to `/photo` when SWE is disabled in `PROD`).
 - `*` → redirect to `/`.
+- Nav brand links (`PhotographyNav`, `SoftwareNav`): point to `/` (site selector) when both sections are enabled, or to the active section root (`/photo` or `/dev`) when the selector is disabled.
 
 Software nested routes (under `/dev`):
 
@@ -88,6 +92,7 @@ Vitest + React Testing Library tests live alongside source files:
 
 - `src/setupTests.ts` — JSDOM mocks (`matchMedia`, `IntersectionObserver`, `ResizeObserver`).
 - `src/utils/photoOptimization.test.ts` — unit tests for grid and viewer path resolution.
-- `src/App.test.tsx` — routing and legacy redirect tests via `MemoryRouter` + `AppRoutes`.
+- `src/utils/featureFlags.test.ts` — unit tests for production and section-level construction flags.
+- `src/App.test.tsx` — routing, feature flag redirects, and legacy redirect tests via `MemoryRouter` + `AppRoutes`.
 - `src/pages/SiteSelectorPage.test.tsx` — split-screen selector rendering and link verification.
 - `src/pages/software/SoftwareProjectsPage.test.tsx` — project rendering and filter toggle tests.

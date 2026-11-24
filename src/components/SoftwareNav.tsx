@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { getFeatureFlags } from '../utils/featureFlags';
 import '../styles/software.css';
 
 const isActive = (pathname: string, candidate: string): boolean => {
@@ -12,6 +13,7 @@ const isActive = (pathname: string, candidate: string): boolean => {
 const SoftwareNav: React.FC = () => {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
+  const { selectorEnabled } = getFeatureFlags();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -22,7 +24,12 @@ const SoftwareNav: React.FC = () => {
 
   return (
     <nav className={`sw-nav${scrolled ? ' sw-nav--scrolled' : ''}`}>
-      <Link to="/" state={{ from: 'software' }} aria-label="Go back to site selector" className="sw-nav-brand">
+      <Link
+        to={selectorEnabled ? '/' : '/dev'}
+        state={selectorEnabled ? { from: 'software' } : undefined}
+        aria-label={selectorEnabled ? 'Go back to site selector' : undefined}
+        className="sw-nav-brand"
+      >
         Nathan Hu
       </Link>
       <div className="sw-nav-links">

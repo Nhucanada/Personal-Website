@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { getFeatureFlags } from '../utils/featureFlags';
 import '../styles/photography.css';
 
 const isPathActive = (pathname: string, candidate: string): boolean => {
@@ -14,10 +15,16 @@ const isPathActive = (pathname: string, candidate: string): boolean => {
 
 const PhotographyNav: React.FC = () => {
   const location = useLocation();
+  const { selectorEnabled } = getFeatureFlags();
 
   return (
     <nav className="photo-nav">
-      <Link to="/" state={{ from: 'photo' }} aria-label="Go back to site selector" className="photo-nav-brand">
+      <Link
+        to={selectorEnabled ? '/' : '/photo'}
+        state={selectorEnabled ? { from: 'photo' } : undefined}
+        aria-label={selectorEnabled ? 'Go back to site selector' : undefined}
+        className="photo-nav-brand"
+      >
         Nathan Hu
       </Link>
       <div className="photo-nav-links">

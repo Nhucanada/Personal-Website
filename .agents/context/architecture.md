@@ -57,5 +57,5 @@ Create React App toolchain, and Material UI dependencies were removed.
     ├── data/                   # photography.ts, software.ts
     ├── pages/                  # SiteSelectorPage, UnderConstructionPage, photography/*, software/*
     ├── styles/                 # base.css, photography.css, selector.css, software.css
-    └── utils/                  # photoOptimization.ts
+    └── utils/                  # featureFlags.ts, photoOptimization.ts
 ```

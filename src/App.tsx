@@ -29,6 +29,7 @@ import SoftwareExperiencePage from './pages/software/SoftwareExperiencePage';
 import SoftwareContactPage from './pages/software/SoftwareContactPage';
 import SoftwareNav from './components/SoftwareNav';
 import PhotographyNav from './components/PhotographyNav';
+import { getFeatureFlags } from './utils/featureFlags';
 
 function ProjectSlugRedirect() {
   const { projectSlug } = useParams();
@@ -46,12 +47,7 @@ function PortraitSubcategoryRedirect() {
 }
 
 export function AppRoutes() {
-  const showUnderConstruction =
-    import.meta.env.PROD
-    && (
-      import.meta.env.VITE_SITE_UNDER_CONSTRUCTION === 'true'
-      || import.meta.env.REACT_APP_SITE_UNDER_CONSTRUCTION === 'true'
-    );
+  const { siteUnderConstruction, sweEnabled, photoEnabled } = getFeatureFlags();
 
   const softwareLayout = (
     <>
@@ -98,11 +94,40 @@ export function AppRoutes() {
     </>
   );
 
+  let rootElement: React.ReactElement;
+  if (siteUnderConstruction) {
+    rootElement = <UnderConstructionPage />;
+  } else if (!sweEnabled) {
+    rootElement = <Navigate to="/photo" replace />;
+  } else if (!photoEnabled) {
+    rootElement = <Navigate to="/dev" replace />;
+  } else {
+    rootElement = <SiteSelectorPage />;
+  }
+
+  let devElement: React.ReactElement;
+  if (siteUnderConstruction) {
+    devElement = <Navigate to="/" replace />;
+  } else if (!sweEnabled) {
+    devElement = <Navigate to="/photo" replace />;
+  } else {
+    devElement = softwareLayout;
+  }
+
+  let photoElement: React.ReactElement;
+  if (siteUnderConstruction) {
+    photoElement = <Navigate to="/" replace />;
+  } else if (!photoEnabled) {
+    photoElement = <Navigate to="/dev" replace />;
+  } else {
+    photoElement = photographyLayout;
+  }
+
   return (
     <Routes>
-      <Route path="/" element={showUnderConstruction ? <UnderConstructionPage /> : <SiteSelectorPage />} />
-      <Route path="/dev/*" element={softwareLayout} />
-      <Route path="/photo/*" element={photographyLayout} />
+      <Route path="/" element={rootElement} />
+      <Route path="/dev/*" element={devElement} />
+      <Route path="/photo/*" element={photoElement} />
 
       {/* Backward-compatible redirects for old software URLs */}
       <Route path="/about" element={<Navigate to="/dev/about" replace />} />
