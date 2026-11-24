@@ -1,0 +1,19 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #f6f4ef;
+  color: #1f1f1f;
+  font-family: "Minion Pro", Garamond, "Adobe Garamond Pro", "Times New Roman", serif;
+  line-height: 1.5;
+}
