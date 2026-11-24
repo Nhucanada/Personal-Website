@@ -417,7 +417,40 @@
   background: var(--sw-border);
 }
 
-/* ── Project cards ────────────────────────────────────── */
+/* ── Project filters & cards ──────────────────────────── */
+
+.sw-filter-row {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.sw-filter-btn {
+  background: transparent;
+  border: 1px solid var(--sw-border);
+  border-radius: 3px;
+  color: var(--sw-text-muted);
+  font-family: var(--sw-font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.sw-filter-btn:hover,
+.sw-filter-btn:focus-visible {
+  border-color: var(--sw-border-hover);
+  color: var(--sw-text);
+  outline: none;
+}
+
+.sw-filter-btn.active {
+  background: var(--sw-accent-dim);
+  border-color: rgba(100, 212, 232, 0.45);
+  color: var(--sw-accent);
+}
 
 .sw-project-grid {
   display: grid;

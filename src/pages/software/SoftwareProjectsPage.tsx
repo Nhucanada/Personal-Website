@@ -20,24 +20,14 @@ const SoftwareProjectsPage: React.FC = () => {
           <div className="sw-section-rule" />
         </div>
 
-        <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '2rem' }}>
+        <div className="sw-filter-row">
           {(['all', 'featured'] as Filter[]).map((f) => (
             <button
               key={f}
+              type="button"
               onClick={() => setFilter(f)}
-              style={{
-                background: filter === f ? 'var(--sw-accent-dim)' : 'transparent',
-                border: `1px solid ${filter === f ? 'rgba(100,212,232,0.45)' : 'var(--sw-border)'}`,
-                borderRadius: '3px',
-                color: filter === f ? 'var(--sw-accent)' : 'var(--sw-text-muted)',
-                fontFamily: 'var(--sw-font-mono)',
-                fontSize: '0.68rem',
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                padding: '0.3rem 0.9rem',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
-              }}
+              className={`sw-filter-btn${filter === f ? ' active' : ''}`}
+              aria-pressed={filter === f}
             >
               {f}
             </button>

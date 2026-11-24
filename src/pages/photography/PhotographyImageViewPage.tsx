@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link, Navigate, useSearchParams } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowBackIcon } from '../../components/Icons';
 import { getViewerPhotoSrc } from '../../utils/photoOptimization';
 import '../../styles/photography.css';
 
 const PhotographyImageViewPage: React.FC = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const src = searchParams.get('src');
   const title = searchParams.get('title') || 'Photo';
   const returnTo = searchParams.get('returnTo') || '/photo';
@@ -15,10 +16,19 @@ const PhotographyImageViewPage: React.FC = () => {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        navigate(returnTo);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
     return () => {
       document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [navigate, returnTo]);
 
   if (!src) {
     return <Navigate to="/photo" replace />;

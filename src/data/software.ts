@@ -39,8 +39,8 @@ export const projects: SoftwareProject[] = [
     id: 2,
     title: 'Personal Website',
     description:
-      'A full-stack personal portfolio website with a split-screen selector, a photography portfolio, and a software section. Built with React, TypeScript, Material UI, and Spring Boot in a Maven multi-module monorepo.',
-    tech: ['React', 'TypeScript', 'Spring Boot', 'Material-UI', 'Maven'],
+      'A dual-identity personal portfolio featuring a 60fps cursor-driven split-screen selector, an interactive Three.js isometric room, and a photography section backed by a two-tier sharp/mozjpeg image optimization pipeline.',
+    tech: ['React', 'TypeScript', 'Vite', 'Three.js', 'Vitest', 'sharp'],
     github: 'https://github.com/Nhucanada/Personal-Website',
     featured: true,
   },

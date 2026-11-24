@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { AppRoutes } from './App';
@@ -76,5 +76,18 @@ describe('AppRoutes', () => {
   it('redirects legacy /photo/work/portraits/:subcategory to /photo/work/people/:subcategory', () => {
     renderAtRoute('/photo/work/portraits/studio');
     expect(screen.getByText('Studio')).toBeInTheDocument();
+  });
+
+  it('returns to returnTo route when Escape is pressed on the full-screen photo viewer', () => {
+    renderAtRoute(
+      '/photo/image?src=%2Fphotos%2FPortfolio%2FAA023.jpg&title=AA023&returnTo=%2Fphoto%2Fwork',
+    );
+    expect(screen.getByRole('img', { name: 'AA023' })).toHaveAttribute(
+      'src',
+      '/photos/optimized/viewer/Portfolio/AA023.jpg',
+    );
+
+    fireEvent.keyDown(window, { key: 'Escape' });
+    expect(screen.getByRole('link', { name: 'Collections' })).toBeInTheDocument();
   });
 });
