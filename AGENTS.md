@@ -44,7 +44,7 @@ Run from the repo root:
 
 ## Environment config
 
-- Construction gate: `VITE_SITE_UNDER_CONSTRUCTION=true` **and** `import.meta.env.PROD` (see `.env.example`).
+- Construction gate: `VITE_SITE_UNDER_CONSTRUCTION=true` (or legacy `REACT_APP_SITE_UNDER_CONSTRUCTION=true`, exposed via `envPrefix: ['VITE_', 'REACT_APP_']` in `vite.config.ts`) **and** `import.meta.env.PROD` (see `.env.example`).
 
 ## Conventions
 

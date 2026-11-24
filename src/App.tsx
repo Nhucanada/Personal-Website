@@ -48,7 +48,10 @@ function PortraitSubcategoryRedirect() {
 export function AppRoutes() {
   const showUnderConstruction =
     import.meta.env.PROD
-    && import.meta.env.VITE_SITE_UNDER_CONSTRUCTION === 'true';
+    && (
+      import.meta.env.VITE_SITE_UNDER_CONSTRUCTION === 'true'
+      || import.meta.env.REACT_APP_SITE_UNDER_CONSTRUCTION === 'true'
+    );
 
   const softwareLayout = (
     <>
