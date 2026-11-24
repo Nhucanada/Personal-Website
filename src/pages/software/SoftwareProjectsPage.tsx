@@ -1,0 +1,81 @@
+import React, { useState } from 'react';
+import { GitHubIcon, OpenInNewIcon } from '../../components/Icons';
+import { projects } from '../../data/software';
+import '../../styles/software.css';
+
+type Filter = 'all' | 'featured';
+
+const SoftwareProjectsPage: React.FC = () => {
+  const [filter, setFilter] = useState<Filter>('all');
+
+  const visible = filter === 'featured'
+    ? projects.filter((p) => p.featured)
+    : projects;
+
+  return (
+    <div className="sw-site">
+      <section className="sw-body">
+        <div className="sw-section-header">
+          <h2 className="sw-section-title">Projects</h2>
+          <div className="sw-section-rule" />
+        </div>
+
+        <div className="sw-filter-row">
+          {(['all', 'featured'] as Filter[]).map((f) => (
+            <button
+              key={f}
+              type="button"
+              onClick={() => setFilter(f)}
+              className={`sw-filter-btn${filter === f ? ' active' : ''}`}
+              aria-pressed={filter === f}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+
+        <div className="sw-project-grid">
+          {visible.map((project) => (
+            <article key={project.id} className="sw-project-card">
+              <div className="sw-project-card-header">
+                <h3 className="sw-project-title">{project.title}</h3>
+                <div className="sw-project-links">
+                  {project.github && (
+                    <a
+                      className="sw-icon-link"
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${project.title} GitHub`}
+                    >
+                      <GitHubIcon fontSize="small" />
+                    </a>
+                  )}
+                  {project.url && (
+                    <a
+                      className="sw-icon-link"
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${project.title} live site`}
+                    >
+                      <OpenInNewIcon fontSize="small" />
+                    </a>
+                  )}
+                </div>
+              </div>
+              <p className="sw-project-desc">{project.description}</p>
+              <div className="sw-tech-chips">
+                {project.tech.map((t) => (
+                  <span key={t} className="sw-chip">{t}</span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default SoftwareProjectsPage;
