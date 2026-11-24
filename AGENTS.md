@@ -44,7 +44,11 @@ Run from the repo root:
 
 ## Environment config
 
-- Construction gate: `VITE_SITE_UNDER_CONSTRUCTION=true` (or legacy `REACT_APP_SITE_UNDER_CONSTRUCTION=true`, exposed via `envPrefix: ['VITE_', 'REACT_APP_']` in `vite.config.ts`) **and** `import.meta.env.PROD` (see `.env.example`).
+- Feature flags (`src/utils/featureFlags.ts`), active only in production builds (`import.meta.env.PROD`) so local `npm run dev` always has full access to all sections (also supports legacy `REACT_APP_` prefix via `envPrefix: ['VITE_', 'REACT_APP_']` in `vite.config.ts`):
+  - `VITE_SITE_UNDER_CONSTRUCTION=true` — gates the entire site behind `UnderConstructionPage` at `/` and redirects `/dev/*` and `/photo/*` to `/`.
+  - `VITE_SWE_UNDER_CONSTRUCTION=true` — disables the `/dev` software section in prod and redirects `/` and `/dev/*` directly to `/photo` (currently enabled in `.env.production`).
+  - `VITE_PHOTO_UNDER_CONSTRUCTION=true` — disables the `/photo` photography section in prod and redirects `/` and `/photo/*` directly to `/dev`.
+  - See `.env.example` and `.env.production`.
 
 ## Conventions
 

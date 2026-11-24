@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { AppRoutes } from './App';
 
 vi.mock('./components/SoftwareThreeScene', () => ({
@@ -89,5 +89,47 @@ describe('AppRoutes', () => {
 
     fireEvent.keyDown(window, { key: 'Escape' });
     expect(screen.getByRole('link', { name: 'Collections' })).toBeInTheDocument();
+  });
+
+  describe('production feature flags', () => {
+    afterEach(() => {
+      vi.unstubAllEnvs();
+    });
+
+    it('redirects / and /dev/* to /photo in prod when VITE_SWE_UNDER_CONSTRUCTION=true', () => {
+      vi.stubEnv('PROD', true);
+      vi.stubEnv('VITE_SWE_UNDER_CONSTRUCTION', 'true');
+
+      const { unmount } = renderAtRoute('/');
+      expect(screen.getByRole('img', { name: 'Photography portfolio' })).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: 'Nathan Hu' })).toHaveAttribute('href', '/photo');
+      expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/photo');
+      unmount();
+
+      renderAtRoute('/dev/projects');
+      expect(screen.getByRole('img', { name: 'Photography portfolio' })).toBeInTheDocument();
+    });
+
+    it('redirects / and /photo/* to /dev in prod when VITE_PHOTO_UNDER_CONSTRUCTION=true', async () => {
+      vi.stubEnv('PROD', true);
+      vi.stubEnv('VITE_PHOTO_UNDER_CONSTRUCTION', 'true');
+
+      renderAtRoute('/photo/work');
+      expect(await screen.findByTestId('three-scene-mock')).toBeInTheDocument();
+      expect(
+        screen.getByText(/Software Engineer · Computer Science & AI @ McGill/i),
+      ).toBeInTheDocument();
+    });
+
+    it('shows UnderConstructionPage and redirects section routes to / when VITE_SITE_UNDER_CONSTRUCTION=true in prod', () => {
+      vi.stubEnv('PROD', true);
+      vi.stubEnv('VITE_SITE_UNDER_CONSTRUCTION', 'true');
+
+      renderAtRoute('/dev');
+      expect(screen.getByText('Under Construction')).toBeInTheDocument();
+      expect(
+        screen.getByRole('img', { name: 'Site under construction background' }),
+      ).toBeInTheDocument();
+    });
   });
 });
